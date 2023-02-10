@@ -4,8 +4,9 @@ import { getDatabase, ref, set } from "firebase/database";
 
 function App() {
   return (
-    <>
-    </>
+    <div data-testid="testComponent">
+      test
+    </div>
   );
 }
 
