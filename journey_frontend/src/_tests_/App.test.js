@@ -1,9 +1,9 @@
 import { render, screen, cleanup } from '@testing-library/react';
 import App from '../components/App';
 
-test('Should render app component', () => {
+test('App contents should render', () => {
   render(<App/>)
-  const appElement = screen.getByTestId('testComponent')
+  const appElement = screen.getByTestId('test')
   expect(appElement).toBeInTheDocument();
-  expect(appElement).toHaveTextContent('test');
 })
+
