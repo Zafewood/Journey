@@ -1,0 +1,23 @@
+footer {
+    height: 10vh;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+}
+
+p {
+    color: white;
+}
+
+.footer-left {
+
+}
+
+.footer-mid {
+    display: flex;
+    align-items: center;
+}
+
+.footer-right {
+    
+}
