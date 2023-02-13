@@ -8,9 +8,12 @@ import Footer from './Footer';
 
 function App() {
   return (
+    // Whole app embedded inside router element to display different content based on current route
+    // Main content of the app is rendered inside the main-content div, and the content depends on the current route
+    // Only one Route element is active at a time, and will display its element value as the main content
     <Router >
       <NavBar />
-      <div class="main-content" data-testid="test">
+      <div class="main-content" data-testid="main-content">
         <Routes>
           <Route path='/' element={ <HomePage /> }/>
         </Routes>
