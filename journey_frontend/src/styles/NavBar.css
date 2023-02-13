@@ -1,0 +1,65 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+}
+
+ul {
+    list-style: none;
+    text-decoration: none;
+}
+
+li {
+    margin-left: 40px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.nav-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    margin-left: 20px;
+}
+
+.nav-mid {
+
+}
+
+.nav-mid ul {
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+}
+
+.my-journey-btn {
+    margin-left: 20px;
+    font-size: 20px;
+    background-color: brown;
+    padding: 15px;
+    outline: none;
+    border-radius: 10px;
+    border: none;
+}
+
+.my-journey-btn a {
+    color: white;
+}
+
+.nav-right {
+    margin-right: 20px;
+}
+
+.nav-right p {
+    color: black;
+}
+
+.user-pic {
+    width: 50px;
+    height: 50px;
+}
