@@ -6,7 +6,7 @@ import '../styles/NavBar.css'
 function NavBar() {
   return (
     <nav data-testid="navbar">
-        <div class="nav-left">
+        <div className="nav-left">
             {/* Link elements work kind of like html a tag, but they also set the route for react router. 
                 Pressing a link changes current route, which rerenders app component with correct content.            
             */}
@@ -24,11 +24,11 @@ function NavBar() {
                     <Link to='/'>About</Link>
                 </li>
                 <li>
-                <button class="my-journey-btn"><Link class="test" to='/about'>MY JOURNEY</Link></button>
+                <button className="my-journey-btn"><Link class="test" to='/about'>MY JOURNEY</Link></button>
                 </li>
             </ul>
         </div>
-        <div class="nav-right">
+        <div className="nav-right">
             <p>Profile pic/</p>
             <p>create user</p>
         </div>

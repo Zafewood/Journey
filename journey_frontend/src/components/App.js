@@ -6,6 +6,8 @@ import HomePage from '../pages/HomePage';
 import NavBar from './NavBar';
 import Footer from './Footer';
 
+const About = () => <h1>About page</h1>
+
 function App() {
   return (
     // Whole app embedded inside router element to display different content based on current route
@@ -13,7 +15,7 @@ function App() {
     // Only one Route element is active at a time, and will display its element value as the main content.
     <Router >
       <NavBar />
-      <div class="main-content" data-testid="main-content">
+      <div className="main-content" data-testid="main-content">
         <Routes>
           <Route path='/' element={ <HomePage /> }/>
         </Routes>
