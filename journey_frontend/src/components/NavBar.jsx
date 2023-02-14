@@ -24,7 +24,7 @@ function NavBar() {
                     <Link to='/about'>About</Link>
                 </li>
                 <li>
-                <button className="my-journey-btn"><Link class="test" to='/about'>MY JOURNEY</Link></button>
+                <button className="my-journey-btn"><Link class="test" to='/loginpage'>LOG IN</Link></button>
                 </li>
             </ul>
         </div>

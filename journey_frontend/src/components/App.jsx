@@ -3,6 +3,8 @@ import { db } from '../firebase-config';
 import { getDatabase, ref, set } from "firebase/database";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from '../pages/HomePage';
+import LoginPage from '../pages/LoginPage';
+import CreateUserPage from '../pages/CreateUserPage';
 import NavBar from './NavBar';
 import Footer from './Footer';
 
@@ -19,6 +21,8 @@ function App() {
         <Routes>
           <Route path='/' element={ <HomePage /> }/>
           <Route path='/about' element={ <About /> }/>
+          <Route path='/loginpage' element={ <LoginPage /> }/>
+          <Route path='/createuserpage' element={ <CreateUserPage /> }/>
         </Routes>
       </div>
       <Footer />
