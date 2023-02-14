@@ -1,0 +1,19 @@
+.background-image{
+    width: 100%;
+    position: absolute;
+    bottom: 10vh;
+}
+
+.text-container {
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.hero-title{
+    font-size: 70px;
+    font-weight: 400;
+}
+
+
