@@ -18,6 +18,7 @@ function App() {
       <div className="main-content" data-testid="main-content">
         <Routes>
           <Route path='/' element={ <HomePage /> }/>
+          <Route path='/about' element={ <About /> }/>
         </Routes>
       </div>
       <Footer />
@@ -26,3 +27,4 @@ function App() {
 }
 
 export default App;
+

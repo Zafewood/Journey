@@ -21,7 +21,7 @@ function NavBar() {
                     <Link to='/'>Ipsum</Link>
                 </li>
                 <li>
-                    <Link to='/'>About</Link>
+                    <Link to='/about'>About</Link>
                 </li>
                 <li>
                 <button className="my-journey-btn"><Link class="test" to='/about'>MY JOURNEY</Link></button>
