@@ -1,16 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import '../styles/NavBar.css'
+import logo from '../assets/journey_brown_monochromatic.png'
 
 
 function NavBar() {
   return (
     <nav data-testid="navbar">
         <div className="nav-left">
+            
             {/* Link elements work kind of like html a tag, but they also set the route for react router. 
                 Pressing a link changes current route, which rerenders app component with correct content.            
             */}
-            <Link to='/'>JOURNEY</Link>
+            <Link to='/'><img src={logo} alt="" className='logo' /></Link>
         </div>
         <div class="nav-mid">
             <ul>

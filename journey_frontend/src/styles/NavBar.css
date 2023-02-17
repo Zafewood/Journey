@@ -11,7 +11,7 @@ ul {
 }
 
 li {
-    margin-left: 40px;
+    margin-left: 30px;
 }
 
 a {
@@ -25,6 +25,7 @@ a {
     align-items: center;
     font-size: 36px;
     margin-left: 20px;
+    margin-top: 30px;
 }
 
 
@@ -32,8 +33,7 @@ a {
 .nav-mid ul {
     display: flex;
     align-items: center;
-    
-    transform: translate(-92%, 10%);
+    transform: translate(-100%, 10%);
     font-size: 25px;
 }
 
@@ -50,6 +50,11 @@ a {
 .my-journey-btn a {
     color: white;
 }
+
+.logo {
+    width: 25%;
+}
+
 /*
 .nav-right {
     margin-right: 20px;
