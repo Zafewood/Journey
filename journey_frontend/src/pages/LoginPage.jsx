@@ -1,19 +1,22 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../firebase-config';
 
-function LoginPage() {
+function LoginPage({ authChanged }) {
     const[email, setEmail] = useState('');
     const[password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const signIn = (e) => { 
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => { 
-            console.log(userCredential);
+            navigate('/about');
+            authChanged(userCredential.user)
         }).catch((error) => { 
             console.log(error);
+            alert('Oops... feil brukernavn eller passord. Prøv igjen')
         })
     }
 

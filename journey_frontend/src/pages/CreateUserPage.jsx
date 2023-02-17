@@ -35,7 +35,6 @@ function CreateUserPage() {
         <button onClick={createUser}>CREATE USER</button><br /><br /><br />
         <h4>Already have a user?</h4>
         <button><Link to='/loginpage' >Log in here</Link></button>
-
     </>
   )
 }
