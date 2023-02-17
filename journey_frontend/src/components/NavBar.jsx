@@ -15,24 +15,22 @@ function NavBar() {
         <div class="nav-mid">
             <ul>
                 <li>
-                    <Link to='/'>Lorem</Link>
+                    <Link to='/'>TOP TRAVELS</Link>
                 </li>
                 <li>
-                    <Link to='/'>Ipsum</Link>
-                </li>
-                <li>
-                    <Link to='/about'>About</Link>
+                    <Link to='/'>FAVOURITES</Link>
                 </li>
                 <li>
                 <button className="my-journey-btn"><Link class="test" to='/loginpage'>LOG IN</Link></button>
                 </li>
             </ul>
         </div>
+        {/*}
         <div className="nav-right">
             <p>Profile pic/</p>
             <p>create user</p>
         </div>
-        
+        */}
     </nav>
   )
 }
