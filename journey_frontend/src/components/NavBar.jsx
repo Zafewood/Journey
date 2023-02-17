@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../styles/NavBar.css'
 
 
-function NavBar() {
+function NavBar({ currentUser }) {
   return (
     <nav data-testid="navbar">
         <div className="nav-left">
@@ -24,7 +24,10 @@ function NavBar() {
                     <Link to='/about'>About</Link>
                 </li>
                 <li>
-                <button className="my-journey-btn"><Link class="test" to='/loginpage'>LOG IN</Link></button>
+                <button className="my-journey-btn">
+                    <Link class="test" to={currentUser ? '/' : '/loginpage'}>
+                        {currentUser ? currentUser.email : 'Logg inn'}
+                    </Link></button>
                 </li>
             </ul>
         </div>
