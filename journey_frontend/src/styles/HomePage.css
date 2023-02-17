@@ -1,0 +1,37 @@
+.background-image{
+    width: 100%;
+    position: absolute;
+    top: 45vh;
+    
+}
+
+.text-container {
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.hero-title{
+    font-size: 70px;
+    font-weight: 400;
+    color: #624b2d;
+}
+
+.background-color div{
+    background-color: #624b2d;
+    height: 2000px; /*endre til relativ til feed*/
+
+}
+
+.text-over-image {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    font-weight: 300;
+    color: white;
+    
+}
+
