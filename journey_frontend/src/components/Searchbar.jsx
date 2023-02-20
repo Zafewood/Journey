@@ -1,10 +1,12 @@
+import '../styles/Searchbar.css';
+
 export default function Searchbar () { 
     return (
         <div className="searchbarDiv">
-            <h3> hallo </h3>
             <input className="searchbar" type="text" placeholder="Search for your trips" />
-            <button type="submit" > Search </button>
-            <select className="dropdown" name="filter" id="filter">
+            <button class="searchbutton" type="submit" > Search </button>
+            <select className="filterdropdown" name="filter" id="filter">
+            <option value="none" selected disabled hidden>Select filter</option>
                 <option value="rating">Rating</option>
                 <option value="country">Country</option>
                 <option value="duration">Duration</option>
