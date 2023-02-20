@@ -1,0 +1,17 @@
+.comment-content {
+    display: flex;
+    align-items: center;
+    background-color: #E9E2D0;
+    gap: 20px;
+    border-radius: 20px;
+}
+
+.default-user-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 20px;
+}
+
+.comment-right {
+    padding: 20px;
+}
