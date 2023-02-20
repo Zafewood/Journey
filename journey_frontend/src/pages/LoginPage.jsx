@@ -12,7 +12,7 @@ function LoginPage({ authChanged }) {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => { 
-            navigate('/about');
+            navigate('/profile');
             authChanged(userCredential.user)
         }).catch((error) => { 
             console.log(error);

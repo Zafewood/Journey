@@ -3,32 +3,25 @@ import { Link } from 'react-router-dom';
 import '../styles/Profile.css';
 import User_picture from '../assets/default_user.jpeg'; 
 
-
-
-function Profile() {
+function Profile({currentUser}) {
   
-  const usernameinput = document.getElementById('username');
-  const homecountryinput = document.getElementById('home_country');
-
-
   const handleEditButton = () => {
+    const usernameinput = document.getElementById('username');
+    const homecountryinput = document.getElementById('home_country');
     usernameinput.disabled = false;
-    //usernameinput.style.border = 'default'
     usernameinput.style.borderWidth = '1px'
     homecountryinput.disabled = false;
-    //homecountryinput.style.border = 'default'
     homecountryinput.style.borderWidth = '1px'
-
-
-    console.log("clicked");
+    console.log(currentUser.uid);
   };
 
   const handleSaveButton = () => {
+    const usernameinput = document.getElementById('username');
+    const homecountryinput = document.getElementById('home_country');
     usernameinput.disabled = true;
     usernameinput.style.borderWidth = '0px'
     homecountryinput.disabled = true;
     homecountryinput.style.borderWidth = '0px'
-    console.log("clicked");
   };
 
   return(
