@@ -1,5 +1,5 @@
 import React from 'react'
-import test from '../assets/bakgrunn.jpg'
+import test from '../assets/bakgrunn.svg'
 import TripsCard from '../components/Trips/TripsCard'
 import Searchbar from '../components/Searchbar'
 import '../styles/HomePage.css'
