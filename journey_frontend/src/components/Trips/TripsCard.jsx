@@ -9,51 +9,88 @@ function TripsCard() {
     const [isExpanded, setIsExpanded] = useState(false);
     const [shoudlDisplay, setShouldDisplay] = useState("none")
 
-    const handleExpand = () => {
-        if (isExpanded) {
-            setCardHeight("0px");
-            setShouldDisplay("none")
-        } else {
-            setCardHeight("auto");
-            setShouldDisplay("block")
-        }
-        setIsExpanded(!isExpanded);
+    const [isShown, setIsShown] = useState(false);
+
+    const handleClick = event => {
+
+        setIsShown(current => !current);
+
+      };
+
+    // const handleExpand = () => {
+    //     if (isExpanded) {
+    //         setCardHeight("0px");
+    //         setShouldDisplay("none")
+    //     } else {
+    //         setCardHeight("auto");
+    //         setShouldDisplay("block")
+    //     }
+    //     setIsExpanded(!isExpanded);
+    // }
+
+    const sendInForm = () => { 
+        alert("ups not up to date");
     }
 
+
   return (
-    <div className='test'>
-        <div className='card-content'>
-            <div className='card-left'>
-                <img src={placeholderImg} alt="" className='trip-image' />
-            </div>
-            <div className='card-right'>
-                <h1 className='trip-title'>Title of your trip</h1>
-                <div className='trip-info'>
-                    <p className='trip-author'>Ola Halvorsen</p>
-                    <p className='trip-duration'>9 days</p>
-                    <p className='trip-country'>portugal</p>
-                    <p className='trip-route'>Porto - Lisboa - Faro</p>
-                    <p className='trip-keywords'>Hiking, nature, party, beach</p>
-                </div>
-                <div className='trip-rating-view'>
-                    <p>Average rating:</p>
-                    <h1>Star rating here</h1>
-                    <button className='comments-btn' onClick={handleExpand}>12 comments</button>
-                </div>
-            </div>
+    <box className= "TripBox">
+        <form>
+            <h1> Add Your Journey Here</h1> <br/>
+            <label> Title of your trip </label> <br/>
+            <input type ="text" maxLength={25}></input> <br/>
+            <label> Author </label> <br/>
+            <text> Your name </text> <br/>
+            <label> Duration </label> <br/>
+            <input type="integer" ></input> <br/>
+            <label> Country/Countries </label> <br/>
+            <input type ="text" ></input> <br/>
+            <label> City/Cities </label> <br/>
+            <input type ="text" ></input> <br/>
+            <label> Description </label> <br/>
+            <textarea type ="text" ></textarea> <br/> <br/>
+
+            <button onClick={sendInForm}> Send in form </button>
+                
+        </form>
+
+    </box>
+
+
+
+    // <div className='test'>
+    //     <div className='card-content'>
+    //         <div className='card-left'>
+    //             <img src={placeholderImg} alt="" className='trip-image' />
+    //         </div>
+    //         <div className='card-right'>
+    //             <h1 className='trip-title'>Title of your trip</h1>
+    //             <div className='trip-info'>
+    //                 <p className='trip-author'>Ola Halvorsen</p>
+    //                 <p className='trip-duration'>9 days</p>
+    //                 <p className='trip-country'>portugal</p>
+    //                 <p className='trip-route'>Porto - Lisboa - Faro</p>
+    //                 <p className='trip-keywords'>Hiking, nature, party, beach</p>
+    //             </div>
+    //             <div className='trip-rating-view'>
+    //                 <p>Average rating:</p>
+    //                 <h1>Star rating here</h1>
+    //                 <button className='comments-btn' onClick={handleExpand}>12 comments</button>
+    //             </div>
+    //         </div>
             
-        </div>
-        <div className='trip-comments' style={{ 
-            height: cardHeight,
-            display: shoudlDisplay
-            }}>
-            <UserComment />
-            <UserComment />
-            <UserComment />
-            <UserComment />
-            <UserComment />
-        </div>
-    </div>
+    //     </div>
+    //     <div className='trip-comments' style={{ 
+    //         height: cardHeight,
+    //         display: shoudlDisplay
+    //         }}>
+    //         <UserComment />
+    //         <UserComment />
+    //         <UserComment />
+    //         <UserComment />
+    //         <UserComment />
+    //     </div>
+    // </div>
   )
 }
 

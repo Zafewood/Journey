@@ -3,6 +3,8 @@ import test from '../assets/bakgrunn.jpg'
 import TripsCard from '../components/Trips/TripsCard'
 import '../styles/HomePage.css'
 
+
+
 function HomePage() {
   return (
     <>
@@ -10,8 +12,12 @@ function HomePage() {
         <h1 className='hero-title'>YOUR NEXT JOURNEY AWAITS...</h1>
       </div>
       <img src={test} alt="" className='background-image' />
+      
       <div className='bottom-content'>
         <h1 className='text-over-image'>NEWEST TRIPS</h1>
+        <div>
+          <button type="button" onClick={<TripsCard />}>ADD ITINERARY</button>
+        </div>
         <div className='card-view'>
           <TripsCard />
           <TripsCard />
