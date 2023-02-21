@@ -41,6 +41,14 @@ const writeTripToUserNode = ({tripName, tripAuthor, tripDuration }) => {
     ))
   }
 
+  const editUserNode = ({displayname, homeCountry}) => {
+    const currentUserID = auth.currentUser.uid;
+    set(ref(db, 'users/' + currentUserID), {
+      displayname: displayname, 
+      homeCountry: homeCountry
+    }).catch((error) => (
+      console.log('error: ', error)
+    ))
+  }
 
-
-export default { getCurrentUserNode, writeTripToUserNode }
+export default { getCurrentUserNode, writeTripToUserNode, editUserNode }
