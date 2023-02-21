@@ -9,14 +9,24 @@ import Profile from '../pages/Profile';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import { useState } from 'react';
-
-
+import  firebaseService  from '../services/firebaseService';
 
 const About = () => <h1>About page</h1>
 
 function App() {
 
   const [user, setUser] = useState(null);
+
+  const testFunc = () => {
+    firebaseService.writeTripToUserNode({
+      tripName: "someTrip",
+      tripAuthor: "SomeName",
+      tripDuration: "20 days"
+    })
+  }
+
+
+  
 
   const handleAuthStateChanged = (newUser) => {
     setUser(newUser);
@@ -29,6 +39,7 @@ function App() {
     // Only one Route element is active at a time, and will display its element value as the main content.
     <Router >
       <NavBar currentUser={user}/>
+      <button onClick={testFunc}>Test</button>
       <div className="main-content" data-testid="main-content">
         <Routes>
           <Route path='/' element={ <HomePage /> }/>
