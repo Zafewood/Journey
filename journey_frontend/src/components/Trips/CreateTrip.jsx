@@ -14,7 +14,6 @@ function TripsCard() {
     const [city, setCity] = useState('');
     const [description, setDescription] = useState('');
 
-
     const handleClick = event => {
         setIsShown(current => !current);
       };
@@ -25,10 +24,8 @@ function TripsCard() {
         if (auth.currentUser.email == null) { 
             alert("A user must be logged in to add a travel")
         } else { 
-            return ({title, country, city, description});
-            
+            return ({title, country, city, description});   
         }
-      
     }
 
     const updateTitle = (event) => { 

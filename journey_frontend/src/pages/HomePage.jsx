@@ -1,6 +1,7 @@
 import React from 'react'
 import test from '../assets/bakgrunn.svg'
-import TripsCard from '../components/Trips/TripsCard'
+import DisplayTrip from '../components/Trips/DisplayTrip'
+import CreateTrip from '../components/Trips/CreateTrip'
 import Searchbar from '../components/Searchbar'
 import '../styles/HomePage.css'
 
@@ -18,12 +19,9 @@ function HomePage() {
         <h1 className='text-over-image'>NEWEST TRIPS</h1>
         <div><Searchbar></Searchbar></div>
         <div className='card-view'>
-          <TripsCard />
-          {/* <TripsCard />
-          <TripsCard />
-          <TripsCard />
-          <TripsCard />
-          <TripsCard /> */}
+          <CreateTrip />
+          <DisplayTrip />
+          <DisplayTrip />
         </div>
       </div>
     </>
