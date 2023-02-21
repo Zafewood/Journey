@@ -1,5 +1,5 @@
 import '../styles/App.css';
-import { db } from '../firebase-config';
+import { db, auth } from '../firebase-config';
 import { getDatabase, ref, set } from "firebase/database";
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import HomePage from '../pages/HomePage';
@@ -10,6 +10,9 @@ import NavBar from './NavBar';
 import Footer from './Footer';
 import { useState, useEffect } from 'react';
 import  firebaseService  from '../services/firebaseService';
+import Cookies from 'js-cookie';
+import { onAuthStateChanged } from 'firebase/auth';
+
 
 
 const About = () => <h1>About page</h1>
@@ -19,22 +22,39 @@ function App() {
   const [user, setUser] = useState(null);
   const [trips, setTrips] = useState([]);
 
+  // Handler for when child component updates current user
   const handleAuthStateChanged = (newUser) => {
     setUser(newUser);
     console.log('new user signed in: ', user);
   }
 
+  // Retrieve all trips from database
   const getAllTrips = () => {
     firebaseService.getAllTrips().then((retrievedTrips) => {
       setTrips(retrievedTrips)
     })
   }
 
+  // Handler function for when child component ads a new trip
   const newTripAdded = () => {
     getAllTrips();
   }
 
+  // Auth persistence: check if user is signed in from before or not
+  const checkIfUserIsSignedIn = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log('user signed in: ', user);
+        setUser(user);
+      } else {
+        console.log('User not signed in');
+      }
+    })
+  }
+
+  // Useffect hook
   useEffect(() => {
+    checkIfUserIsSignedIn();
     getAllTrips();
     newTripAdded();
   }, [])

@@ -33,7 +33,7 @@ function CreateUserPage() {
     const result = createUserWithCredentials(email, password, username, homeCountry)
     result.then((data) => {
       if (data) {
-        navigate('../loginpage');
+        navigate('/loginpage');
       }
     });
   }

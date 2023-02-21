@@ -14,7 +14,7 @@ function NavBar({ currentUser }) {
             */}
             <Link to='/'><img src={logo} alt="" className='logo' /></Link>
         </div>
-        <div class="nav-mid">
+        <div className="nav-mid">
             <ul>
                 <li>
                     <Link to='/'>TOP TRAVELS</Link>
@@ -24,7 +24,7 @@ function NavBar({ currentUser }) {
                 </li>
                 <li>
                 <button className="my-journey-btn">
-                    <Link class="test" to={currentUser ? '/profile' : '/loginpage'}>
+                    <Link className="test" to={currentUser ? '/profile' : '/loginpage'}>
                         {currentUser ? currentUser.email : 'Logg inn'}
                     </Link></button>
                 </li>
