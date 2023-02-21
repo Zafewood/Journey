@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-route
 import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
 import CreateUserPage from '../pages/CreateUserPage';
+import Profile from '../pages/Profile';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import { useState } from 'react';
@@ -45,6 +46,7 @@ function App() {
           <Route path='/about' element={ <About /> }/>
           <Route path='/loginpage' element={ <LoginPage authChanged={handleAuthStateChanged}/> }/>
           <Route path='/createuserpage' element={ <CreateUserPage /> }/>
+          <Route path='/profile' element={ <Profile currentUser={user}/> }/>
         </Routes>
       </div>
       <Footer />
