@@ -29,12 +29,25 @@ float: left;
   padding-bottom: 20%;
 }
 
+#button {
+  margin-bottom: 2%;
+}
+#countrydropdown {
+  font-size: 1em;
+  margin-left: 2%;
+  width: 30%;
+  padding: 2%;
+}
+
 #tabs {
   float: left;
   margin-left: 20%;
   margin-right: 20%;
   width: 60%;
 }
+
+
+
 
 #lefttab{
   margin-left: 10%;
