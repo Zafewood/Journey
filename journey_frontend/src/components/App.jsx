@@ -18,21 +18,27 @@ function App() {
   const [user, setUser] = useState(null);
   const [trips, setTrips] = useState([]);
 
-  useEffect(() => {
-    testFunc();
-  }, [])
-  
-
-  const testFunc = () => {
-    firebaseService.getAllTrips().then((data) => {
-      setTrips(data)
-    })
-  }
-
   const handleAuthStateChanged = (newUser) => {
     setUser(newUser);
     console.log('new user signed in: ', user);
   }
+
+  const getAllTrips = () => {
+    firebaseService.getAllTrips().then((retrievedTrips) => {
+      setTrips(retrievedTrips)
+    })
+  }
+
+  const newTripAdded = () => {
+    getAllTrips();
+  }
+
+  useEffect(() => {
+    getAllTrips();
+    newTripAdded();
+  }, [])
+  
+
 
   return (
     // Whole app embedded inside router element to display different content based on current route
@@ -42,7 +48,7 @@ function App() {
       <NavBar currentUser={user}/>
       <div className="main-content" data-testid="main-content">
         <Routes>
-          <Route path='/' element={ <HomePage allTrips={trips}/> }/>
+          <Route path='/' element={ <HomePage allTrips={trips} tripAddedHandler={newTripAdded} /> }/>
           <Route path='/about' element={ <About /> }/>
           <Route path='/loginpage' element={ <LoginPage authChanged={handleAuthStateChanged}/> }/>
           <Route path='/createuserpage' element={ <CreateUserPage /> }/>
