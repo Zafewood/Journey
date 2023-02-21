@@ -68,7 +68,7 @@ function Profile({currentUser}) {
     </div>
     <div id='tabs'>
       <button style={{background:tripbuttoncolor}} onClick={handleTripButton} id='lefttab'>My Trips</button>
-      <button style={{background:activitybuttoncolor}} onClick={handleActivityButton} id='righttab'>My Acitivty</button>
+      <button style={{background:activitybuttoncolor}} onClick={handleActivityButton} id='righttab'>My Activity</button>
       <div id='h_line'></div>
     </div>
     <div id='feed'>
