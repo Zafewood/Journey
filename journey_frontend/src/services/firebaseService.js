@@ -23,11 +23,22 @@ const getCurrentUserNode = () => {
       });
 }
 
-const writeTripToUserNode = (tripObject) => {
-    const currentUserID = "4JD1Q9EUC3cpkGHwOfzubm3BhZr1"//auth.currentUser.uid;
-    set(ref(db, 'users/' + currentUserID + '/trips/' + uuidv4()), {
-        tripObject
-    });
+const writeTripToUserNode = ({tripName, tripAuthor, tripDuration }) => {
+    const currentUserID = auth.currentUser.uid;
+    const tripID = uuidv4();
+    set(ref(db, 'users/' + currentUserID + '/trips/' + tripID), {
+      tripName,  
+      tripAuthor,
+      tripDuration
+    }).then(() => {
+      set(ref(db, 'tips/' + tripID), {
+        tripName,
+        tripAuthor,
+        tripDuration
+      })
+    }).catch((error) => (
+      console.log('error: ', error)
+    ))
   }
 
 
