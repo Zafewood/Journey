@@ -4,6 +4,7 @@ import placeholderImg from '../../assets/example-beach.jpg'
 import { useState } from 'react'
 import UserComment from './UserComment';
 import { auth } from '../../firebase-config';
+import { set } from 'firebase/database';
 
 function TripsCard() {
     const [isShown, setIsShown] = useState(false);
@@ -16,20 +17,18 @@ function TripsCard() {
 
     const handleClick = event => {
         setIsShown(current => !current);
-
       };
 
     const sendInForm = () => { 
-        // if (auth.currentUser == null) { 
-        //     alert("A person who is not logged in cannot add trips")
-        // }
-        console.log("tittel: " + title);
-        console.log("duration: " + duration);
-        console.log("country: " + country);
-        console.log("city: " + city);
-        console.log("description: " + description);
-        alert("hva skjer her til nå")
+        console.log(auth.currentUser.email)
         setIsShown(false);
+        if (auth.currentUser.email == null) { 
+            alert("A user must be logged in to add a travel")
+        } else { 
+            return ({title, country, city, description});
+            
+        }
+      
     }
 
     const updateTitle = (event) => { 
@@ -55,21 +54,21 @@ function TripsCard() {
 
   return (
     <div className= "tripBox"> 
-        <button onClick={handleClick}> Add travel </button>
+        <button  id='addTravelButton'onClick={handleClick}> Add travel </button>
         {isShown && (
             <div>
             <form>
-                <h1> Add Your Journey Here</h1> <br/>
+                <h1> <b> Add Your Journey Here </b> </h1> <br/>
                 <label> Title of your trip </label> <br/>
-                <input type ="text" onChange = {updateTitle} ></input> <br/>
+                <input type ="text" onChange = {updateTitle} ></input> <br/> <br/>
                 <label> Author </label> <br/>
-                <label> Your name </label> <br/>
+                <label> {auth.currentUser.displayName} </label> <br/> <br/>
                 <label> Duration </label> <br/>
-                <input type="integer" onChange = {updateDuration}></input> <br/>
+                <input type="integer" onChange = {updateDuration}></input> <br/> <br/>
                 <label> Country/Countries </label> <br/>
-                <input type ="text" onChange={updateCountry}></input> <br/>
+                <input type ="text" onChange={updateCountry}></input> <br/> <br/>
                 <label> City/Cities </label> <br/>
-                <input type ="text" onChange={updateCity}></input> <br/>
+                <input type ="text" onChange={updateCity}></input> <br/> <br/>
                 <label> Description </label> <br/>
                 <textarea type ="text" onChange={updateDescription}></textarea> <br/> <br/>
             </form>
