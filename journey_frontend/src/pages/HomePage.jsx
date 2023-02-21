@@ -7,7 +7,11 @@ import '../styles/HomePage.css'
 
 
 
-function HomePage() {
+function HomePage({ allTrips, tripAddedHandler }) {
+
+  const allTripsArray = Object.values(allTrips); 
+  console.log("alltirpos: ", allTripsArray);
+
   return (
     <>
       <div className='hero-content'>
@@ -19,13 +23,15 @@ function HomePage() {
         <h1 className='text-over-image'>NEWEST TRIPS</h1>
         <div><Searchbar></Searchbar></div>
         <div className='card-view'>
-          <CreateTrip />
-          <DisplayTrip />
-          <DisplayTrip />
+          <CreateTrip tripAddedHandler={tripAddedHandler}/>
+          {allTripsArray.map((tripObject) => {
+            return <DisplayTrip tripsInfo={tripObject}/>
+          })}
         </div>
       </div>
     </>
   )
 }
+
 
 export default HomePage
