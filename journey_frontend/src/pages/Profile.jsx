@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import '../styles/Profile.css';
 import User_picture from '../assets/default_user.jpeg'; 
-import TripsCard from '../components/Trips/TripsCard'
+import DisplayTrip from '../components/Trips/DisplayTrip'
+
 
 function Profile({currentUser}) {
   
@@ -327,11 +328,10 @@ function Profile({currentUser}) {
       <div id='h_line'></div>
     </div>
     <div id='feed'>
-      <TripsCard></TripsCard>
-      <TripsCard></TripsCard>
-      <TripsCard></TripsCard>
-      <TripsCard></TripsCard>
-      <TripsCard></TripsCard>
+    <DisplayTrip />
+    <DisplayTrip />
+    <DisplayTrip />
+    <DisplayTrip />
     </div>
     </>
     )
