@@ -1,6 +1,7 @@
 import React from 'react'
-import test from '../assets/bakgrunn.jpg'
+import test from '../assets/bakgrunn.svg'
 import TripsCard from '../components/Trips/TripsCard'
+import Searchbar from '../components/Searchbar'
 import '../styles/HomePage.css'
 
 
@@ -15,9 +16,7 @@ function HomePage() {
       
       <div className='bottom-content'>
         <h1 className='text-over-image'>NEWEST TRIPS</h1>
-        <div>
-          {/* <button type="button" onClick={<TripsCard />}>ADD ITINERARY</button> */}
-        </div>
+        <div><Searchbar></Searchbar></div>
         <div className='card-view'>
           <TripsCard />
           {/* <TripsCard />

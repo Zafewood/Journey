@@ -1,0 +1,31 @@
+.searchbarDiv { 
+    top: 30%;
+    left: 25%;
+    /* transform: translate(-70%,-50%); */
+    padding-bottom: 30px;
+    padding-top: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+
+.searchbar { 
+  font-size: 30px;
+  margin-right: 10px;
+  width: 500px;
+  padding-inline: 5px;
+  padding-bottom: 5px;
+}
+
+.searchbutton {
+  font-size: 25px;
+  padding: 5px 10px;
+}
+
+.filterdropdown {
+  padding: 5px;
+  font-size: 25px;
+  margin-left: 10px;
+
+}
