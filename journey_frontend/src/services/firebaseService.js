@@ -41,6 +41,21 @@ const writeTripToUserNode = ({tripName, tripAuthor, tripDuration }) => {
     ))
   }
 
+  const getAllTrips = () => {
+    const dbRef = ref(db);
+    return new Promise((resolve, reject) => {
+      get(child(dbRef, 'tips')).then((snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          console.log('data trips: ', data)
+          
+          resolve(data);
+        } else {
+          console.log('error')
+        }
+      })
+    })
+  }
 
 
-export default { getCurrentUserNode, writeTripToUserNode }
+export default { getCurrentUserNode, writeTripToUserNode, getAllTrips }

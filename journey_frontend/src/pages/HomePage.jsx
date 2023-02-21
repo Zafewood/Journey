@@ -7,7 +7,10 @@ import '../styles/HomePage.css'
 
 
 
-function HomePage() {
+function HomePage({ allTrips }) {
+
+  const allTripsArray = Object.values(allTrips); 
+
   return (
     <>
       <div className='hero-content'>
@@ -20,12 +23,14 @@ function HomePage() {
         <div><Searchbar></Searchbar></div>
         <div className='card-view'>
           <CreateTrip />
-          <DisplayTrip />
-          <DisplayTrip />
+          {allTripsArray.map((tripObject) => {
+            return <DisplayTrip tripsInfo={tripObject}/>
+          })}
         </div>
       </div>
     </>
   )
 }
+
 
 export default HomePage

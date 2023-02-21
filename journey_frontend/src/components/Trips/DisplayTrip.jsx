@@ -4,7 +4,7 @@ import placeholderImg from '../../assets/example-beach.jpg'
 import { useState } from 'react'
 import UserComment from './UserComment';
 
-function DisplayTrip() {
+function DisplayTrip({ tripsInfo }) {
     const [cardHeight, setCardHeight] = useState("0px");
     const [isExpanded, setIsExpanded] = useState(false);
     const [shoudlDisplay, setShouldDisplay] = useState("none")
@@ -27,10 +27,10 @@ function DisplayTrip() {
                 <img src={placeholderImg} alt="" className='trip-image' />
             </div>
             <div className='card-right'>
-                <h1 className='trip-title'>Title of your trip</h1>
+                <h1 className='trip-title'>{tripsInfo.tripName}</h1>
                 <div className='trip-info'>
-                    <p className='trip-author'>Ola Halvorsen</p>
-                    <p className='trip-duration'>9 days</p>
+                    <p className='trip-author'>{tripsInfo.autho}</p>
+                    <p className='trip-duration'>{tripsInfo.tripDuration}</p>
                     <p className='trip-country'>portugal</p>
                     <p className='trip-route'>Porto - Lisboa - Faro</p>
                     <p className='trip-keywords'>Hiking, nature, party, beach</p>
