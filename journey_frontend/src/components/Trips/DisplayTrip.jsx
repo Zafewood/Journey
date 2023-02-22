@@ -20,8 +20,6 @@ function DisplayTrip({ tripsInfo }) {
         setIsExpanded(!isExpanded);
     }
 
-    console.log('mytrips: ', tripsInfo);
-
   return (
     <div className='test'>
         <div className='card-content'>
@@ -29,12 +27,12 @@ function DisplayTrip({ tripsInfo }) {
                 <img src={placeholderImg} alt="" className='trip-image' />
             </div>
             <div className='card-right'>
-                <h1 className='trip-title'>{tripsInfo.tripTitle}</h1>
+                <h1 className='trip-title'>{tripsInfo?.tripTitle}</h1>
                 <div className='trip-info'>
                     <p className='trip-author'>AUTHOR NAME</p>
-                    <p className='trip-duration'>{tripsInfo.tripDuration}</p>
-                    <p className='trip-country'>{tripsInfo.tripCountry}</p>
-                    <p className='trip-description'>{tripsInfo.tripDescription}</p>
+                    <p className='trip-duration'>{tripsInfo?.tripDuration}</p>
+                    <p className='trip-country'>{tripsInfo?.tripCountry}</p>
+                    <p className='trip-description'>{tripsInfo?.tripDescription}</p>
                 </div>
                 <div className='trip-rating-view'>
                     <p>Average rating:</p>

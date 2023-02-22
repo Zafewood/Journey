@@ -1,15 +1,25 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Profile.css';
 import User_picture from '../assets/default_user.jpeg'; 
-import DisplayTrip from '../components/Trips/DisplayTrip'
+import DisplayTrip from '../components/Trips/DisplayTrip';
+import firebaseService from '../services/firebaseService.js';
 
 
-function Profile({allTrips, currentUser}) {
+function Profile({allTrips, currentUser, signOutHandler}) {
+
+  function loadValues() {
+    const userNode = firebaseService.getCurrentUserNode();
+    userNode.then((data) => {
+      document.getElementById('username').value = data.displayName;
+      document.getElementById('home_country').value = data.homeCountry;
+      document.getElementById('email').value = data.email;
+    })
+  }
 
   const allTripsArray = Object.values(allTrips);
   console.log("alltirpos: ", allTripsArray);
-  
+
   const handleEditButton = () => {
     const usernameinput = document.getElementById('username');
     const homecountryinput = document.getElementById('home_country');
@@ -17,13 +27,16 @@ function Profile({allTrips, currentUser}) {
     usernameinput.style.borderWidth = '1px'
     homecountryinput.disabled = false;
     homecountryinput.style.borderWidth = '1px'
-    console.log(currentUser.uid);
   };
 
   const handleSaveButton = () => {
     const usernameinput = document.getElementById('username');
     const homecountryinput = document.getElementById('home_country');
     usernameinput.disabled = true;
+    firebaseService.editUserNode({
+      displayname: usernameinput.value,
+      homeCountry: homecountryinput.value
+      })
     usernameinput.style.borderWidth = '0px'
     homecountryinput.disabled = true;
     homecountryinput.style.borderWidth = '0px'
@@ -33,6 +46,7 @@ function Profile({allTrips, currentUser}) {
   const [activitybuttoncolor, setActivityButtonColor] = useState('white');
   const [tripbuttonstate, setTripButtonState] = useState(true);
   const [acitvitybuttonstate, setActivityButtonState] = useState(false);
+  const navigate = useNavigate();
 
   const handleTripButton = () => {
     if (tripbuttonstate) {}
@@ -64,19 +78,25 @@ function Profile({allTrips, currentUser}) {
       }
     };
 
+    const signOutTapped = () => {
+      signOutHandler();
+      navigate('/loginpage');
+    }
 
   return(
     <>
     <h1 id='header'>Your Profile</h1>
-    <div id='profile'>
+    <div id='profile' onLoad={loadValues}>
     <div id='image'>
       <img src={User_picture} alt="User_picture" width='300' height='300'/>
     </div>
-    <div id='personal_info'>
+    <div id='personal_info' >
       <button id='button' onClick={handleEditButton}>Edit</button>
       <button id='button' onClick={handleSaveButton}>Save</button>
-      <p>Username:  <input id='username' type='text' disabled value='< >'></input></p><br/>
-      <p>Home Country:  <select id='countrydropdown' name="country">
+      <button onClick={signOutTapped}>Logg out</button>
+      <p>Username:  <input id='username' type='text' disabled></input></p><br/>
+      <p>Home Country:
+        <select id='home_country' name="country" disabled>
     <option >Select country</option>
     <option value="AF">Afghanistan</option>
     <option value="AX">Aland Islands</option>

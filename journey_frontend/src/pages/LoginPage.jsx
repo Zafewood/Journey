@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { setPersistence, signInWithEmailAndPassword, browserSessionPersistence } from 'firebase/auth';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../firebase-config';
@@ -10,13 +10,16 @@ function LoginPage({ authChanged }) {
 
     const signIn = (e) => { 
         e.preventDefault();
-        signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => { 
-            navigate('/profile');
-            authChanged(userCredential.user)
-        }).catch((error) => { 
-            console.log(error);
-            alert('Oops... feil brukernavn eller passord. Prøv igjen')
+        console.log('credentials: ', auth, email, password);
+        setPersistence(auth, browserSessionPersistence).then(() => {
+            return signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => { 
+                navigate('/');
+                authChanged(userCredential.user)
+            }).catch((error) => { 
+                console.log(error);
+                alert('Oops... feil brukernavn eller passord. Prøv igjen')
+            })
         })
     }
 

@@ -9,8 +9,7 @@ import '../styles/HomePage.css'
 
 function HomePage({ allTrips, tripAddedHandler }) {
 
-  const allTripsArray = Object.values(allTrips); 
-  console.log("alltirpos: ", allTripsArray);
+  const allTripsArray = Object.values(allTrips);
 
   return (
     <>
@@ -24,8 +23,9 @@ function HomePage({ allTrips, tripAddedHandler }) {
         <div><Searchbar></Searchbar></div>
         <div className='card-view'>
           <CreateTrip tripAddedHandler={tripAddedHandler}/>
-          {allTripsArray.map((tripObject) => {
-            return <DisplayTrip tripsInfo={tripObject}/>
+          {allTripsArray.map((tripObject, index) => {
+            console.log('key: ', tripObject.id);
+            return <DisplayTrip tripsInfo={tripObject} key={index}/>
           })}
         </div>
       </div>
