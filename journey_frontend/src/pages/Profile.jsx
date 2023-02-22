@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Profile.css';
 import User_picture from '../assets/default_user.jpeg'; 
 import DisplayTrip from '../components/Trips/DisplayTrip';
 import firebaseService from '../services/firebaseService.js';
 
 
-function Profile({currentUser}) {
+function Profile({currentUser, signOutHandler}) {
 
   function loadValues() {
     const userNode = firebaseService.getCurrentUserNode();
@@ -43,6 +43,7 @@ function Profile({currentUser}) {
   const [activitybuttoncolor, setActivityButtonColor] = useState('white');
   const [tripbuttonstate, setTripButtonState] = useState(true);
   const [acitvitybuttonstate, setActivityButtonState] = useState(false);
+  const navigate = useNavigate();
 
   const handleTripButton = () => {
     if (tripbuttonstate) {}
@@ -66,6 +67,11 @@ function Profile({currentUser}) {
       }
     };
 
+    const signOutTapped = () => {
+      signOutHandler();
+      navigate('/loginpage');
+    }
+
   return(
     <>
     <h1 id='header'>Your Profile</h1>
@@ -76,6 +82,7 @@ function Profile({currentUser}) {
     <div id='personal_info' >
       <button id='button' onClick={handleEditButton}>Edit</button>
       <button id='button' onClick={handleSaveButton}>Save</button>
+      <button onClick={signOutTapped}>Logg out</button>
       <p>Username:  <input id='username' type='text' disabled></input></p><br/>
       <p>Home Country:
         <select id='home_country' name="country" disabled>

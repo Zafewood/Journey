@@ -2,9 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import '../styles/NavBar.css'
 import logo from '../assets/journey_brown_monochromatic.png'
+import firebaseService from '../services/firebaseService';
+import { useState } from 'react';
 
 
 function NavBar({ currentUser }) {
+    
   return (
     <nav data-testid="navbar">
         <div className="nav-left">

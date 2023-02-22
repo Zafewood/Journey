@@ -10,8 +10,8 @@ import NavBar from './NavBar';
 import Footer from './Footer';
 import { useState, useEffect } from 'react';
 import  firebaseService  from '../services/firebaseService';
-import Cookies from 'js-cookie';
-import { onAuthStateChanged } from 'firebase/auth';
+
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 
 
 
@@ -52,6 +52,15 @@ function App() {
     })
   }
 
+  const signOutUSers = () => {
+    signOut(auth).then(() => {
+      console.log('signed out sucessfull');
+      setUser(null)
+    }).catch((error) => {
+      console.log('error signing out; ', error);
+    })
+  }
+
   // Useffect hook
   useEffect(() => {
     checkIfUserIsSignedIn();
@@ -73,7 +82,7 @@ function App() {
           <Route path='/about' element={ <About /> }/>
           <Route path='/loginpage' element={ <LoginPage authChanged={handleAuthStateChanged}/> }/>
           <Route path='/createuserpage' element={ <CreateUserPage /> }/>
-          <Route path='/profile' element={ <Profile currentUser={user}/> }/>
+          <Route path='/profile' element={ <Profile currentUser={user} signOutHandler={signOutUSers} /> }/>
         </Routes>
       </div>
       <Footer />

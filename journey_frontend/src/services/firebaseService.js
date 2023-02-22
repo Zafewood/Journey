@@ -10,11 +10,9 @@ const getCurrentUserNode = () => {
     return new Promise((resolve, reject) => {
         get(child(dbRef, `users/${currentUserID}`)).then((snapshot) => {
           if (snapshot.exists()) {
-            console.log('user exists');
             const userNode = snapshot.val();
             resolve(userNode);
           } else {
-            console.log("No data available");
             resolve(null);
           }
         }).catch((error) => {

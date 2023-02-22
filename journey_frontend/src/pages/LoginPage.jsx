@@ -2,7 +2,6 @@ import { setPersistence, signInWithEmailAndPassword, browserSessionPersistence }
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../firebase-config';
-import Cookies from 'js-cookie';
 
 function LoginPage({ authChanged }) {
     const[email, setEmail] = useState('');
