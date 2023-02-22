@@ -1,6 +1,7 @@
 import { db, auth } from '../firebase-config';
 import { set, ref, onValue, get, child } from 'firebase/database';
 import { uuidv4 } from '@firebase/util';
+import Cookies from 'js-cookie';
 
 
 const getCurrentUserNode = () => {
