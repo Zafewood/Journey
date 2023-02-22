@@ -5,7 +5,10 @@ import User_picture from '../assets/default_user.jpeg';
 import DisplayTrip from '../components/Trips/DisplayTrip'
 
 
-function Profile({currentUser}) {
+function Profile({allTrips, currentUser}) {
+
+  const allTripsArray = Object.values(allTrips);
+  console.log("alltirpos: ", allTripsArray);
   
   const handleEditButton = () => {
     const usernameinput = document.getElementById('username');
@@ -38,6 +41,11 @@ function Profile({currentUser}) {
         setTripButtonColor('#624b2d')
         setActivityButtonState(false)
         setActivityButtonColor('white')
+        const my_div = document.getElementById('my_div');
+        const act_div = document.getElementById('act_div');
+        my_div.hidden = false;
+        act_div.hidden = true;
+
       }
     };
 
@@ -48,6 +56,11 @@ function Profile({currentUser}) {
         setActivityButtonColor('#624b2d')
         setTripButtonState(false)
         setTripButtonColor('white')
+        const my_div = document.getElementById('my_div');
+        const act_div = document.getElementById('act_div');
+        act_div.hidden = false;
+        my_div.hidden = true;
+
       }
     };
 
@@ -328,10 +341,13 @@ function Profile({currentUser}) {
       <div id='h_line'></div>
     </div>
     <div id='feed'>
-    <DisplayTrip />
-    <DisplayTrip />
-    <DisplayTrip />
-    <DisplayTrip />
+      <div id='midlertidig'>
+      <div id='my_div' hidden>Users own trips here</div>
+      <div id='act_div' hidden>Users interacted trips here</div>
+      </div>
+    {allTripsArray.map((tripObject) => {
+            return <DisplayTrip tripsInfo={tripObject}/>
+          })}
     </div>
     </>
     )
