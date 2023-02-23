@@ -23,18 +23,22 @@
     flex-direction: column;
     justify-content: space-between;
     margin: 50px 0;
+    margin-left: 5%;
 }
 
 .card-left {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-left: 5%;
+
 }
 
 .trip-image {
     width: 300px;
     height: 300px;
     border-radius: 10px;
+    margin-right: 10%;
 }
 
 .trip-comments {
@@ -56,8 +60,46 @@
 }
 
 .tripBox { 
-    background-color: antiquewhite;
-    margin: 50px;
-    padding: 20px;
+    background-color: #E9E2D0;
+    padding: 10px;
+    margin: 0 auto;
+    /* max-width: 500px; */
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.39);
 }
+
+#addTravelButton { 
+    padding: 0;
+    border: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #E9E2D0;
+    font-size: 20px
+}
+
+#addTravelButton:hover { 
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#formButton { 
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 15px;
+    /* border: 0; */
+    background-color: #624b2d;
+    color: #E9E2D0;
+    border-color: #624b2d;
+
+}
+
+#formButton:hover { 
+    background-color: #E9E2D0;
+    color: #624b2d;
+    cursor: pointer;
+    font-weight: bold;
+    border-color:#E9E2D0;
+    text-align: center;
+
+}
+
+

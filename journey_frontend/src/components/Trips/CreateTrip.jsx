@@ -23,14 +23,26 @@ function TripsCard({ tripAddedHandler }) {
         tripDescription: ''
       });
 
-    const handleClick = event => {
+      function changeButtonText () { 
+        const button = document.getElementById("addTravelButton");
         setIsShown(current => !current);
-        
-      };
+        if (isShown == true) { 
+            button.textContent = 'Add Your Own Travel'
+        } else { 
+            button.textContent = 'Exit';
+        }
+
+    }
 
     const sendInForm = () => { 
         //console.log(auth.currentUser.email)
+        const button = document.getElementById("addTravelButton");
         setIsShown(false);
+        if (isShown == true) { 
+            button.textContent = 'Add Your Own Travel'
+        } else { 
+            button.textContent = 'Exit';
+        }
         console.log('obj:', trip);
         firebaseService.createTrip(trip);
         tripAddedHandler();
@@ -67,7 +79,7 @@ function TripsCard({ tripAddedHandler }) {
 
   return (
     <div className= "tripBox"> 
-        <button  id='addTravelButton' onClick={handleClick}> Add travel </button>
+        <button  id='addTravelButton' onClick={changeButtonText}> Add travel </button>
         {isShown && (
             <div>
             <form>
@@ -75,17 +87,17 @@ function TripsCard({ tripAddedHandler }) {
                 <label> Title of your trip </label> <br/>
                 <input type ="text" onChange = {updateTitle} ></input> <br/> <br/>
                 <label> Author </label> <br/>
-                {/*<label> {auth.currentUser.displayName} </label> <br/> <br/>*/}
-                <label> Duration </label> <br/>
+                <label> {auth.currentUser.email} </label> <br/> <br/>
+                <label> Duration (days) </label> <br/>
                 <input type="integer" onChange = {updateDuration}></input> <br/> <br/>
                 <label> Country/Countries </label> <br/>
                 <input type ="text" onChange={updateCountry}></input> <br/> <br/>
                 <label> City/Cities </label> <br/>
                 <input type ="text" onChange={updateCity}></input> <br/> <br/>
                 <label> Description </label> <br/>
-                <textarea type ="text" onChange={updateDescription}></textarea> <br/> <br/>
+                <textarea type ="text" onChange={updateDescription} textarea rows={5} cols={40} ></textarea> <br/> <br/>
             </form>
-            <button onClick={sendInForm}> Send in form </button>
+            <button id='formButton' onClick={sendInForm}> Send in form </button>
             </div>
             )}
      </div>
