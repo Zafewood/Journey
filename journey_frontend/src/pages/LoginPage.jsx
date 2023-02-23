@@ -2,6 +2,7 @@ import { setPersistence, signInWithEmailAndPassword, browserSessionPersistence }
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../firebase-config';
+import '../styles/LoginPage.css';
 
 function LoginPage({ authChanged }) {
     const[email, setEmail] = useState('');
@@ -24,18 +25,18 @@ function LoginPage({ authChanged }) {
     }
 
   return (
-    <>
-    <form onSubmit={signIn}>
+    <div className='loginDiv'>
+    <form onSubmit={signIn} className ='loginForm'>
         <h1>Log In</h1><br />
         <label>Email</label><br />
         <input type="email" value={email} onChange = {(e) => setEmail(e.target.value)}></input><br /><br />
         <label>Password</label><br />
         <input type="password" value={password} onChange = {(e) => setPassword(e.target.value)}></input><br /><br />
-        <button>LOG IN</button><br /><br /><br />
-        <h4>Don´t have an account??</h4>
-        <button><Link to='/createuserpage'>Create new account</Link></button>
+        <button className='loginButtons'>LOG IN</button><br /><br /><br />
+        <h4>Don´t have an account??</h4> <br/>
+        <button className='loginButtons'><Link to='/createuserpage'>Create new account</Link></button>
     </form>
-    </>
+    </div>
   )
 }
 
