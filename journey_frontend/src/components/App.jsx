@@ -82,7 +82,7 @@ function App() {
           <Route path='/about' element={ <About /> }/>
           <Route path='/loginpage' element={ <LoginPage authChanged={handleAuthStateChanged}/> }/>
           <Route path='/createuserpage' element={ <CreateUserPage /> }/>
-          <Route path='/profile' element={ <Profile currentUser={user} signOutHandler={signOutUSers} /> }/>
+          <Route path='/profile' element={ <Profile allTrips={trips} currentUser={user} signOutHandler={signOutUSers} /> }/>
         </Routes>
       </div>
       <Footer />

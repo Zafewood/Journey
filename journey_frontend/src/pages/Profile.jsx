@@ -6,7 +6,7 @@ import DisplayTrip from '../components/Trips/DisplayTrip';
 import firebaseService from '../services/firebaseService.js';
 
 
-function Profile({currentUser, signOutHandler}) {
+function Profile({allTrips, currentUser, signOutHandler}) {
 
   function loadValues() {
     const userNode = firebaseService.getCurrentUserNode();
@@ -16,6 +16,9 @@ function Profile({currentUser, signOutHandler}) {
       document.getElementById('email').value = data.email;
     })
   }
+
+  const allTripsArray = Object.values(allTrips);
+  console.log("alltirpos: ", allTripsArray);
 
   const handleEditButton = () => {
     const usernameinput = document.getElementById('username');
@@ -29,10 +32,12 @@ function Profile({currentUser, signOutHandler}) {
   const handleSaveButton = () => {
     const usernameinput = document.getElementById('username');
     const homecountryinput = document.getElementById('home_country');
+    const emailField = document.getElementById('email');
     usernameinput.disabled = true;
     firebaseService.editUserNode({
-      displayname: usernameinput.value,
-      homeCountry: homecountryinput.value
+      displayName: usernameinput.value,
+      homeCountry: homecountryinput.value,
+      email: emailField.value,
       })
     usernameinput.style.borderWidth = '0px'
     homecountryinput.disabled = true;
@@ -52,7 +57,11 @@ function Profile({currentUser, signOutHandler}) {
         setTripButtonColor('#624b2d')
         setActivityButtonState(false)
         setActivityButtonColor('white')
-        //handle feed change
+        const my_div = document.getElementById('my_div');
+        const act_div = document.getElementById('act_div');
+        my_div.hidden = false;
+        act_div.hidden = true;
+
       }
     };
 
@@ -63,7 +72,11 @@ function Profile({currentUser, signOutHandler}) {
         setActivityButtonColor('#624b2d')
         setTripButtonState(false)
         setTripButtonColor('white')
-        //handle feed change
+        const my_div = document.getElementById('my_div');
+        const act_div = document.getElementById('act_div');
+        act_div.hidden = false;
+        my_div.hidden = true;
+
       }
     };
 
@@ -350,10 +363,13 @@ function Profile({currentUser, signOutHandler}) {
       <div id='h_line'></div>
     </div>
     <div id='feed'>
-    <DisplayTrip />
-    <DisplayTrip />
-    <DisplayTrip />
-    <DisplayTrip />
+      <div id='midlertidig'>
+      <div id='my_div' hidden>Users own trips here</div>
+      <div id='act_div' hidden>Users interacted trips here</div>
+      </div>
+    {allTripsArray.map((tripObject) => {
+            return <DisplayTrip tripsInfo={tripObject}/>
+          })}
     </div>
     </>
     )
