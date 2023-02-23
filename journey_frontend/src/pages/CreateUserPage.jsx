@@ -304,7 +304,7 @@ function CreateUserPage() {
             <input onChange={updateEmail}></input><br /><br />
             <label>Choose Password</label><br />
             <input onChange={updatePassword}></input><br /><br />
-            <button className='createUserButton' onClick={createUser}> Create user </button><br /><br /><br />
+            <button className='createUserButton' onClick={createUser}>CREATE USER</button><br /><br /><br />
             <h4>Already have a user?</h4>
             <button className='createUserButton'><Link to='/loginpage' >Log in here</Link></button>
     </div>
