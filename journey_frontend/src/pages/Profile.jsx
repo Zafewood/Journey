@@ -32,10 +32,12 @@ function Profile({allTrips, currentUser, signOutHandler}) {
   const handleSaveButton = () => {
     const usernameinput = document.getElementById('username');
     const homecountryinput = document.getElementById('home_country');
+    const emailField = document.getElementById('email');
     usernameinput.disabled = true;
     firebaseService.editUserNode({
-      displayname: usernameinput.value,
-      homeCountry: homecountryinput.value
+      displayName: usernameinput.value,
+      homeCountry: homecountryinput.value,
+      email: emailField.value,
       })
     usernameinput.style.borderWidth = '0px'
     homecountryinput.disabled = true;
