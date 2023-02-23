@@ -87,7 +87,7 @@ function TripsCard({ tripAddedHandler }) {
                 <label> Title of your trip </label> <br/>
                 <input type ="text" onChange = {updateTitle} ></input> <br/> <br/>
                 <label> Author </label> <br/>
-                <label> {auth.currentUser.email} </label> <br/> <br/>
+                <label>  </label> <br/> <br/>
                 <label> Duration (days) </label> <br/>
                 <input type="integer" onChange = {updateDuration}></input> <br/> <br/>
                 <label> Country/Countries </label> <br/>
