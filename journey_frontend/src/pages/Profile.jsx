@@ -95,7 +95,7 @@ function Profile({allTrips, currentUser, signOutHandler}) {
     <div id='personal_info' >
       <button id='button' onClick={handleEditButton}>Edit</button>
       <button id='button' onClick={handleSaveButton}>Save</button>
-      <button onClick={signOutTapped}>Logg out</button>
+      <button id ='button' onClick={signOutTapped}>Log out</button>
       <p>Username:  <input id='username' type='text' disabled></input></p><br/>
       <p>Home Country:
         <select id='home_country' name="country" disabled>

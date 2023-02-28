@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+body { 
+    background-color: rgb(252, 245, 227)  ;
+}
+
 .main-content {
     min-height: 80vh;
 }

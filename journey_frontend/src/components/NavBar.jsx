@@ -28,7 +28,7 @@ function NavBar({ currentUser }) {
                 <li>
                 <button className="my-journey-btn">
                     <Link className="test" to={currentUser ? '/profile' : '/loginpage'}>
-                        {currentUser ? currentUser.email : 'Logg inn'}
+                        {currentUser ? currentUser.email : 'Log in'}
                     </Link></button>
                 </li>
             </ul>
