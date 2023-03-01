@@ -8,7 +8,7 @@ unit-test:
     - cd journey_frontend
     - npm install
   script:
-    - npm run test:ci
+    - npm run test
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
   artifacts:
     paths:
