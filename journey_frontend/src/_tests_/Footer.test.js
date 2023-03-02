@@ -1,9 +1,14 @@
-import { render, screen, cleanup } from '@testing-library/react';
-import App from '../components/App';
-import { Footer } from '../components/Footer';
+import { render, screen } from '@testing-library/react';
+import Footer from '../components/Footer';
 
-test('Navbar should render', () => {
-    render(<App />);
-    const footer = screen.getByTestId('footer');
-    expect(footer).toBeInTheDocument();
-})
+describe('Footer tests', () => {
+    
+  beforeEach(() => {
+    render(<Footer />);
+  });
+
+  it('renders the Journey trademark', () => {
+    const trademarkElement = screen.getByText('©2023 Journey ™');
+    expect(trademarkElement).toBeInTheDocument();
+  });
+});

@@ -1,20 +1,14 @@
 import React from 'react'
-import '../../styles/Trips/TripsCard.css'
+import '../../styles/Trips/CreateTrip.css'
 import placeholderImg from '../../assets/example-beach.jpg'
 import { useState } from 'react'
 import UserComment from './UserComment';
-import { auth } from '../../firebase-config';
-import { set } from 'firebase/database';
+
 import  firebaseService  from '../../services/firebaseService';
-import { useEffect } from 'react';
+
 
 function TripsCard({ tripAddedHandler }) {
     const [isShown, setIsShown] = useState(false);
-    const [title, setTitle] = useState('');
-    const [duration, setDuration] = useState('');
-    const [country, setCountry] = useState('');
-    const [city, setCity] = useState('');
-    const [description, setDescription] = useState('');
     const [trip, setTrip] = useState({
         tripTitle: '',
         tripDuration: '',
@@ -83,21 +77,22 @@ function TripsCard({ tripAddedHandler }) {
         {isShown && (
             <div>
             <form>
-                <h1> <b> Add Your Journey Here </b> </h1> <br/>
-                <label> Title of your trip </label> <br/>
-                <input type ="text" onChange = {updateTitle} ></input> <br/> <br/>
-                <label> Author </label> <br/>
-                <label>  </label> <br/> <br/>
-                <label> Duration (days) </label> <br/>
-                <input type="integer" onChange = {updateDuration}></input> <br/> <br/>
-                <label> Country/Countries </label> <br/>
-                <input type ="text" onChange={updateCountry}></input> <br/> <br/>
-                <label> City/Cities </label> <br/>
-                <input type ="text" onChange={updateCity}></input> <br/> <br/>
-                <label> Description </label> <br/>
-                <textarea type ="text" onChange={updateDescription} textarea rows={5} cols={40} ></textarea> <br/> <br/>
+                <h1> <b> Add Your Journey Here </b> </h1> 
+                <div className="trip-content">
+                    <label for="titleInput">Title of your trip</label>
+                    <input id="titleInput" type="text" onChange={updateTitle} />
+                    <label id='authorLabel'> Author </label> 
+                    <label for='duationInput'> Duration (days) </label> 
+                    <input id='duationInput' type="integer" onChange = {updateDuration}></input> 
+                    <label for='countryInput'> Country/Countries </label> 
+                    <input id='countryInput' type ="text" onChange={updateCountry}></input> 
+                    <label for='citiesInput'> City/Cities </label> 
+                    <input id='citiesInput' type ="text" onChange={updateCity}></input> 
+                    <label for='descriptionInput' > Description </label> 
+                    <textarea id='descriptionInput' type ="text" onChange={updateDescription} textarea rows={5} cols={40} ></textarea> 
+                </div>
             </form>
-            <button id='formButton' onClick={sendInForm}> Send in form </button>
+            <button id='formButton' onClick={sendInForm}>Send in form</button>
             </div>
             )}
      </div>

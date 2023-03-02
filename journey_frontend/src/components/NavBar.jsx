@@ -15,7 +15,7 @@ function NavBar({ currentUser }) {
             {/* Link elements work kind of like html a tag, but they also set the route for react router. 
                 Pressing a link changes current route, which rerenders app component with correct content.            
             */}
-            <Link to='/'><img src={logo} alt="" className='logo' /></Link>
+            <Link to='/'><img src={logo} alt="Journey logo" className='logo' /></Link>
         </div>
         <div className="nav-mid">
             <ul>
