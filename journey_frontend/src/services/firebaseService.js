@@ -65,6 +65,7 @@ const getCurrentUserNode = () => {
     const userID = "1jEO8tQdc6a2l3HD62QlDl6q3aP2"
     set(ref(db, 'trips/' + tripID), {
       tripTitle, 
+      tripID,
       tripCountry, 
       tripCity, 
       tripDescription,
