@@ -16,40 +16,30 @@ const getCurrentUserNode = () => {
             resolve(null);
           }
         }).catch((error) => {
-          console.error(error);
+          console.log(error);
           reject(error);
         });
       });
 }
 
-const writeTripToUserNode = ({tripName, tripAuthor, tripDuration }) => {
+  const editUserNode = ({displayName, homeCountry, email}) => {
+    
     const currentUserID = auth.currentUser.uid;
-    const tripID = uuidv4();
-    set(ref(db, 'users/' + currentUserID + '/trips/' + tripID), {
-      tripName,  
-      tripAuthor,
-      tripDuration
-    }).then(() => {
-      set(ref(db, 'tips/' + tripID), {
-        tripName,
-        tripAuthor,
-        tripDuration
-      })
-    }).catch((error) => (
-      console.log('error: ', error)
-    ))
+    return new Promise((resolve, reject) => {
+      
+      set(ref(db, 'users/' + currentUserID), {
+        displayName: displayName,
+        homeCountry: homeCountry,
+        email: email,
+      }).then(() => {
+        resolve();
+      }).catch((error) => {
+        console.log('error editing user node: ', error);
+        reject(error);
+      });
+    });
   }
 
-  const editUserNode = ({displayName, homeCountry, email}) => {
-    const currentUserID = auth.currentUser.uid;
-    set(ref(db, 'users/' + currentUserID), {
-      displayName: displayName, 
-      homeCountry: homeCountry,
-      email: email,
-    }).catch((error) => (
-      console.log('error: ', error)
-    ))
-  }
   const getAllTrips = () => {
     const dbRef = ref(db);
     return new Promise((resolve, reject) => {
@@ -60,8 +50,11 @@ const writeTripToUserNode = ({tripName, tripAuthor, tripDuration }) => {
           
           resolve(data);
         } else {
-          console.log('error')
+          console.log('error');
+          resolve(null);
         }
+      }).catch((error) => {
+        reject(error);
       })
     })
   }
@@ -83,4 +76,4 @@ const writeTripToUserNode = ({tripName, tripAuthor, tripDuration }) => {
     })
   }
 
-export default { getCurrentUserNode, writeTripToUserNode, editUserNode, getAllTrips, createTrip }
+export default { getCurrentUserNode, editUserNode, getAllTrips, createTrip }

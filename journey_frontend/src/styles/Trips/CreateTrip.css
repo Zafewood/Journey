@@ -1,0 +1,40 @@
+#addTravelButton { 
+    padding: 0;
+    border: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #E9E2D0;
+    font-size: 20px
+}
+
+#addTravelButton:hover { 
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#formButton { 
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 15px;
+    /* border: 0; */
+    background-color: #624b2d;
+    color: #E9E2D0;
+    border-color: #624b2d;
+
+}
+
+#formButton:hover { 
+    background-color: #E9E2D0;
+    color: #624b2d;
+    cursor: pointer;
+    font-weight: bold;
+    border-color:#E9E2D0;
+    text-align: center;
+}
+
+.trip-content {
+    display: flex;
+    flex-direction: column;
+}
+
+
