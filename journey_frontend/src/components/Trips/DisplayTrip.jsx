@@ -3,11 +3,36 @@ import '../../styles/Trips/TripsCard.css'
 import placeholderImg from '../../assets/example-beach.jpg'
 import { useState } from 'react'
 import UserComment from './UserComment';
+import { Rating } from 'react-simple-star-rating'
+
 
 function DisplayTrip({ tripsInfo }) {
     const [cardHeight, setCardHeight] = useState("0px");
     const [isExpanded, setIsExpanded] = useState(false);
     const [shoudlDisplay, setShouldDisplay] = useState("none")
+    const [rating, setRating] = useState(0)
+    const [isAllowed, setIsAllowed] = useState(true)
+
+  
+
+    const handleRating = (index) => {
+      //lagre index og tripID i useractivity på currentuser
+      //lagre currentuser i RatedBy på tripID-en
+      console.log('Test:' + index)
+      setRating(index)
+      setIsAllowed(false)
+    }
+
+    const onPointerEnter = () => console.log('Enter')
+    const onPointerLeave = () => setRating(4)
+    const onPointerMove = (value, index) => console.log(value, index)
+
+    const handleReset = () => {
+      // Set the initial value
+      setRating(0)
+    }
+    
+      
 
     const handleExpand = () => {
         if (isExpanded) {
@@ -37,7 +62,14 @@ function DisplayTrip({ tripsInfo }) {
                 </div>
                 <div className='trip-rating-view'>
                     <p>Average rating:</p>
-                    <h1>Star rating here</h1>
+        <div className='App'>
+      <Rating 
+      initialValue={rating}
+      onClick={handleRating}
+      allowHover={isAllowed}
+      allowFraction={true}
+      />
+    </div>
                     <button className='comments-btn' onClick={handleExpand}>12 comments</button>
                 </div>
             </div>
