@@ -1,63 +1,30 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import TripsCard from '../components/Trips/CreateTrip'
+import { render, fireEvent, screen } from '@testing-library/react';
 
-describe('TripsCard tests', () => {
-  it('should render the "Add travel" button', () => {
-    render(<TripsCard />);
-    const addButton = screen.getByRole('button', { name: 'Add travel' });
-    expect(addButton).toBeInTheDocument();
-  });
+import DisplayTrip from '../components/Trips/DisplayTrip'
 
-  it('should display form on "Add travel" button click', () => {
-    render(<TripsCard />);
-    const addButton = screen.getByRole('button', { name: 'Add travel' });
-    fireEvent.click(addButton);
+describe('DisplayTrip component', () => {
+  test('should render component with fields', () => {
+    const tripsInfo = {
+      tripTitle: 'Example trip',
+      tripDuration: '7',
+      tripCountry: 'Country',
+      tripCity: 'City',
+      tripDescription: 'Example description'
+    };
+    render(<DisplayTrip tripsInfo={tripsInfo} />);
 
-    const formTitle = screen.getByLabelText('Title of your trip');
-    expect(formTitle).toBeInTheDocument();
+    const tripDuration = screen.getByTestId('trip-duration');
+    expect(tripDuration).toBeInTheDocument();
 
-    const formDuration = screen.getByLabelText('Duration (days)');
-    expect(formDuration).toBeInTheDocument();
+    const tripCountry = screen.getByTestId('trip-country');
+    expect(tripCountry).toBeInTheDocument();
 
-    const formCountry = screen.getByLabelText('Country/Countries');
-    expect(formCountry).toBeInTheDocument();
+    const tripCities = screen.getByTestId('trip-cities');
+    expect(tripCities).toBeInTheDocument();
 
-    const formCity = screen.getByLabelText('City/Cities');
-    expect(formCity).toBeInTheDocument();
-
-    const formDescription = screen.getByLabelText('Description');
-    expect(formDescription).toBeInTheDocument();
-  });
-
-  /*
-  it('should hide the form when the "Send in form" button is clicked', () => {
-    render(<TripsCard />);
-    const addButton = screen.getByRole('button', { name: 'Add travel' });
-    fireEvent.click(addButton);
+    const tripDescription = screen.getByTestId('trip-description');
+    expect(tripDescription).toBeInTheDocument();
 
     
-    const sendInFormButton = screen.getByRole('button', { name: 'Send in form' });
-    fireEvent.click(sendInFormButton);
-    
-
-    const formTitle = screen.queryByLabelText('Title of your trip');
-    expect(formTitle).not.toBeInTheDocument();
-
-    const formAuthor = screen.queryByLabelText('Author');
-    expect(formAuthor).not.toBeInTheDocument();
-
-    const formDuration = screen.queryByLabelText('Duration (days)');
-    expect(formDuration).not.toBeInTheDocument();
-
-    const formCountry = screen.queryByLabelText('Country/Countries');
-    expect(formCountry).not.toBeInTheDocument();
-
-    const formCity = screen.queryByLabelText('City/Cities');
-    expect(formCity).not.toBeInTheDocument();
-
-    const formDescription = screen.queryByLabelText('Description');
-    expect(formDescription).not.toBeInTheDocument();
   });
-  */
 });

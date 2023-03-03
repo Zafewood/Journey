@@ -30,10 +30,10 @@ function DisplayTrip({ tripsInfo }) {
                 <h1 className='trip-title'>{tripsInfo?.tripTitle}</h1>
                 <div className='trip-info'>
                     <p className='trip-author'> Author: </p>
-                    <p className='trip-duration'>Duration (days): {tripsInfo?.tripDuration}</p>
-                    <p className='trip-country'>Countries: {tripsInfo?.tripCountry}</p>
-                    <p className='trip-cities'>Cities: {tripsInfo?.tripCity} </p> 
-                    <p className='trip-description'>Description: {tripsInfo?.tripDescription}</p> <br/>
+                    <p className='trip-duration' data-testid="trip-duration">Duration (days): {tripsInfo?.tripDuration}</p>
+                    <p className='trip-country' data-testid="trip-country">Countries: {tripsInfo?.tripCountry}</p>
+                    <p className='trip-cities' data-testid="trip-cities">Cities: {tripsInfo?.tripCity} </p> 
+                    <p className='trip-description' data-testid="trip-description">Description: {tripsInfo?.tripDescription}</p> <br/>
                 </div>
                 <div className='trip-rating-view'>
                     <p>Average rating:</p>

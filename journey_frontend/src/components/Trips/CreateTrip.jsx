@@ -73,22 +73,22 @@ function TripsCard({ tripAddedHandler }) {
 
   return (
     <div className= "tripBox"> 
-        <button  id='addTravelButton' onClick={changeButtonText}> Add travel </button>
+        <button  id='addTravelButton' data-testid="addTravelBtn" onClick={changeButtonText}>Add travel</button>
         {isShown && (
             <div>
             <form>
                 <h1> <b> Add Your Journey Here </b> </h1> 
                 <div className="trip-content">
-                    <label for="titleInput">Title of your trip</label>
+                    <label htmlFor="titleInput">Title of your trip</label>
                     <input id="titleInput" type="text" onChange={updateTitle} />
                     <label id='authorLabel'> Author </label> 
-                    <label for='duationInput'> Duration (days) </label> 
+                    <label htmlFor='duationInput'> Duration (days) </label> 
                     <input id='duationInput' type="integer" onChange = {updateDuration}></input> 
-                    <label for='countryInput'> Country/Countries </label> 
+                    <label htmlFor='countryInput'> Country/Countries </label> 
                     <input id='countryInput' type ="text" onChange={updateCountry}></input> 
-                    <label for='citiesInput'> City/Cities </label> 
+                    <label htmlFor='citiesInput'> City/Cities </label> 
                     <input id='citiesInput' type ="text" onChange={updateCity}></input> 
-                    <label for='descriptionInput' > Description </label> 
+                    <label htmlFor='descriptionInput' > Description </label> 
                     <textarea id='descriptionInput' type ="text" onChange={updateDescription} textarea rows={5} cols={40} ></textarea> 
                 </div>
             </form>
