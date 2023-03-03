@@ -38,7 +38,11 @@ function Profile({allTrips, currentUser, signOutHandler}) {
       displayName: usernameinput.value,
       homeCountry: homecountryinput.value,
       email: emailField.value,
-      })
+    }).then(() => {
+      console.log('user node updated succesfully');
+    }).catch((error) => {
+      console.log('error occured: ', error);
+    })
     usernameinput.style.borderWidth = '0px'
     homecountryinput.disabled = true;
     homecountryinput.style.borderWidth = '0px'
@@ -61,7 +65,6 @@ function Profile({allTrips, currentUser, signOutHandler}) {
         const act_div = document.getElementById('act_div');
         my_div.hidden = false;
         act_div.hidden = true;
-
       }
     };
 
@@ -76,7 +79,6 @@ function Profile({allTrips, currentUser, signOutHandler}) {
         const act_div = document.getElementById('act_div');
         act_div.hidden = false;
         my_div.hidden = true;
-
       }
     };
 
