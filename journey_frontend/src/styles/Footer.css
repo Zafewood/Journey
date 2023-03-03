@@ -1,0 +1,25 @@
+footer {
+    height: 10vh;
+    float: left;
+    width: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+}
+
+footer p {
+  color: white;
+}
+
+.footer-left {
+
+}
+
+.footer-mid {
+    display: flex;
+    align-items: center;
+}
+
+.footer-right {
+    
+}

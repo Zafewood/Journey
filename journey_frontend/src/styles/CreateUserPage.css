@@ -1,0 +1,35 @@
+.createUserDiv { 
+    margin-top: 5%;
+    margin-left: 30%;
+    margin-right: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:  #E9E2D0;
+    display: block;
+    background-color:  #614C2C;
+    padding: 5%;
+    border-radius: 30px;
+    font-size: 20px;
+}
+
+.createUserForm { 
+    background-color:  #614C2C;
+    padding: 5%;
+    border-radius: 30px;
+    font-size: 20px;
+    /* display: block; */
+    
+}
+
+.createUserButton{ 
+    background-color: #E9E2D0;
+    color: #614C2C;
+    border-radius: 10px;
+    padding: 3px;
+    border-color: #E9E2D0;
+}
+
+.countryDrop { 
+    width: 300px !important;
+}

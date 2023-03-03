@@ -1,0 +1,73 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+}
+
+ul {
+    list-style: none;
+    text-decoration: none;
+}
+
+li {
+    margin-left: 30px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.nav-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    margin-left: 3%;
+    /* margin-right: 5%; */
+    margin-top: 2%;
+}
+
+
+
+.nav-mid ul {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    /* padding-left: 50px; */
+    transform: translate(-75%, 10%);
+    font-size: 30px;
+}
+
+.my-journey-btn {
+    margin-left: 2%;
+    font-size: 20px;
+    background-color: #624b2d;
+    padding: 10%;
+    outline: none;
+    border-radius: 10px;
+    border: none;
+}
+
+.my-journey-btn a {
+    color: white;
+}
+
+.logo {
+    width: 25%;
+}
+
+/*
+.nav-right {
+    margin-right: 20px;
+}
+
+.nav-right p {
+    color: black;
+}
+
+.user-pic {
+    width: 50px;
+    height: 50px;
+}*/
