@@ -3,12 +3,14 @@ import '../../styles/Trips/TripsCard.css'
 import placeholderImg from '../../assets/example-beach.jpg'
 import { useState } from 'react'
 import UserComment from './UserComment';
+import firebaseService from '../../services/firebaseService';
+import { auth } from '../../firebase-config';
 
 function DisplayTrip({ tripsInfo, handleUserEditTrip }) {
     const [cardHeight, setCardHeight] = useState("0px");
     const [isExpanded, setIsExpanded] = useState(false);
     const [shoudlDisplay, setShouldDisplay] = useState("none")
-
+    const currentUserID = auth.currentUser.uid;
 
     const handleExpand = () => {
         if (isExpanded) {
@@ -23,6 +25,13 @@ function DisplayTrip({ tripsInfo, handleUserEditTrip }) {
 
     const editTrip = () => {
         handleUserEditTrip(tripsInfo);
+    }
+
+    const deleteTrip = () => {
+        firebaseService.deleteTripNode({
+            tripID: tripsInfo.tripID,
+            userID: tripsInfo.userID
+        })
     }
 
   return (
@@ -40,8 +49,9 @@ function DisplayTrip({ tripsInfo, handleUserEditTrip }) {
                     <p className='trip-cities' data-testid="trip-cities">Cities: {tripsInfo?.tripCity} </p> 
                     <p className='trip-description' data-testid="trip-description">Description: {tripsInfo?.tripDescription}</p> <br/>
                 </div>
+                <button id="editTrip" onClick={editTrip} style={{ display: currentUserID == tripsInfo.userID ? 'block' : 'none' }}>Edit</button>
+                <button id="deleteTrip" onClick={deleteTrip} style={{ display: currentUserID == tripsInfo.userID ? 'block' : 'none' }}>Delete</button>
                 <div className='trip-rating-view'>
-                    <button id="editTrip" onClick={editTrip}>Edit</button>
                     <p>Average rating:</p>
                     <h1>Star rating here</h1>
                     <button className='comments-btn' onClick={handleExpand}>12 comments</button>

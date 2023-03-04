@@ -55,6 +55,20 @@ const editTripNode = ({tripID, tripTitle, tripDuration, tripCountry, tripCity, t
   });
 }
 
+const deleteTripNode = ({tripID, userID}) => {
+  return new Promise((resolve, reject) => {
+    set(ref(db, 'trips/' + tripID), {
+    }).then(() => {
+      set(ref(db, 'users/' + userID + '/userTrips/' + tripID), {
+      })
+      resolve();
+    }).catch((error) => {
+      console.log('error deleting user node: ', error);
+      reject(error);
+    });
+  });
+}
+
 const getAllTrips = () => {
   const dbRef = ref(db);
   return new Promise((resolve, reject) => {
@@ -90,4 +104,4 @@ const createTrip = ({ tripTitle, tripCountry, tripCity, tripDescription, tripDur
   })
 }
 
-export default { getCurrentUserNode, editUserNode, getAllTrips, createTrip, editTripNode}
+export default { getCurrentUserNode, editUserNode, getAllTrips, createTrip, editTripNode, deleteTripNode }
