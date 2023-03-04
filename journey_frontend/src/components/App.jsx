@@ -69,6 +69,10 @@ function App() {
     setPopup(!shouldShowPopup);
   }
 
+  const handleUserSaveTrip = () => {
+    setPopup(!shouldShowPopup);
+  }
+
   // Useffect hook
   useEffect(() => {
     checkIfUserIsSignedIn();
@@ -81,7 +85,7 @@ function App() {
     // Main content of the app is rendered inside the main-content div, and the content depends on the current route
     // Only one Route element is active at a time, and will display its element value as the main content.
     <>
-      <EditTrip userTripEdit={userTripEdit} shouldShowPopup={shouldShowPopup} />
+      <EditTrip userTripEdit={userTripEdit} shouldShowPopup={shouldShowPopup} handleUserSaveTrip={handleUserSaveTrip}/>
       <Router >
         <NavBar currentUser={user}/>
         
