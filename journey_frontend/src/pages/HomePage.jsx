@@ -5,7 +5,7 @@ import CreateTrip from '../components/Trips/CreateTrip'
 import Searchbar from '../components/Searchbar'
 import '../styles/HomePage.css'
 
-function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip }) {
+function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser, tripsChanged }) {
 
   const allTripsArray = Object.values(allTrips);
 
@@ -23,7 +23,7 @@ function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip }) {
           <CreateTrip tripAddedHandler={tripAddedHandler}/>
           {allTripsArray.map((tripObject, index) => {
             console.log('key: ', tripObject.id);
-            return <DisplayTrip tripsInfo={tripObject} key={index} handleUserEditTrip={handleUserEditTrip}/>
+            return <DisplayTrip tripsInfo={tripObject} key={index} handleUserEditTrip={handleUserEditTrip} signedInUser={signedInUser} tripsChanged={tripsChanged}/>
           })}
         </div>
       </div>

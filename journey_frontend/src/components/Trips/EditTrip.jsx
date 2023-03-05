@@ -3,7 +3,7 @@ import '../../styles/Trips/EditTrip.css'
 import { useState, useEffect } from 'react';
 import firebaseService from '../../services/firebaseService.js';
 
-function EditTrip( {userTripEdit, shouldShowPopup, handleUserSaveTrip}) {
+function EditTrip( {userTripEdit, shouldShowPopup, handleUserSaveTrip, tripsChanged}) {
 
   const [trip, setTrip] = useState({
     tripTitle: '',
@@ -45,6 +45,7 @@ function EditTrip( {userTripEdit, shouldShowPopup, handleUserSaveTrip}) {
       tripDescription: trip.tripDescription,
     }).then(() => {
       console.log('trip node updated succesfully');
+      tripsChanged();
     }).catch((error) => {
       console.log('error occured: ', error);
     })

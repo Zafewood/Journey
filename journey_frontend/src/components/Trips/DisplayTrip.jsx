@@ -6,11 +6,14 @@ import UserComment from './UserComment';
 import firebaseService from '../../services/firebaseService';
 import { auth } from '../../firebase-config';
 
-function DisplayTrip({ tripsInfo, handleUserEditTrip }) {
+function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged }) {
     const [cardHeight, setCardHeight] = useState("0px");
     const [isExpanded, setIsExpanded] = useState(false);
     const [shoudlDisplay, setShouldDisplay] = useState("none")
-    const currentUserID = auth.currentUser.uid;
+
+    const currentUserID = signedInUser ? signedInUser.uid : null;
+
+    console.log(currentUserID);
 
     const handleExpand = () => {
         if (isExpanded) {
@@ -24,13 +27,15 @@ function DisplayTrip({ tripsInfo, handleUserEditTrip }) {
     }
 
     const editTrip = () => {
-        handleUserEditTrip(tripsInfo);
+        handleUserEditTrip(tripsInfo)
     }
 
     const deleteTrip = () => {
         firebaseService.deleteTripNode({
             tripID: tripsInfo.tripID,
             userID: tripsInfo.userID
+        }).then(() => {
+            tripsChanged();
         })
     }
 
