@@ -11,28 +11,32 @@ function DisplayTrip({ tripsInfo }) {
     const [isExpanded, setIsExpanded] = useState(false);
     const [shoudlDisplay, setShouldDisplay] = useState("none")
     const [rating, setRating] = useState(0)
-    const [isAllowed, setIsAllowed] = useState(true)
+    const [setOrHold, setSetOrHold] = useState(setRating)
+    const [ratingtype, setRatingType] = useState('Avg rating')
+    const [isHoverAllowed, setIsHoverAllowed] = useState(true)
 
-  
+    function loadValues(){
+    {setRatingType('Avg rating')
+    setRating(2.3)} //avg from database
+    }
+
+    const handleChoice = () => {
+      console.log('choosing')
+      setRatingType('Your rating')
+      setSetOrHold(setRating)
+      setIsHoverAllowed(true)
+
+    }
 
     const handleRating = (index) => {
-      //lagre index og tripID i useractivity på currentuser
-      //lagre currentuser i RatedBy på tripID-en
-      console.log('Test:' + index)
-      setRating(index)
-      setIsAllowed(false)
-    }
-
-    const onPointerEnter = () => console.log('Enter')
-    const onPointerLeave = () => setRating(4)
-    const onPointerMove = (value, index) => console.log(value, index)
-
-    const handleReset = () => {
-      // Set the initial value
-      setRating(0)
-    }
-    
-      
+        //lagre index og tripID i useractivity på currentuser
+        //lagre currentuser i RatedBy på tripID-en
+          console.log('Test:' + index)
+          setRatingType('Your rating')
+          setRating(index)
+          setSetOrHold(index)
+          setIsHoverAllowed(false)
+        }
 
     const handleExpand = () => {
         if (isExpanded) {
@@ -46,12 +50,12 @@ function DisplayTrip({ tripsInfo }) {
     }
 
   return (
-    <div className='test'>
+    <div className='test' onLoad={loadValues}>
         <div className='card-content'>
             <div className='card-left'>
                 <img src={placeholderImg} alt="" className='trip-image' />
             </div>
-            <div className='card-right'>
+              <div className='card-right'>
                 <h1 className='trip-title'>{tripsInfo?.tripTitle}</h1>
                 <div className='trip-info'>
                     <p className='trip-author'> Author: </p>
@@ -61,31 +65,37 @@ function DisplayTrip({ tripsInfo }) {
                     <p className='trip-description' data-testid="trip-description">Description: {tripsInfo?.tripDescription}</p> <br/>
                 </div>
                 <div className='trip-rating-view'>
-                    <p>Average rating:</p>
-        <div className='App'>
-      <Rating 
-      initialValue={rating}
-      onClick={handleRating}
-      allowHover={isAllowed}
-      allowFraction={true}
-      />
-    </div>
-                    <button className='comments-btn' onClick={handleExpand}>12 comments</button>
+                  <div className='app' >
+                    <div className='rating'>
+                    <Rating 
+                    initialValue={rating}
+                    onPointerLeave={loadValues}
+                    onClick={handleRating}
+                    onPointerEnter={handleChoice}
+                    onPointerMove={setSetOrHold}
+                    allowFraction={true}
+                    transition={true}
+                    allowHover={isHoverAllowed}
+                    />
+                    </div>
+                    <div className='your-rating'>{ratingtype}: {rating}</div> 
+                  </div>
+                  
                 </div>
+                <button className='comments-btn' onClick={handleExpand}>12 comments</button>
+              </div>   
             </div>
-            
+            <div className='trip-comments' style={{ 
+                height: cardHeight,
+                display: shoudlDisplay
+                }}>
+                <UserComment />
+                <UserComment />
+                <UserComment />
+                <UserComment />
+                <UserComment />
+            </div>
         </div>
-        <div className='trip-comments' style={{ 
-            height: cardHeight,
-            display: shoudlDisplay
-            }}>
-            <UserComment />
-            <UserComment />
-            <UserComment />
-            <UserComment />
-            <UserComment />
-        </div>
-    </div>
   )
 }
 
