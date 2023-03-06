@@ -10,19 +10,21 @@ import { useState, useEffect } from 'react'
 
 function HomePage({ allTrips, tripAddedHandler }) {
 
-  const allTripsArray = Object.values(allTrips);
-  const [filteredTrips, setFilteredTrips] = useState(allTripsArray)
+  const [initialTripsArray, setInitialTripsArray] = useState([]);
+  const [filteredTrips, setFilteredTrips] = useState([])
 
   
   // Load initial trips
   useEffect(() => {
-
-  }, []);
+    const allTripsArray = Object.values(allTrips);
+    setInitialTripsArray(allTripsArray);
+    setFilteredTrips(allTripsArray);
+  }, [allTrips]);
 
   const handleSearch = (searchText) => {
 
 
-    const matchingTrips = allTripsArray.filter((trip) => {
+    const matchingTrips = initialTripsArray.filter((trip) => {
       const { tripTitle, tripCountry, tripCity } = trip;
       return (
         tripTitle.toLowerCase().includes(searchText.toLowerCase()) ||
