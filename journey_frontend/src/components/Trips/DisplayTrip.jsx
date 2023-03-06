@@ -101,9 +101,6 @@ function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged
                   </div>
                   
                 </div>
-<<<<<<< journey_frontend/src/components/Trips/DisplayTrip.jsx
-                
-=======
                 <button className='comments-btn' onClick={handleExpand}>12 comments</button>
               </div>   
             </div>
@@ -116,7 +113,6 @@ function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged
                 <UserComment />
                 <UserComment />
                 <UserComment />
->>>>>>> journey_frontend/src/components/Trips/DisplayTrip.jsx
             </div>
         </div>
   )
