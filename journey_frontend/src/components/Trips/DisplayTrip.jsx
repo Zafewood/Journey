@@ -3,10 +3,10 @@ import '../../styles/Trips/TripsCard.css'
 import placeholderImg from '../../assets/example-beach.jpg'
 import { useState } from 'react'
 import UserComment from './UserComment';
+import firebaseService from '../../services/firebaseService';
 import { Rating } from 'react-simple-star-rating'
 
-
-function DisplayTrip({ tripsInfo }) {
+function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged }) {
     const [cardHeight, setCardHeight] = useState("0px");
     const [isExpanded, setIsExpanded] = useState(false);
     const [shoudlDisplay, setShouldDisplay] = useState("none")
@@ -38,6 +38,10 @@ function DisplayTrip({ tripsInfo }) {
           setIsHoverAllowed(false)
         }
 
+    const currentUserID = signedInUser ? signedInUser.uid : null;
+
+    console.log(currentUserID);
+
     const handleExpand = () => {
         if (isExpanded) {
             setCardHeight("0px");
@@ -47,6 +51,19 @@ function DisplayTrip({ tripsInfo }) {
             setShouldDisplay("block")
         }
         setIsExpanded(!isExpanded);
+    }
+
+    const editTrip = () => {
+        handleUserEditTrip(tripsInfo)
+    }
+
+    const deleteTrip = () => {
+        firebaseService.deleteTripNode({
+            tripID: tripsInfo.tripID,
+            userID: tripsInfo.userID
+        }).then(() => {
+            tripsChanged();
+        })
     }
 
   return (
@@ -64,6 +81,8 @@ function DisplayTrip({ tripsInfo }) {
                     <p className='trip-cities' data-testid="trip-cities">Cities: {tripsInfo?.tripCity} </p> 
                     <p className='trip-description' data-testid="trip-description">Description: {tripsInfo?.tripDescription}</p> <br/>
                 </div>
+                <button id="editTrip" onClick={editTrip} style={{ display: currentUserID == tripsInfo.userID ? 'block' : 'none' }}>Edit</button>
+                <button id="deleteTrip" onClick={deleteTrip} style={{ display: currentUserID == tripsInfo.userID ? 'block' : 'none' }}>Delete</button>
                 <div className='trip-rating-view'>
                   <div className='app' >
                     <div className='rating'>

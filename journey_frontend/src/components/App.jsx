@@ -10,8 +10,8 @@ import NavBar from './NavBar';
 import Footer from './Footer';
 import { useState, useEffect } from 'react';
 import  firebaseService  from '../services/firebaseService';
-
 import { onAuthStateChanged, signOut } from 'firebase/auth';
+import EditTrip from './Trips/EditTrip';
 
 
 
@@ -21,6 +21,8 @@ function App() {
 
   const [user, setUser] = useState(null);
   const [trips, setTrips] = useState([]);
+  const [userTripEdit, setUserTripEdit] = useState({});
+  const [shouldShowPopup, setPopup] = useState(false);
 
   // Handler for when child component updates current user
   const handleAuthStateChanged = (newUser) => {
@@ -37,6 +39,10 @@ function App() {
 
   // Handler function for when child component ads a new trip
   const newTripAdded = () => {
+    getAllTrips();
+  }
+
+  const tripsChanged = () => {
     getAllTrips();
   }
 
@@ -61,32 +67,44 @@ function App() {
     })
   }
 
+  const handleUserEditTrip = (tripsInfo) => {
+    setUserTripEdit(tripsInfo);
+    setPopup(!shouldShowPopup);
+  }
+
+  const handleUserSaveTrip = () => {
+    setPopup(!shouldShowPopup);
+  }
+
   // Useffect hook
   useEffect(() => {
     checkIfUserIsSignedIn();
     getAllTrips();
     newTripAdded();
   }, [])
-  
-
 
   return (
     // Whole app embedded inside router element to display different content based on current route
     // Main content of the app is rendered inside the main-content div, and the content depends on the current route
     // Only one Route element is active at a time, and will display its element value as the main content.
-    <Router >
-      <NavBar currentUser={user}/>
-      <div className="main-content" data-testid="main-content">
-        <Routes>
-          <Route path='/' element={ <HomePage allTrips={trips} tripAddedHandler={newTripAdded} /> }/>
-          <Route path='/about' element={ <About /> }/>
-          <Route path='/loginpage' element={ <LoginPage authChanged={handleAuthStateChanged}/> }/>
-          <Route path='/createuserpage' element={ <CreateUserPage /> }/>
-          <Route path='/profile' element={ <Profile allTrips={trips} currentUser={user} signOutHandler={signOutUSers} /> }/>
-        </Routes>
-      </div>
-      <Footer />
-    </Router>
+    <>
+      <EditTrip userTripEdit={userTripEdit} shouldShowPopup={shouldShowPopup} handleUserSaveTrip={handleUserSaveTrip} tripsChanged={tripsChanged}/>
+      <Router >
+        <NavBar currentUser={user}/>
+        
+        <div className="main-content" data-testid="main-content">
+          <Routes>
+            <Route path='/' element={ <HomePage allTrips={trips} tripAddedHandler={newTripAdded} handleUserEditTrip={handleUserEditTrip} signedInUser={user} tripsChanged={tripsChanged} /> }/>
+            <Route path='/about' element={ <About /> }/>
+            <Route path='/loginpage' element={ <LoginPage authChanged={handleAuthStateChanged}/> }/>
+            <Route path='/createuserpage' element={ <CreateUserPage /> }/>
+            <Route path='/profile' element={ <Profile allTrips={trips} currentUser={user} signOutHandler={signOutUSers} /> }/>
+          </Routes>
+        </div>
+        <Footer />
+      </Router>
+    </>
+    
   );
 }
 
