@@ -4,10 +4,33 @@ import DisplayTrip from '../components/Trips/DisplayTrip'
 import CreateTrip from '../components/Trips/CreateTrip'
 import Searchbar from '../components/Searchbar'
 import '../styles/HomePage.css'
+import { useState, useEffect } from 'react'
 
 function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser, tripsChanged }) {
 
   const allTripsArray = Object.values(allTrips);
+  const [filteredTrips, setFilteredTrips] = useState(allTripsArray)
+
+  
+  // Load initial trips
+  useEffect(() => {
+
+  }, []);
+
+  const handleSearch = (searchText) => {
+
+
+    const matchingTrips = allTripsArray.filter((trip) => {
+      const { tripTitle, tripCountry, tripCity } = trip;
+      return (
+        tripTitle.toLowerCase().includes(searchText.toLowerCase()) ||
+        tripCountry.toLowerCase().includes(searchText.toLowerCase()) ||
+        tripCity.toLowerCase().includes(searchText.toLowerCase())
+      );
+    });
+
+    setFilteredTrips(matchingTrips);
+  }
 
   return (
     <>
@@ -18,10 +41,10 @@ function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser
       
       <div className='bottom-content'>
         <h1 className='text-over-image'>NEWEST TRIPS</h1>
-        <div><Searchbar></Searchbar></div>
+        <div><Searchbar handleSearch={handleSearch}></Searchbar></div>
         <div className='card-view'>
           <CreateTrip tripAddedHandler={tripAddedHandler}/>
-          {allTripsArray.map((tripObject, index) => {
+          {filteredTrips.map((tripObject, index) => {
             console.log('key: ', tripObject.id);
             return <DisplayTrip tripsInfo={tripObject} key={index} handleUserEditTrip={handleUserEditTrip} signedInUser={signedInUser} tripsChanged={tripsChanged}/>
           })}
