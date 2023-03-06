@@ -19,18 +19,24 @@
 }
 
 .card-right {
-    display: flex;
+    display: block;
+    float: left;
     flex-direction: column;
     justify-content: space-between;
-    margin: 50px 0;
+    margin: 5% 0;
     margin-left: 5%;
+    margin-right: 5%;
+    width: 100%;
 }
 
 .card-left {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: top;
     margin-left: 5%;
+    margin-top: 6%;
+    margin-bottom: 6%;
+    width: 80%;
 
 }
 
@@ -38,7 +44,7 @@
     width: 300px;
     height: 300px;
     border-radius: 10px;
-    margin-right: 10%;
+    margin-right: 5%;
 }
 
 .trip-comments {
@@ -53,10 +59,31 @@
     align-items: center;
 }
 
+.rating {
+  width: 55%;
+  float: left;
+}
+.app {
+  float:left;
+  padding: 2%;
+  width: 100%;
+  margin-top: 2%;
+}
+.your-rating {
+  float: left;
+  font-style: italic;
+  margin-top: 3%;
+  margin-left: 3%;
+  font-size: smaller
+  }
+
 .comments-btn {
     border: none;
     background-color: transparent;
     cursor: pointer;
+    float: left;
+    width: 30%;
+    color: gray;
 }
 
 .tripBox { 
@@ -101,5 +128,4 @@
     text-align: center;
 
 }
-
 
