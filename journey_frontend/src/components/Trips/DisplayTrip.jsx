@@ -5,13 +5,15 @@ import { useState } from 'react'
 import UserComment from './UserComment';
 import firebaseService from '../../services/firebaseService';
 import { Rating } from 'react-simple-star-rating'
+import {db, auth} from '../../firebase-config';
 
 function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged }) {
   const [cardHeight, setCardHeight] = useState("0px");
   const [isExpanded, setIsExpanded] = useState(false);
   const [shouldDisplay, setShouldDisplay] = useState("none")
   const [rating, setRating] = useState(0)
-  const [textRating, setTextRating] = useState(0) 
+  const [textRating, setTextRating] = useState(0)
+  const [rateToSave, setRateToSave] = useState(0)
   const [ratingtype, setRatingType] = useState('Avg rating')
   const currentUserID = signedInUser ? signedInUser.uid : null;
 
@@ -23,20 +25,28 @@ function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged
   const handleRating = (rate) => {
     setRating(rate);
     setTextRating(rate);
+    setRateToSave(rate);
+
+  };
+
+  const saveRating = () => {
+    console.log('rate that till be saved:' + rateToSave)
     firebaseService.saveRating({
-      tripID: tripsInfo.tripID, 
-      userID: tripsInfo.userID,
-      tripRating: rate
+      tripID: tripsInfo.tripID,
+      userID: auth.currentUser.uid,
+      tripRating: rateToSave
     }).then(() => {
       console.log('rating updated succesfully');
     }).catch((error) => {
       console.log('error occured: ', error);
     })
+    loadAverageRating()
   };
 
   const handlePointerMove = (rate) => {
     setRatingType('Your rating');
     setTextRating(rating)
+    setRating(rate)
   };
 
   const handleExpand = () => {
@@ -82,18 +92,19 @@ function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged
           <button id="deleteTrip" onClick={deleteTrip} style={{ display: currentUserID === tripsInfo.userID ? 'block' : 'none' }}>Delete</button>
           <div className='trip-rating-view'>
             <div className='app' >
-              <div className='rating'>
+              <div id='rating'>
                 <Rating 
                 allowFraction={true}
                 readonly={currentUserID == null ? true : false}
                 onClick={handleRating}
                 onPointerMove={handlePointerMove}
+                //onPointerLeave={loadAverageRating} if user stop hovering should bring back average
                 initialValue={textRating}
-                onPointerLeave={loadAverageRating}
                 allowHover={rating === 0 ? true : false}
                 />
               </div>
-            <div className='your-rating'>{ratingtype}: {textRating}</div> 
+              <button className='rating-btn' onClick={saveRating} style={{ display: currentUserID ? 'inline' : 'none' }}> Send rating</button>  
+            <div className='your-rating'>{ratingtype}: {textRating}</div>   
             </div>  
           </div>
         <button className='comments-btn' onClick={handleExpand}>12 comments</button>
