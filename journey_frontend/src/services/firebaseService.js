@@ -69,6 +69,22 @@ const deleteTripNode = ({tripID, userID}) => {
   });
 }
 
+const saveRating = ({ tripID, userID, tripRating }) => {
+  return new Promise((resolve, reject) => {
+    set(ref(db, `trips/${tripID}/ratings/${userID}/`), {
+      tripRating: tripRating
+    }).then(() => {
+      set(ref(db, `users/${userID}/userRatedTrips/${tripID}`), {
+        tripID
+      })
+      resolve()
+    }).catch((error) => {
+      console.log('error saving rating: ', error);
+      reject(error);
+    });
+  });
+}
+
 const getAllTrips = () => {
   const dbRef = ref(db);
   return new Promise((resolve, reject) => {
@@ -104,4 +120,4 @@ const createTrip = ({ tripTitle, tripCountry, tripCity, tripDescription, tripDur
   })
 }
 
-export default { getCurrentUserNode, editUserNode, getAllTrips, createTrip, editTripNode, deleteTripNode }
+export default { getCurrentUserNode, editUserNode, getAllTrips, createTrip, editTripNode, deleteTripNode, saveRating }

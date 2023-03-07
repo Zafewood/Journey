@@ -23,7 +23,15 @@ function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged
   const handleRating = (rate) => {
     setRating(rate);
     setTextRating(rate);
-    //save rate to database
+    firebaseService.saveRating({
+      tripID: tripsInfo.tripID, 
+      userID: tripsInfo.userID,
+      tripRating: rate
+    }).then(() => {
+      console.log('rating updated succesfully');
+    }).catch((error) => {
+      console.log('error occured: ', error);
+    })
   };
 
   const handlePointerMove = (rate) => {
