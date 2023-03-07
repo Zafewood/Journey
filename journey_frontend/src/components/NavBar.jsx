@@ -23,7 +23,7 @@ function NavBar({ currentUser }) {
                     <Link to='/'>TOP TRAVELS</Link>
                 </li>
                 <li>
-                    <Link to='/'>FAVOURITES</Link>
+                    <Link to='/favourites'>FAVOURITES</Link>
                 </li>
                 <li>
                 <button className="my-journey-btn">

@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-route
 import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
 import CreateUserPage from '../pages/CreateUserPage';
+import Favourites from '../pages/Favourites';
 import Profile from '../pages/Profile';
 import NavBar from './NavBar';
 import Footer from './Footer';
@@ -53,7 +54,8 @@ function App() {
         console.log('user signed in: ', user);
         setUser(user);
       } else {
-        console.log('User not signed in');
+        console.log('User not signed in', user);
+        // console.log('this is user id: ', auth.currentUser.uid, 'hva kommer ut');
       }
     })
   }
@@ -82,6 +84,12 @@ function App() {
     getAllTrips();
     newTripAdded();
   }, [])
+  
+  const handleLike = (tripsInfo) => {
+    setUserTripEdit(tripsInfo);
+    console.log("im here")
+    console.log(tripsInfo)
+}
 
   return (
     // Whole app embedded inside router element to display different content based on current route
@@ -94,8 +102,8 @@ function App() {
         
         <div className="main-content" data-testid="main-content">
           <Routes>
-            <Route path='/' element={ <HomePage allTrips={trips} tripAddedHandler={newTripAdded} handleUserEditTrip={handleUserEditTrip} signedInUser={user} tripsChanged={tripsChanged} /> }/>
-            <Route path='/about' element={ <About /> }/>
+            <Route path='/' element={ <HomePage allTrips={trips} tripAddedHandler={newTripAdded} handleUserEditTrip={handleUserEditTrip} signedInUser={user} tripsChanged={tripsChanged} handleLike={handleLike}/> }/>
+            <Route path='/favourites' element={ <Favourites allTrips={trips}/> }/>
             <Route path='/loginpage' element={ <LoginPage authChanged={handleAuthStateChanged}/> }/>
             <Route path='/createuserpage' element={ <CreateUserPage /> }/>
             <Route path='/profile' element={ <Profile allTrips={trips} currentUser={user} signOutHandler={signOutUSers} /> }/>

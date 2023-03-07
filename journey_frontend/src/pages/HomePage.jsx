@@ -6,11 +6,12 @@ import Searchbar from '../components/Searchbar'
 import '../styles/HomePage.css'
 import { useState, useEffect } from 'react'
 
-function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser, tripsChanged }) {
+function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser, tripsChanged, handleLike }) {
 
   const [initialTripsArray, setInitialTripsArray] = useState([]);
   const [filteredTrips, setFilteredTrips] = useState([])
 
+  const allTripsArray = Object.values(allTrips);
   
   // Load initial trips
   useEffect(() => {
@@ -20,8 +21,6 @@ function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser
   }, [allTrips]);
 
   const handleSearch = (searchText) => {
-
-
     const matchingTrips = initialTripsArray.filter((trip) => {
       const { tripTitle, tripCountry, tripCity } = trip;
       return (
@@ -47,8 +46,7 @@ function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser
         <div className='card-view'>
           <CreateTrip tripAddedHandler={tripAddedHandler}/>
           {filteredTrips.map((tripObject, index) => {
-            console.log('key: ', tripObject.id);
-            return <DisplayTrip tripsInfo={tripObject} key={index} handleUserEditTrip={handleUserEditTrip} signedInUser={signedInUser} tripsChanged={tripsChanged}/>
+            return <DisplayTrip tripsInfo={tripObject} handleLike={handleLike} key={index} handleUserEditTrip={handleUserEditTrip} signedInUser={signedInUser} tripsChanged={tripsChanged}/>
           })}
         </div>
       </div>
