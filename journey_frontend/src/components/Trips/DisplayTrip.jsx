@@ -8,7 +8,7 @@ import { Rating } from 'react-simple-star-rating'
 import myFavouriteTrips from '../../pages/Favourites';
 import { auth } from '../../firebase-config';
 
-function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged, handleLike }) {
+function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged, handleLike, userTripEdit}) {
     const [cardHeight, setCardHeight] = useState("0px");
     const [isExpanded, setIsExpanded] = useState(false);
     const [shoudlDisplay, setShouldDisplay] = useState("none")
@@ -86,7 +86,7 @@ function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged
             setBtnText('Like this trip')
             setLikeTripButton(true)
         }
-      }, [tripsInfo]);
+      }, [userTripEdit]);
 
       
     const likeTrip = () => { 

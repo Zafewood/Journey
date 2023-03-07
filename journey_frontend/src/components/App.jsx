@@ -102,7 +102,7 @@ function App() {
         
         <div className="main-content" data-testid="main-content">
           <Routes>
-            <Route path='/' element={ <HomePage allTrips={trips} tripAddedHandler={newTripAdded} handleUserEditTrip={handleUserEditTrip} signedInUser={user} tripsChanged={tripsChanged} handleLike={handleLike}/> }/>
+            <Route path='/' element={ <HomePage userTripEdit={userTripEdit} allTrips={trips} tripAddedHandler={newTripAdded} handleUserEditTrip={handleUserEditTrip} signedInUser={user} tripsChanged={tripsChanged} handleLike={handleLike}/> }/>
             <Route path='/favourites' element={ <Favourites allTrips={trips}/> }/>
             <Route path='/loginpage' element={ <LoginPage authChanged={handleAuthStateChanged}/> }/>
             <Route path='/createuserpage' element={ <CreateUserPage /> }/>
