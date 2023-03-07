@@ -88,7 +88,7 @@ const getAllTrips = () => {
   })
 }
 
-const createTrip = ({ tripTitle, tripPrice, tripCountry, tripCity, tripKeywords, tripDescription, tripDuration }) => {
+const createTrip = ({ tripTitle, tripPrice, tripCountry, tripCity, tripKeywords, tripDescription, tripDuration, tripAuthor }) => {
   const tripID = uuidv4();
   const userID = auth.currentUser.uid;
   set(ref(db, 'trips/' + tripID), {
@@ -101,6 +101,7 @@ const createTrip = ({ tripTitle, tripPrice, tripCountry, tripCity, tripKeywords,
     tripDescription,
     tripDuration,
     userID,
+    tripAuthor,
   }).then(() => {
     set(ref(db, 'users/' + userID + '/userTrips/' + tripID), {
       tripID

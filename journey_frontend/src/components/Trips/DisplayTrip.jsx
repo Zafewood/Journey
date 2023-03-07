@@ -75,7 +75,7 @@ function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged
               <div className='card-right'>
                 <h1 className='trip-title'>{tripsInfo?.tripTitle}</h1>
                 <div className='trip-info'>
-                    <p className='trip-author'> Author: </p>
+                    <p className='trip-author' data-testid="trip-author">Author: {tripsInfo?.tripAuthor}</p>
                     <p className='trip-duration' data-testid="trip-duration">Duration (days): {tripsInfo?.tripDuration}</p>
                     <p className='trip-price' data-testid="trip-price">Estimated Price (NOK): {tripsInfo?.tripPrice}</p>
                     <p className='trip-country' data-testid="trip-country">Countries: {tripsInfo?.tripCountry}</p>

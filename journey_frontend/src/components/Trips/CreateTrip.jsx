@@ -3,6 +3,7 @@ import '../../styles/Trips/CreateTrip.css'
 import placeholderImg from '../../assets/example-beach.jpg'
 import { useState } from 'react'
 import UserComment from './UserComment';
+import { auth, db } from '../../firebase-config'
 
 import  firebaseService  from '../../services/firebaseService';
 
@@ -16,7 +17,8 @@ function TripsCard({ tripAddedHandler }) {
         tripCountry: '',
         tripCity: '',
         tripKeywords: '',   
-        tripDescription: ''
+        tripDescription: '',
+        tripAuthor: auth.currentUser ? auth.currentUser.email : "",
       });
 
       function changeButtonText () { 
@@ -91,7 +93,7 @@ function TripsCard({ tripAddedHandler }) {
                 <div className="trip-content">
                     <label htmlFor="titleInput">Title of your trip</label>
                     <input id="titleInput" type="text" onChange={updateTitle} />
-                    <label id='authorLabel'> Author </label> 
+                    <label id='authorLabel'> Author: {auth.currentUser ? auth.currentUser.email : ""} </label> 
                     <label htmlFor='duationInput'> Duration (days) </label> 
                     <input id='duationInput' type="integer" onChange = {updateDuration}></input> 
                     <label htmlFor="priceInput">Estimated Price</label>
