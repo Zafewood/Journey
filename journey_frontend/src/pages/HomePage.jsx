@@ -8,63 +8,75 @@ import { useState, useEffect } from 'react'
 
 function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser, tripsChanged }) {
 
-  const [initialTripsArray, setInitialTripsArray] = useState([]);
+  const allTripsArray = Object.values(allTrips);
+  const [initialTripsArray, setInitialTripsArray] = useState(allTripsArray);
   const [filteredTrips, setFilteredTrips] = useState([])
+  const [sortVal, setSortVal] = useState("Newest");
 
   
   // Load initial trips
   useEffect(() => {
-    const allTripsArray = Object.values(allTrips);
     setInitialTripsArray(allTripsArray);
-    setFilteredTrips(allTripsArray);
+    setFilteredTrips(allTripsArray)
   }, [allTrips]);
 
+  // Search handler is ran when search button is pressed with searchfields test as input
   const handleSearch = (searchText) => {
-    const matchingTrips = initialTripsArray.filter((trip) => {
+    console.log("searchtext: ", searchText);
+    const matchingTrips = allTripsArray.filter((trip) => {
       const { tripTitle, tripCountry, tripCity } = trip;
       return (
-        tripTitle.toLowerCase().includes(searchText.toLowerCase()) ||
-        tripCountry.toLowerCase().includes(searchText.toLowerCase()) ||
-        tripCity.toLowerCase().includes(searchText.toLowerCase())
+        tripTitle.toLowerCase()?.includes(searchText.toLowerCase()) ||
+        tripCountry.toLowerCase()?.includes(searchText.toLowerCase()) ||
+        tripCity.toLowerCase()?.includes(searchText.toLowerCase())
       );
     });
-
-    setFilteredTrips(matchingTrips);
+    const matchingTripsSorted = sortByOption(sortVal, matchingTrips);
+    setFilteredTrips(matchingTripsSorted);
   }
 
-  const handleSort = (sortBy) => {
+  // Function for sorting trips by option from searchbar dropdown menu
+  const sortByOption = (sortBy, inputArray) => {
     let sortedTrips;
-    console.log("Sort by: ", sortBy);
     switch (sortBy) {
       case "Title":
-        sortedTrips = [...filteredTrips].sort((a, b) =>
+        console.log("sort by title");
+        sortedTrips = [...inputArray].sort((a, b) =>
           a.tripTitle.localeCompare(b.tripTitle)
         );
         break;
       case "Duration":
         console.log("sort by duration");
-        sortedTrips = [...filteredTrips].sort(
-          (a, b) => parseInt(a.tripDuration) - parseInt(b.tripDuration)
+        sortedTrips = [...inputArray].sort(
+          (a, b) => parseInt(b.tripDuration) - parseInt(a.tripDuration)
         );
         break;
       case "Country":
         console.log("sort by country");
-        sortedTrips = [...filteredTrips].sort((a, b) =>
+        sortedTrips = [...inputArray].sort((a, b) =>
           a.tripCountry.localeCompare(b.tripCountry)
         );
+        break;
         case "Price":
-        console.log("sort by country");
-        sortedTrips = [...filteredTrips].sort((a, b) =>
+        console.log("sort by price");
+        sortedTrips = [...inputArray].sort((a, b) =>
           a.tripCountry.localeCompare(b.tripCountry)
         );
         break;
       default:
-        sortedTrips = filteredTrips;
+        sortedTrips = inputArray;
         break;
     }
+    return sortedTrips;
+  }
 
+  // Handler for searchbar dropdown menu
+  const handleSort = (sortBy) => {
+    setSortVal(sortBy);
+    const sortedTrips = sortByOption(sortBy, filteredTrips);
     setFilteredTrips(sortedTrips);
   }
+  
 
   return (
     <>
@@ -79,7 +91,6 @@ function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser
         <div className='card-view'>
           <CreateTrip tripAddedHandler={tripAddedHandler}/>
           {filteredTrips.map((tripObject, index) => {
-            console.log('key: ', tripObject.id);
             return <DisplayTrip tripsInfo={tripObject} key={index} handleUserEditTrip={handleUserEditTrip} signedInUser={signedInUser} tripsChanged={tripsChanged}/>
           })}
         </div>

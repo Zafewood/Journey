@@ -3,31 +3,36 @@ import { useState } from 'react';
 import '../styles/Searchbar.css';
 
 export default function Searchbar ({ handleSearch, handleSort }) { 
-    const [searchValue, setSearchValue] = (""); 
-    const [sortingBy, setSortingBy] = useState("Newest");
+    const [searchValue, setSearchValue] = useState(""); 
+    const [sortValue, setSortValue] = useState("");
     
     useEffect(() => {
-        handleSort(sortingBy);
-      }, [handleSort])
+        setSortValue("Newest");
+      }, [])
 
     const searchbarHandler = (event) => {
         const searchText = event.target.value;
-        handleSearch(searchText)
+        setSearchValue(searchText)
     }
 
-    const sortingHandler = (event) => {
-        const sortValue = event.target.value
-        console.log(sortValue);
-        setSortingBy(sortValue);
+    const sortBtn = (event) => {
+        const sorted = event.target.value;
+        console.log("sort form searchbar: ", sorted);
+        setSortValue(sorted);
+        handleSort(sorted);
+    }
+
+    const searchBtnHandler = () => {
         handleSort(sortValue);
+        handleSearch(searchValue);
     }
     
 
     return (
         <div className="searchbarDiv">
             <input className="searchbar" type="text" placeholder="Search for your trips" value={searchValue} onChange={searchbarHandler}/>
-            <button className="searchbutton" type="submit"> Search </button>
-            <select className="filterdropdown" name="filter" id="filter" value={sortingBy} onChange={sortingHandler}>
+            <button className="searchbutton" type="submit" onClick={searchBtnHandler}> Search </button>
+            <select className="filterdropdown" name="filter" id="filter" value={sortValue} onChange={sortBtn}>
                 <option value="Newest">Newest first</option>
                 <option value="Rating">Rating</option>
                 <option value="Country">Country</option>
