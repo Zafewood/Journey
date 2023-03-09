@@ -26,9 +26,9 @@ function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser
     const matchingTrips = allTripsArray.filter((trip) => {
       const { tripTitle, tripCountry, tripCity } = trip;
       return (
-        tripTitle.toLowerCase()?.includes(searchText.toLowerCase()) ||
-        tripCountry.toLowerCase()?.includes(searchText.toLowerCase()) ||
-        tripCity.toLowerCase()?.includes(searchText.toLowerCase())
+        tripTitle?.toLowerCase().includes(searchText.toLowerCase()) ||
+        tripCountry?.toLowerCase().includes(searchText.toLowerCase()) ||
+        tripCity?.toLowerCase().includes(searchText.toLowerCase())
       );
     });
     const matchingTripsSorted = sortByOption(sortVal, matchingTrips);

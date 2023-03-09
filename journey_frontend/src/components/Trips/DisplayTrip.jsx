@@ -73,10 +73,12 @@ function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged
               <div className='card-right'>
                 <h1 className='trip-title'>{tripsInfo?.tripTitle}</h1>
                 <div className='trip-info'>
-                    <p className='trip-author'> Author: </p>
+                    <p className='trip-author' data-testid="trip-author">Author: {tripsInfo?.tripAuthor}</p>
                     <p className='trip-duration' data-testid="trip-duration">Duration (days): {tripsInfo?.tripDuration}</p>
+                    <p className='trip-price' data-testid="trip-price">Estimated Price (NOK): {tripsInfo?.tripPrice}</p>
                     <p className='trip-country' data-testid="trip-country">Countries: {tripsInfo?.tripCountry}</p>
                     <p className='trip-cities' data-testid="trip-cities">Cities: {tripsInfo?.tripCity} </p> 
+                    <p className='trip-keywords' data-testid="trip-keywords">Keywords: {tripsInfo?.tripKeywords} </p> 
                     <p className='trip-description' data-testid="trip-description">Description: {tripsInfo?.tripDescription}</p> <br/>
                 </div>
                 <button id="editTrip" onClick={editTrip} style={{ display: currentUserID == tripsInfo.userID ? 'block' : 'none' }}>Edit</button>

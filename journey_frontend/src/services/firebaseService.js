@@ -36,13 +36,15 @@ const editUserNode = ({displayName, homeCountry, email}) => {
   });
 }
 
-const editTripNode = ({tripID, tripTitle, tripDuration, tripCountry, tripCity, tripDescription, userID}) => {
+const editTripNode = ({tripID, tripTitle, tripDuration, tripPrice, tripCountry, tripCity, tripKeywords, tripDescription, userID}) => {
   return new Promise((resolve, reject) => {
     set(ref(db, 'trips/' + tripID), {
       tripTitle, 
       tripID,
+      tripPrice,
       tripCountry, 
       tripCity, 
+      tripKeywords,
       tripDescription,
       tripDuration,
       userID,
@@ -86,17 +88,20 @@ const getAllTrips = () => {
   })
 }
 
-const createTrip = ({ tripTitle, tripCountry, tripCity, tripDescription, tripDuration }) => {
+const createTrip = ({ tripTitle, tripPrice, tripCountry, tripCity, tripKeywords, tripDescription, tripDuration, tripAuthor }) => {
   const tripID = uuidv4();
   const userID = auth.currentUser.uid;
   set(ref(db, 'trips/' + tripID), {
     tripTitle, 
     tripID,
+    tripPrice,
     tripCountry, 
     tripCity, 
+    tripKeywords,
     tripDescription,
     tripDuration,
     userID,
+    tripAuthor,
   }).then(() => {
     set(ref(db, 'users/' + userID + '/userTrips/' + tripID), {
       tripID
