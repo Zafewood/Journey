@@ -33,6 +33,7 @@ function App() {
   // Retrieve all trips from database
   const getAllTrips = () => {
     firebaseService.getAllTrips().then((retrievedTrips) => {
+      
       setTrips(retrievedTrips)
     })
   }
