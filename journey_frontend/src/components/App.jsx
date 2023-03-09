@@ -85,12 +85,6 @@ function App() {
     newTripAdded();
   }, [])
   
-  const handleLike = (tripsInfo) => {
-    setUserTripEdit(tripsInfo);
-    console.log("im here")
-    console.log(tripsInfo)
-}
-
   return (
     // Whole app embedded inside router element to display different content based on current route
     // Main content of the app is rendered inside the main-content div, and the content depends on the current route
@@ -102,7 +96,7 @@ function App() {
         
         <div className="main-content" data-testid="main-content">
           <Routes>
-            <Route path='/' element={ <HomePage userTripEdit={userTripEdit} allTrips={trips} tripAddedHandler={newTripAdded} handleUserEditTrip={handleUserEditTrip} signedInUser={user} tripsChanged={tripsChanged} handleLike={handleLike}/> }/>
+            <Route path='/' element={ <HomePage allTrips={trips} tripAddedHandler={newTripAdded} handleUserEditTrip={handleUserEditTrip} signedInUser={user} tripsChanged={tripsChanged}/> }/>
             <Route path='/favourites' element={ <Favourites allTrips={trips}/> }/>
             <Route path='/loginpage' element={ <LoginPage authChanged={handleAuthStateChanged}/> }/>
             <Route path='/createuserpage' element={ <CreateUserPage /> }/>

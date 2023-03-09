@@ -107,11 +107,18 @@ const createTrip = ({ tripTitle, tripCountry, tripCity, tripDescription, tripDur
   const addLike = ({userID, tripID}) => { 
     set(ref(db, 'trips/' + tripID + '/tripLikedBy/' + userID), { 
       userID
+    }).then(() => {
+      set(ref(db, 'users/' + userID + '/likedTrips/' + tripID), {
+        tripID
+      })
     })
   }
 
   const removeLike = ({userID, tripID}) => { 
     set(ref(db, 'trips/' + tripID + '/tripLikedBy/' + userID), { 
+    }).then(() => {
+      set(ref(db, 'users/' + userID + '/likedTrips/' + tripID), {
+      })
     })
   }
   

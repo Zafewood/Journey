@@ -5,10 +5,9 @@ import { useState, useEffect } from 'react'
 import UserComment from './UserComment';
 import firebaseService from '../../services/firebaseService';
 import { Rating } from 'react-simple-star-rating'
-import myFavouriteTrips from '../../pages/Favourites';
 import { auth } from '../../firebase-config';
 
-function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged, handleLike, userTripEdit}) {
+function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}) {
     const [cardHeight, setCardHeight] = useState("0px");
     const [isExpanded, setIsExpanded] = useState(false);
     const [shoudlDisplay, setShouldDisplay] = useState("none")
@@ -70,10 +69,9 @@ function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged
 
     useEffect(() => {
         if (typeof tripsInfo.tripLikedBy !== 'undefined') {
-            const userid = auth.currentUser.uid;
             const tripLikedBy = Object.values(tripsInfo.tripLikedBy);
             for (let i = 0; i < tripLikedBy.length; i++) {
-                if (tripLikedBy[i].userID === userid) {
+                if (tripLikedBy[i].userID === currentUserID) {
                     setBtnText('Unlike this trip')
                     setLikeTripButton(false)
                     break;
@@ -86,7 +84,7 @@ function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged
             setBtnText('Like this trip')
             setLikeTripButton(true)
         }
-      }, [userTripEdit]);
+      }, [tripsInfo]);
 
       
     const likeTrip = () => { 
@@ -100,14 +98,13 @@ function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged
                     userID: auth.currentUser.uid,
                     tripID: tripsInfo.tripID,
                 });
-                console.log(tripsInfo)
-                handleLike(tripsInfo);
+                tripsChanged();
             } else { 
-               firebaseService.removeLike({ 
-                userID: auth.currentUser.uid,
-                tripID: tripsInfo.tripID,
-               })
-               handleLike(tripsInfo);
+                firebaseService.removeLike({ 
+                    userID: auth.currentUser.uid,
+                    tripID: tripsInfo.tripID,
+                })
+                tripsChanged();
             }
         }
 
