@@ -40,8 +40,6 @@ function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged
 
     const currentUserID = signedInUser ? signedInUser.uid : null;
 
-    console.log(currentUserID);
-
     const handleExpand = () => {
         if (isExpanded) {
             setCardHeight("0px");
