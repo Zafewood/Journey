@@ -3,6 +3,7 @@ import '../../styles/Trips/TripsCard.css'
 import placeholderImg from '../../assets/example-beach.jpg'
 import { useState, useEffect } from 'react'
 import UserComment from './UserComment';
+import CreateComment from './CreateComment';
 import firebaseService from '../../services/firebaseService';
 import { Rating } from 'react-simple-star-rating'
 import {db, auth} from '../../firebase-config';
@@ -11,8 +12,8 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
   const [cardHeight, setCardHeight] = useState("0px");
   const [isExpanded, setIsExpanded] = useState(false);
   const [shouldDisplay, setShouldDisplay] = useState("none")
-    const [likedTripButton, setLikeTripButton] = useState(true);
-    const [btnText, setBtnText] = useState("Like this trip")
+  const [likedTripButton, setLikeTripButton] = useState(true);
+  const [btnText, setBtnText] = useState("Like this trip")
   const [rating, setRating] = useState(0)
   const [ratingtype, setRatingType] = useState('Avg rating')
   const currentUserID = signedInUser ? signedInUser.uid : null;
@@ -99,26 +100,20 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
 
       
     const likeTrip = () => { 
-        // vente på å få inn trip author --> gjøre slik at man ikke kan like egen trip
-        if (auth.currentUser === null) { 
-            alert('A nonlogged in person cannot like a trip')
-        } else { 
-            setLikeTripButton (current => !current);
-            if (likedTripButton) { 
-                firebaseService.addLike({
-                    userID: auth.currentUser.uid,
-                    tripID: tripsInfo.tripID,
-                });
-                tripsChanged();
-            } else { 
-                firebaseService.removeLike({ 
-                    userID: auth.currentUser.uid,
-                    tripID: tripsInfo.tripID,
-                })
-                tripsChanged();
-            }
-        }
-
+      setLikeTripButton (current => !current);
+      if (likedTripButton) { 
+          firebaseService.addLike({
+              userID: auth.currentUser.uid,
+              tripID: tripsInfo.tripID,
+          });
+          tripsChanged();
+      } else { 
+          firebaseService.removeLike({ 
+              userID: auth.currentUser.uid,
+              tripID: tripsInfo.tripID,
+          })
+          tripsChanged();
+      }
     }
 
   return (
@@ -128,7 +123,7 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
             <img src={placeholderImg} alt="" className='trip-image' />
         </div>
         <div className='card-right'>
-        <button id='likeButton' onClick={likeTrip}> {btnText} </button>
+        <button id='likeButton' onClick={likeTrip} style={{ display: currentUserID != null ? 'block' : 'none' }}> {btnText} </button>
 
           <h1 className='trip-title'>{tripsInfo?.tripTitle}</h1>
           <div className='trip-info'>
@@ -164,11 +159,8 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
         height: cardHeight,
         display: shouldDisplay
         }}>
-        <UserComment />
-        <UserComment />
-        <UserComment />
-        <UserComment />
-        <UserComment />
+        <CreateComment signedInUser={signedInUser} tripsInfo={tripsInfo}/>
+        
       </div>
     </div>
   )

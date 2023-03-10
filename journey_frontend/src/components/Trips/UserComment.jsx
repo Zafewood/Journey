@@ -2,7 +2,7 @@ import React from 'react'
 import defaultUser from '../../assets/default_user.jpeg'
 import '../../styles/Trips/UserComment.css'
 
-function UserComment() {
+function UserComment({comment}) {
   return (
     <div className='comment-content'>
         <div className='comment-left'>
@@ -15,7 +15,6 @@ function UserComment() {
                 tempore distinctio nostrum odio molestiae, voluptatum commodi? 
                 Labore dolores est beatae aliquam velit vitae?
             </p>
-            <p>Rating</p>
         </div>
     </div>
   )
