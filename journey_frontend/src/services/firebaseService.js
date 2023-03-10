@@ -145,4 +145,4 @@ const createTrip = ({ tripTitle, tripPrice, tripCountry, tripCity, tripKeywords,
   
 
 
-export default { getCurrentUserNode, editUserNode, getAllTrips, createTrip, addLike, removeLike }
+export default { getCurrentUserNode, editUserNode, getAllTrips, createTrip, addLike, removeLike, saveRating, editTripNode, deleteTripNode}
