@@ -142,7 +142,14 @@ const createTrip = ({ tripTitle, tripPrice, tripCountry, tripCity, tripKeywords,
       })
     })
   }
+
+  const getCurrentUserTrips = () => {
+    getCurrentUserNode().then((userNode) => {
+      const userTrips = Object.keys(userNode.userTrips);
+      
+    })
+  }
   
 
 
-export default { getCurrentUserNode, editUserNode, getAllTrips, createTrip, addLike, removeLike, saveRating, editTripNode, deleteTripNode}
+export default { getCurrentUserNode, editUserNode, getAllTrips, createTrip, addLike, removeLike, saveRating, editTripNode, deleteTripNode, getCurrentUserTrips }

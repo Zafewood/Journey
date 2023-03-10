@@ -20,20 +20,16 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
   const currentUserID = signedInUser ? signedInUser.uid : null;
 
   const loadAverageRating = () => {
-    console.log('tripsinfocheck:', tripsInfo)
     if (tripsInfo.ratings === undefined) {
-      console.log('no ratings yet')
       setRating(0);
       return;
     }
     const ratings = tripsInfo.ratings
     var count = 0.0;
     var sum = 0.0;
-    console.log('ratings: ', Object.values(ratings));
       for (let j = 0; j < Object.values(ratings).length; j++) {
           count += 1.0;
           sum += Object.values(ratings)[j].tripRating;
-          console.log('ratingcheck: ', Object.values(ratings)[j].tripRating);
       }
     const average = (sum / count).toFixed(1);
     setTextRating(average);
