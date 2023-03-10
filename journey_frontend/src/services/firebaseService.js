@@ -1,5 +1,5 @@
 import { db, auth } from '../firebase-config';
-import { set, ref, get, child } from 'firebase/database';
+import { set, ref, onValue, get, child, update } from 'firebase/database';
 import { uuidv4 } from '@firebase/util';
 
 const getCurrentUserNode = () => {
@@ -36,13 +36,15 @@ const editUserNode = ({displayName, homeCountry, email}) => {
   });
 }
 
-const editTripNode = ({tripID, tripTitle, tripDuration, tripCountry, tripCity, tripDescription, userID}) => {
+const editTripNode = ({tripID, tripTitle, tripDuration, tripPrice, tripCountry, tripCity, tripKeywords, tripDescription, userID}) => {
   return new Promise((resolve, reject) => {
     set(ref(db, 'trips/' + tripID), {
       tripTitle, 
       tripID,
+      tripPrice,
       tripCountry, 
       tripCity, 
+      tripKeywords,
       tripDescription,
       tripDuration,
       userID,
@@ -102,17 +104,20 @@ const getAllTrips = () => {
   })
 }
 
-const createTrip = ({ tripTitle, tripCountry, tripCity, tripDescription, tripDuration }) => {
+const createTrip = ({ tripTitle, tripPrice, tripCountry, tripCity, tripKeywords, tripDescription, tripDuration, tripAuthor }) => {
   const tripID = uuidv4();
   const userID = auth.currentUser.uid;
   set(ref(db, 'trips/' + tripID), {
     tripTitle, 
     tripID,
+    tripPrice,
     tripCountry, 
     tripCity, 
+    tripKeywords,
     tripDescription,
     tripDuration,
     userID,
+    tripAuthor,
   }).then(() => {
     set(ref(db, 'users/' + userID + '/userTrips/' + tripID), {
       tripID
@@ -120,4 +125,24 @@ const createTrip = ({ tripTitle, tripCountry, tripCity, tripDescription, tripDur
   })
 }
 
-export default { getCurrentUserNode, editUserNode, getAllTrips, createTrip, editTripNode, deleteTripNode, saveRating }
+  const addLike = ({userID, tripID}) => { 
+    set(ref(db, 'trips/' + tripID + '/tripLikedBy/' + userID), { 
+      userID
+    }).then(() => {
+      set(ref(db, 'users/' + userID + '/likedTrips/' + tripID), {
+        tripID
+      })
+    })
+  }
+
+  const removeLike = ({userID, tripID}) => { 
+    set(ref(db, 'trips/' + tripID + '/tripLikedBy/' + userID), { 
+    }).then(() => {
+      set(ref(db, 'users/' + userID + '/likedTrips/' + tripID), {
+      })
+    })
+  }
+  
+
+
+export default { getCurrentUserNode, editUserNode, getAllTrips, createTrip, addLike, removeLike }

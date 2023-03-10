@@ -1,16 +1,18 @@
 import React from 'react'
 import '../../styles/Trips/TripsCard.css'
 import placeholderImg from '../../assets/example-beach.jpg'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import UserComment from './UserComment';
 import firebaseService from '../../services/firebaseService';
 import { Rating } from 'react-simple-star-rating'
 import {db, auth} from '../../firebase-config';
 
-function DisplayTrip({ allTrips, tripsInfo, handleUserEditTrip, signedInUser, tripsChanged, getAllTrips }) {
+function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}) {
   const [cardHeight, setCardHeight] = useState("0px");
   const [isExpanded, setIsExpanded] = useState(false);
   const [shouldDisplay, setShouldDisplay] = useState("none")
+    const [likedTripButton, setLikeTripButton] = useState(true);
+    const [btnText, setBtnText] = useState("Like this trip")
   const [rating, setRating] = useState(0)
   const [textRating, setTextRating] = useState(0)
   const [rateToSave, setRateToSave] = useState(0)
@@ -92,6 +94,49 @@ function DisplayTrip({ allTrips, tripsInfo, handleUserEditTrip, signedInUser, tr
     })
   }
 
+    useEffect(() => {
+        if (typeof tripsInfo.tripLikedBy !== 'undefined') {
+            const tripLikedBy = Object.values(tripsInfo.tripLikedBy);
+            for (let i = 0; i < tripLikedBy.length; i++) {
+                if (tripLikedBy[i].userID === currentUserID) {
+                    setBtnText('Unlike this trip')
+                    setLikeTripButton(false)
+                    break;
+                } else {
+                    setBtnText('Like this trip')
+                    setLikeTripButton(true)
+                }
+            } 
+        } else {
+            setBtnText('Like this trip')
+            setLikeTripButton(true)
+        }
+      }, [tripsInfo]);
+
+      
+    const likeTrip = () => { 
+        // vente på å få inn trip author --> gjøre slik at man ikke kan like egen trip
+        if (auth.currentUser === null) { 
+            alert('A nonlogged in person cannot like a trip')
+        } else { 
+            setLikeTripButton (current => !current);
+            if (likedTripButton) { 
+                firebaseService.addLike({
+                    userID: auth.currentUser.uid,
+                    tripID: tripsInfo.tripID,
+                });
+                tripsChanged();
+            } else { 
+                firebaseService.removeLike({ 
+                    userID: auth.currentUser.uid,
+                    tripID: tripsInfo.tripID,
+                })
+                tripsChanged();
+            }
+        }
+
+    }
+
   return (
     <div className='test' onLoad={loadAverageRating}>
       <div className='card-content'>
@@ -99,12 +144,16 @@ function DisplayTrip({ allTrips, tripsInfo, handleUserEditTrip, signedInUser, tr
             <img src={placeholderImg} alt="" className='trip-image' />
         </div>
         <div className='card-right'>
+        <button id='likeButton' onClick={likeTrip}> {btnText} </button>
+
           <h1 className='trip-title'>{tripsInfo?.tripTitle}</h1>
           <div className='trip-info'>
-              <p className='trip-author'> Author: </p>
+          <p className='trip-author' data-testid="trip-author">Author: {tripsInfo?.tripAuthor}</p>
               <p className='trip-duration' data-testid="trip-duration">Duration (days): {tripsInfo?.tripDuration}</p>
+              <p className='trip-price' data-testid="trip-price">Estimated Price (NOK): {tripsInfo?.tripPrice}</p>
               <p className='trip-country' data-testid="trip-country">Countries: {tripsInfo?.tripCountry}</p>
               <p className='trip-cities' data-testid="trip-cities">Cities: {tripsInfo?.tripCity} </p> 
+              <p className='trip-keywords' data-testid="trip-keywords">Keywords: {tripsInfo?.tripKeywords} </p> 
               <p className='trip-description' data-testid="trip-description">Description: {tripsInfo?.tripDescription}</p> <br/>
           </div>
           <button id="editTrip" onClick={editTrip} style={{ display: currentUserID === tripsInfo.userID ? 'block' : 'none' }}>Edit</button>
