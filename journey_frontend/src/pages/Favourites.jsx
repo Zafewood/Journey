@@ -5,7 +5,7 @@ import { auth } from '../firebase-config';
 import '../styles/Favourites.css';
 import firebaseService from '../services/firebaseService.js';
 
-function Favourites({allTrips}) {
+function Favourites({allTrips, signedInUser, tripsChanged, handleUserEditTrip}) {
 
     const [allTripsArray, setAllTripsArray] = useState([])
     
@@ -38,7 +38,7 @@ return (
     <div id="favouritesDiv">
         <h1 id='headerFav'> MY FAVOURITE TRIPS </h1>
         {allTripsArray.map((tripObject, index) => {
-            return <DisplayTrip key={index} tripsInfo={tripObject}/>
+            return <DisplayTrip key={index} tripsInfo={tripObject} signedInUser={signedInUser} tripsChanged={tripsChanged} handleUserEditTrip={handleUserEditTrip}/>
           })}
     </div>
 )}
