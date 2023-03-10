@@ -129,6 +129,54 @@
 
 }
 
+#likeButton { 
+    border-radius: 5px;
+    width: 105px;
+    height: 10%;
+    padding: 5px;
+    margin-left: 50%;
+    margin-bottom: 5%;
+    font-size: 15px;
+    /* border: 0; */
+    background-color: #624b2d;
+    color: #E9E2D0;
+    border-color: #624b2d;
+}
+
+#likeButton:hover { 
+    background-color: #E9E2D0;
+    color: #624b2d;
+    cursor: pointer;
+    font-weight: bold;
+    border-color:#E9E2D0;
+    text-align: center;
+
+}
+
+#likeButton { 
+    border-radius: 5px;
+    width: 105px;
+    height: 10%;
+    padding: 5px;
+    margin-left: 50%;
+    margin-bottom: 5%;
+    font-size: 15px;
+    /* border: 0; */
+    background-color: #624b2d;
+    color: #E9E2D0;
+    border-color: #624b2d;
+}
+
+#likeButton:hover { 
+    background-color: #E9E2D0;
+    color: #624b2d;
+    cursor: pointer;
+    font-weight: bold;
+    border-color:#E9E2D0;
+    text-align: center;
+
+}
+
 #editTrip {
     width: 3vh;
 }

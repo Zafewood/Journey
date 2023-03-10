@@ -1,5 +1,5 @@
 import { db, auth } from '../firebase-config';
-import { set, ref, get, child } from 'firebase/database';
+import { set, ref, onValue, get, child, update } from 'firebase/database';
 import { uuidv4 } from '@firebase/util';
 
 const getCurrentUserNode = () => {
@@ -109,4 +109,24 @@ const createTrip = ({ tripTitle, tripPrice, tripCountry, tripCity, tripKeywords,
   })
 }
 
-export default { getCurrentUserNode, editUserNode, getAllTrips, createTrip, editTripNode, deleteTripNode }
+  const addLike = ({userID, tripID}) => { 
+    set(ref(db, 'trips/' + tripID + '/tripLikedBy/' + userID), { 
+      userID
+    }).then(() => {
+      set(ref(db, 'users/' + userID + '/likedTrips/' + tripID), {
+        tripID
+      })
+    })
+  }
+
+  const removeLike = ({userID, tripID}) => { 
+    set(ref(db, 'trips/' + tripID + '/tripLikedBy/' + userID), { 
+    }).then(() => {
+      set(ref(db, 'users/' + userID + '/likedTrips/' + tripID), {
+      })
+    })
+  }
+  
+
+
+export default { getCurrentUserNode, editUserNode, getAllTrips, createTrip, addLike, removeLike }
