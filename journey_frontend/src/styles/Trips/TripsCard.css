@@ -65,24 +65,36 @@
 }
 .app {
   float:left;
-  padding: 2%;
   width: 100%;
   margin-top: 2%;
 }
 .your-rating {
   float: left;
   font-style: italic;
-  margin-top: 3%;
+  margin-top: 4%;
   margin-left: 3%;
   font-size: smaller
   }
+
+.rating-btn {
+  float: left;
+  margin-right: 2%;
+  margin-top: 2%;
+  border-radius: 10px;
+  padding: 6px;
+  font-size: 15px;
+  background-color: #624b2d;
+  color:#E9E2D0;
+  border-color: #E9E2D0;
+}
 
 .comments-btn {
     border: none;
     background-color: transparent;
     cursor: pointer;
     float: left;
-    width: 30%;
+    margin-top: 4%;
+    width: 25%;
     color: gray;
 }
 
