@@ -13,8 +13,6 @@ function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser
   const [filteredTrips, setFilteredTrips] = useState([])
   const [sortVal, setSortVal] = useState("Newest");
 
-  const allTripsArray = Object.values(allTrips);
-  
   // Load initial trips
   useEffect(() => {
     setInitialTripsArray(allTripsArray);
