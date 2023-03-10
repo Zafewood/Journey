@@ -14,51 +14,36 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
     const [likedTripButton, setLikeTripButton] = useState(true);
     const [btnText, setBtnText] = useState("Like this trip")
   const [rating, setRating] = useState(0)
-  const [textRating, setTextRating] = useState(0)
-  const [rateToSave, setRateToSave] = useState(0)
   const [ratingtype, setRatingType] = useState('Avg rating')
   const currentUserID = signedInUser ? signedInUser.uid : null;
 
-  const loadAverageRating = () => {
-    console.log('tripsinfocheck:', tripsInfo)
+  useEffect(() => {
     if (tripsInfo.ratings === undefined) {
-      console.log('no ratings yet')
       setRating(0);
       return;
     }
     const ratings = tripsInfo.ratings
     var count = 0.0;
     var sum = 0.0;
-    console.log('ratings: ', Object.values(ratings));
       for (let j = 0; j < Object.values(ratings).length; j++) {
           count += 1.0;
           sum += Object.values(ratings)[j].tripRating;
-          console.log('ratingcheck: ', Object.values(ratings)[j].tripRating);
       }
     const average = (sum / count).toFixed(1);
-    setTextRating(average);
     setRating(average);
     setRatingType('Avg rating')
-  };
-
-  const handleRating = (rate) => {
-    setRating(rate);
-    setTextRating(rate);
-    setRateToSave(rate);
-
-  };
+  }, [tripsInfo]);
 
   const saveRating = () => {
-    console.log('rate that till be saved:' + rateToSave)
+    console.log("rateToSave ", rating)
     firebaseService.saveRating({
       tripID: tripsInfo.tripID,
       userID: auth.currentUser.uid,
-      tripRating: rateToSave
+      tripRating: rating
     }).then(() => {
       console.log('rating updated succesfully');
       console.log('tripchange');
       tripsChanged();
-      loadAverageRating();
     }).catch((error) => {
       console.log('error occured: ', error);
     })
@@ -66,7 +51,6 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
 
   const handlePointerMove = (rate) => {
     setRatingType('Your rating');
-    setTextRating(rating)
     setRating(rate)
   };
 
@@ -138,7 +122,7 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
     }
 
   return (
-    <div className='test' onLoad={loadAverageRating}>
+    <div className='test'>
       <div className='card-content'>
         <div className='card-left'>
             <img src={placeholderImg} alt="" className='trip-image' />
@@ -164,15 +148,13 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
                 <Rating 
                 allowFraction={true}
                 readonly={currentUserID == null ? true : false}
-                onClick={handleRating}
                 onPointerMove={handlePointerMove}
-                //onPointerLeave={loadAverageRating} if user stop hovering should bring back average
-                initialValue={textRating}
+                initialValue={rating}
                 allowHover={rating === 0 ? true : false}
                 />
               </div>
               <button className='rating-btn' onClick={saveRating} style={{ display: currentUserID ? 'inline' : 'none' }}> Send rating</button>  
-            <div className='your-rating'>{ratingtype}: {textRating}</div>   
+            <div className='your-rating'>{ratingtype}: {rating}</div>   
             </div>  
           </div>
         <button className='comments-btn' onClick={handleExpand}>12 comments</button>
