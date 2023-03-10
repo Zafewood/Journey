@@ -7,7 +7,7 @@ import firebaseService from '../../services/firebaseService';
 import { Rating } from 'react-simple-star-rating'
 import {db, auth} from '../../firebase-config';
 
-function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged }) {
+function DisplayTrip({ allTrips, tripsInfo, handleUserEditTrip, signedInUser, tripsChanged, getAllTrips }) {
   const [cardHeight, setCardHeight] = useState("0px");
   const [isExpanded, setIsExpanded] = useState(false);
   const [shouldDisplay, setShouldDisplay] = useState("none")
@@ -18,8 +18,25 @@ function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged
   const currentUserID = signedInUser ? signedInUser.uid : null;
 
   const loadAverageRating = () => {
-    setRatingType('Avg rating');
-    setTextRating(2.3);
+    console.log('tripsinfocheck:', tripsInfo)
+    if (tripsInfo.ratings === undefined) {
+      console.log('no ratings yet')
+      setRating(0);
+      return;
+    }
+    const ratings = tripsInfo.ratings
+    var count = 0.0;
+    var sum = 0.0;
+    console.log('ratings: ', Object.values(ratings));
+      for (let j = 0; j < Object.values(ratings).length; j++) {
+          count += 1.0;
+          sum += Object.values(ratings)[j].tripRating;
+          console.log('ratingcheck: ', Object.values(ratings)[j].tripRating);
+      }
+    const average = (sum / count).toFixed(1);
+    setTextRating(average);
+    setRating(average);
+    setRatingType('Avg rating')
   };
 
   const handleRating = (rate) => {
@@ -37,10 +54,12 @@ function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged
       tripRating: rateToSave
     }).then(() => {
       console.log('rating updated succesfully');
+      console.log('tripchange');
+      tripsChanged();
+      loadAverageRating();
     }).catch((error) => {
       console.log('error occured: ', error);
     })
-    loadAverageRating()
   };
 
   const handlePointerMove = (rate) => {

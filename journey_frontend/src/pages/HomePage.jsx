@@ -48,7 +48,7 @@ function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser
           <CreateTrip tripAddedHandler={tripAddedHandler}/>
           {filteredTrips.map((tripObject, index) => {
             console.log('key: ', tripObject.id);
-            return <DisplayTrip tripsInfo={tripObject} key={index} handleUserEditTrip={handleUserEditTrip} signedInUser={signedInUser} tripsChanged={tripsChanged}/>
+            return <DisplayTrip allTrips={allTrips} tripsInfo={tripObject} key={index} handleUserEditTrip={handleUserEditTrip} signedInUser={signedInUser} tripsChanged={tripsChanged}/>
           })}
         </div>
       </div>
