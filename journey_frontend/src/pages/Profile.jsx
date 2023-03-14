@@ -9,6 +9,7 @@ import firebaseService from '../services/firebaseService.js';
 function Profile({allTrips, currentUser, signOutHandler}) {
 
   const [userOwnTrips, setUserOwnTrips] = useState([]);
+  const [userActivityTrips, setUserActivityTrips] = useState([]);
   const [tripsToDisplay, setTripsToDisplay] = useState([]);
   const [currentTab, setCurrentTab] = useState("trips");
   const [tripbuttoncolor, setTripButtonColor] = useState('#624b2d ');
@@ -19,12 +20,12 @@ function Profile({allTrips, currentUser, signOutHandler}) {
   
   const allTripsArray = Object.values(allTrips);
 
-  const tripsToShow = tripbuttonstate ? userOwnTrips : allTripsArray
+  const tripsToShow = tripbuttonstate ? userOwnTrips : userActivityTrips
   
   useEffect(() => {
     getUserLikedTrips();
-    
-  }, [allTrips, userOwnTrips])
+    getUserActivityTrips();
+  }, [allTrips])
 
   
 
@@ -45,6 +46,20 @@ function Profile({allTrips, currentUser, signOutHandler}) {
         return currentUserTripsID.includes(someTrip.tripID)
       })
       setUserOwnTrips(userTrips);
+    })
+  }
+
+  const getUserActivityTrips = () => {
+
+    firebaseService.getCurrentUserNode().then((userNode) => {
+      console.log("uerNdoe:", userNode);
+      const currentUserCommentedTripsID = Object.keys(userNode.userCommentedTrips);
+      const currentUserRatedTrips = Object.keys(userNode.userRatedTrips);
+      const userActivityTrups = allTripsArray.filter((someTrip) => {
+        return currentUserCommentedTripsID.includes(someTrip.tripID) || currentUserRatedTrips.includes(someTrip.tripID);
+      })
+      setUserActivityTrips(userActivityTrups);
+      console.log("user activity: ", userActivityTrups);
     })
   }
 
@@ -85,23 +100,28 @@ function Profile({allTrips, currentUser, signOutHandler}) {
         setTripButtonColor('#624b2d')
         setActivityButtonState(false)
         setActivityButtonColor('white')
-        const my_div = document.getElementById('my_div');
-        const act_div = document.getElementById('act_div');
-        my_div.hidden = false;
-        act_div.hidden = true;
+        //const my_div = document.getElementById('my_div');
+        //const act_div = document.getElementById('act_div');
+        //my_div.hidden = false;
+        //act_div.hidden = true;
     };
 
   const handleActivityButton = () => {
     if (acitvitybuttonstate) {}
       else{
+        console.log("inside here");
+        console.log("Activity: ", userActivityTrips);
+        setTripsToDisplay(userActivityTrips);
         setActivityButtonState(true)
         setActivityButtonColor('#624b2d')
         setTripButtonState(false)
         setTripButtonColor('white')
+        /*
         const my_div = document.getElementById('my_div');
         const act_div = document.getElementById('act_div');
         act_div.hidden = false;
         my_div.hidden = true;
+        */
       }
     };
 
