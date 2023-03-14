@@ -19,10 +19,9 @@
 
 #comment-button{
   width: 18%;
-  margin-left: 85%;
   margin-bottom: 2%;
   margin-top: 1%; 
-  border: none;
+  margin-left: 85%;
   padding: 1%;
   resize: none;
   border-radius: 10px;
@@ -30,6 +29,15 @@
   background-color: #624b2d;
   color: #E9E2D0;
   border-color: #E9E2D0;
+}
+
+#comment-button:hover{
+  background-color: #E9E2D0;
+  color: #624b2d;
+  cursor: pointer;
+  font-weight: bold;
+  border-color:gray;
+  text-align: center;
 }
 
 .create-comment-content{

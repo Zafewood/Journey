@@ -4,7 +4,7 @@ import firebaseService from '../../services/firebaseService';
 import '../../styles/Trips/CreateComment.css'
 
 
-function CreateComment({signedInUser, tripsInfo}) {
+function CreateComment({signedInUser, tripsInfo, tripsChanged}) {
     const [comment, setComment] = useState("");
 
     const saveComment = () => {
@@ -12,7 +12,9 @@ function CreateComment({signedInUser, tripsInfo}) {
             comment: comment,
             userID: signedInUser.uid,
             tripID: tripsInfo.tripID
-        })
+        }).then(() => {
+            tripsChanged();
+          })
     }
 
     const updateComment = (event) => {
@@ -20,7 +22,7 @@ function CreateComment({signedInUser, tripsInfo}) {
       };
 
     return (
-        <div className='create-comment-content'>
+        <div className='create-comment-content' style={{display: signedInUser ? "block" : "none"}}>
             <div className='create-comment-right'>
                 <h3 id="create-comment-header">Create Comment</h3>
                 <textarea id="commentInput" type="text" onChange={updateComment}></textarea>
