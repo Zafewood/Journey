@@ -6,7 +6,7 @@ import Searchbar from '../components/Searchbar'
 import '../styles/HomePage.css'
 import { useState, useEffect } from 'react'
 
-function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser, tripsChanged }) {
+function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser, tripsChanged, theme }) {
 
   const [initialTripsArray, setInitialTripsArray] = useState([]);
   const [filteredTrips, setFilteredTrips] = useState([])
@@ -48,7 +48,7 @@ function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser
           <CreateTrip tripAddedHandler={tripAddedHandler}/>
           {filteredTrips.map((tripObject, index) => {
             console.log('key: ', tripObject.id);
-            return <DisplayTrip tripsInfo={tripObject} key={index} handleUserEditTrip={handleUserEditTrip} signedInUser={signedInUser} tripsChanged={tripsChanged}/>
+            return <DisplayTrip tripsInfo={tripObject} key={index} handleUserEditTrip={handleUserEditTrip} signedInUser={signedInUser} tripsChanged={tripsChanged} theme={theme}/>
           })}
         </div>
       </div>

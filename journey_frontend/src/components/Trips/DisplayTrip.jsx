@@ -6,7 +6,7 @@ import UserComment from './UserComment';
 import firebaseService from '../../services/firebaseService';
 import { Rating } from 'react-simple-star-rating'
 
-function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged }) {
+function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged, theme}) {
     const [cardHeight, setCardHeight] = useState("0px");
     const [isExpanded, setIsExpanded] = useState(false);
     const [shoudlDisplay, setShouldDisplay] = useState("none")
@@ -68,7 +68,7 @@ function DisplayTrip({ tripsInfo, handleUserEditTrip, signedInUser, tripsChanged
 
   return (
     <div className='test' onLoad={loadValues}>
-        <div className='card-content'>
+        <div className={`card-content ${theme}`}>
             <div className='card-left'>
                 <img src={placeholderImg} alt="" className='trip-image' />
             </div>

@@ -1,15 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import '../styles/NavBar.css'
+import '../styles/darkMode.css';
 import logo from '../assets/journey_brown_monochromatic.png'
 import firebaseService from '../services/firebaseService';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import ReactSwitch from 'react-switch';
 
 
-function NavBar({ currentUser }) {
+function NavBar({ currentUser, theme, toggleTheme }) {
+
+    // useEffect(() => {
+    //     document.body.className = theme;
+    // }, [theme]);
+    
+
     
   return (
-    <nav data-testid="navbar">
+    <nav >
         <div className="nav-left">
             
             {/* Link elements work kind of like html a tag, but they also set the route for react router. 
@@ -18,9 +26,9 @@ function NavBar({ currentUser }) {
             <Link to='/'><img src={logo} alt="Journey logo" className='logo' /></Link>
         </div>
         <div className="nav-mid">
-            <ul>
+            <ul >
                 <li>
-                    <Link to='/'>TOP TRAVELS</Link>
+                    <Link to='/' >TOP TRAVELS</Link>
                 </li>
                 <li>
                     <Link to='/'>FAVOURITES</Link>
@@ -31,6 +39,7 @@ function NavBar({ currentUser }) {
                         {currentUser ? currentUser.email : 'Log in'}
                     </Link></button>
                 </li>
+                
             </ul>
         </div>
         {/*}
@@ -39,6 +48,11 @@ function NavBar({ currentUser }) {
             <p>create user</p>
         </div>
         */}
+        <div className={`switch ${theme}`}>
+            {/*<button onClick={toggleTheme}>Toggle Theme</button>*/}
+            {theme === "light" ? "Light Mode" : "Dark Mode"}
+            <ReactSwitch onChange={toggleTheme} checked={theme === "dark"}/>
+    </div>
     </nav>
   )
 }

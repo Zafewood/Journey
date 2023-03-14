@@ -8,10 +8,21 @@ import CreateUserPage from '../pages/CreateUserPage';
 import Profile from '../pages/Profile';
 import NavBar from './NavBar';
 import Footer from './Footer';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import  firebaseService  from '../services/firebaseService';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import EditTrip from './Trips/EditTrip';
+import ReactSwitch from "react-switch";
+import Searchbar from './Searchbar';
+import DisplayTrip from './Trips/DisplayTrip';
+import UserComment from './Trips/UserComment';
+import TripsCard from './Trips/CreateTrip';
+import '../styles/darkMode.css';
+import '../styles/NavBar.css';
+
+export const ThemeContext = createContext(null);
+
+
 
 
 
@@ -19,6 +30,20 @@ const About = () => <h1>About page</h1>
 
 function App() {
 
+// Making function for toggeling between light and dark mode
+  const [theme, setTheme] = useState('light');
+  const toggleTheme = () => {
+    if (theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  };
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
+  
+  
   const [user, setUser] = useState(null);
   const [trips, setTrips] = useState([]);
   const [userTripEdit, setUserTripEdit] = useState({});
@@ -87,14 +112,15 @@ function App() {
     // Whole app embedded inside router element to display different content based on current route
     // Main content of the app is rendered inside the main-content div, and the content depends on the current route
     // Only one Route element is active at a time, and will display its element value as the main content.
-    <>
+    <> 
       <EditTrip userTripEdit={userTripEdit} shouldShowPopup={shouldShowPopup} handleUserSaveTrip={handleUserSaveTrip} tripsChanged={tripsChanged}/>
       <Router >
-        <NavBar currentUser={user}/>
+        <NavBar currentUser={user} toggleTheme={toggleTheme} theme={theme}/>
         
         <div className="main-content" data-testid="main-content">
           <Routes>
-            <Route path='/' element={ <HomePage allTrips={trips} tripAddedHandler={newTripAdded} handleUserEditTrip={handleUserEditTrip} signedInUser={user} tripsChanged={tripsChanged} /> }/>
+            
+            <Route path='/' element={ <HomePage allTrips={trips} tripAddedHandler={newTripAdded} handleUserEditTrip={handleUserEditTrip} signedInUser={user} tripsChanged={tripsChanged} theme={theme}/> }/>
             <Route path='/about' element={ <About /> }/>
             <Route path='/loginpage' element={ <LoginPage authChanged={handleAuthStateChanged}/> }/>
             <Route path='/createuserpage' element={ <CreateUserPage /> }/>
