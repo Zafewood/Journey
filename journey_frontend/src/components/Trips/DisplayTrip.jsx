@@ -82,7 +82,6 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
   }
 
     useEffect(() => {
-      loadAverageRating();
         if (typeof tripsInfo.tripLikedBy !== 'undefined') {
             const tripLikedBy = Object.values(tripsInfo.tripLikedBy);
             for (let i = 0; i < tripLikedBy.length; i++) {
