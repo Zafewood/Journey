@@ -46,6 +46,7 @@ function Profile({allTrips, currentUser, signOutHandler}) {
   const getUserLikedTrips = () => {
     
     firebaseService.getCurrentUserNode().then((userNode) => {
+      console.log("Usernode: ", userNode);
       const currentUserTripsID = Object.keys(userNode.userTrips);
       const userTrips = allTripsArray.filter((someTrip) => {
         return currentUserTripsID.includes(someTrip.tripID)

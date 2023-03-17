@@ -19,7 +19,7 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
   const currentUserID = signedInUser ? signedInUser.uid : null;
   const [rateActive, setRateActive] = useState(false);
 
-  useEffect(() => {
+const loadAverageRating = () => {
     if (tripsInfo.ratings === undefined) {
       setRating(0);
       return;
@@ -34,7 +34,7 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
     const average = (sum / count).toFixed(1);
     setRating(average);
     setRatingType('Avg rating')
-  }, [tripsInfo]);
+    };
 
   const saveRating = () => {
     setRateActive(true);
@@ -82,6 +82,7 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
   }
 
     useEffect(() => {
+      loadAverageRating();
         if (typeof tripsInfo.tripLikedBy !== 'undefined') {
             const tripLikedBy = Object.values(tripsInfo.tripLikedBy);
             for (let i = 0; i < tripLikedBy.length; i++) {
