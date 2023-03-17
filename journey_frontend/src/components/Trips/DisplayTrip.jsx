@@ -17,6 +17,7 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
   const [rating, setRating] = useState(0);
   const [ratingtype, setRatingType] = useState('Avg rating');
   const currentUserID = signedInUser ? signedInUser.uid : null;
+  const [rateActive, setRateActive] = useState(false);
 
   useEffect(() => {
     if (tripsInfo.ratings === undefined) {
@@ -36,6 +37,7 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
   }, [tripsInfo]);
 
   const saveRating = () => {
+    setRateActive(true);
     console.log("rateToSave ", rating)
     firebaseService.saveRating({
       tripID: tripsInfo.tripID,
@@ -50,6 +52,7 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
   };
 
   const handlePointerMove = (rate) => {
+    setRateActive(false);
     setRatingType('Your rating');
     setRating(rate)
   };
@@ -147,7 +150,7 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
                 allowHover={rating === 0 ? true : false}
                 />
               </div>
-              <button className='rating-btn' onClick={saveRating} style={{ display: currentUserID ? 'inline' : 'none' }}> Send rating</button>  
+              <button className='rating-btn' onClick={saveRating} disabled={rateActive? true : false} style={{ display: currentUserID ? 'inline' : 'none', backgroundColor: rateActive ? 'gray' : '#624b2d'}}> Send rating</button>  
             <div className='your-rating'>{ratingtype}: {rating}</div>   
             </div>  
           </div>

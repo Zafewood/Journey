@@ -31,7 +31,7 @@ function UserComment({comment, signedInUser, userID, tripID, tripsChanged}) {
 
   const saveComment = () => {
     setMakeTextEditable(true);
-    setShouldDisplaySave(false); 
+    setShouldDisplaySave(false);
 
     firebaseService.editComment({
       userID: userID,

@@ -44,4 +44,7 @@
   margin-right: 8%;
 }
 
+#comment-edit[readonly]{
+  outline: none;
+}
 

@@ -13,6 +13,7 @@ function CreateComment({signedInUser, tripsInfo, tripsChanged}) {
             userID: signedInUser.uid,
             tripID: tripsInfo.tripID
         }).then(() => {
+          setComment("");
             tripsChanged();
           })
     }
@@ -25,7 +26,7 @@ function CreateComment({signedInUser, tripsInfo, tripsChanged}) {
         <div className='create-comment-content' style={{display: signedInUser ? "block" : "none"}}>
             <div className='create-comment-right'>
                 <h3 id="create-comment-header">Create Comment</h3>
-                <textarea id="commentInput" type="text" onChange={updateComment}></textarea>
+                <textarea id="commentInput" type="text" onChange={updateComment} value={comment}></textarea>
                 <button id="comment-button" onClick={saveComment}>Save Comment</button>
             </div>
         </div>
