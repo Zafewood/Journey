@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Profile.css';
 import User_picture from '../assets/default_user.jpeg'; 
@@ -8,6 +8,32 @@ import firebaseService from '../services/firebaseService.js';
 
 function Profile({allTrips, currentUser, signOutHandler}) {
 
+  const [userOwnTrips, setUserOwnTrips] = useState([]);
+  const [userActivityTrips, setUserActivityTrips] = useState([]);
+  const [tripsToDisplay, setTripsToDisplay] = useState([]);
+  const [currentTab, setCurrentTab] = useState("trips");
+  const [tripbuttoncolor, setTripButtonColor] = useState('#624b2d ');
+  const [activitybuttoncolor, setActivityButtonColor] = useState('white');
+  const [tripbuttonstate, setTripButtonState] = useState(true);
+  const [acitvitybuttonstate, setActivityButtonState] = useState(false);
+  const navigate = useNavigate();
+  
+  const allTripsArray = Object.values(allTrips);
+
+  const tripsToShow = tripbuttonstate ? userOwnTrips : userActivityTrips
+
+  useEffect(() => {
+    getUserLikedTrips();
+    getUserActivityTrips();
+    setTripsToDisplay(userOwnTrips);
+  }, [allTrips]);
+
+  useEffect(() => {
+    setTripsToDisplay(userOwnTrips);
+    handleTripButton();
+  }, [userOwnTrips]);
+
+  
   function loadValues() {
     const userNode = firebaseService.getCurrentUserNode(currentUser.uid);
     userNode.then((data) => {
@@ -17,7 +43,28 @@ function Profile({allTrips, currentUser, signOutHandler}) {
     })
   }
 
-  const allTripsArray = Object.values(allTrips);
+  const getUserLikedTrips = () => {
+    
+    firebaseService.getCurrentUserNode().then((userNode) => {
+      const currentUserTripsID = Object.keys(userNode.userTrips);
+      const userTrips = allTripsArray.filter((someTrip) => {
+        return currentUserTripsID.includes(someTrip.tripID)
+      })
+      setUserOwnTrips(userTrips);
+    })
+  }
+
+  const getUserActivityTrips = () => {
+
+    firebaseService.getCurrentUserNode().then((userNode) => {
+      const currentUserCommentedTripsID = Object.keys(userNode.userCommentedTrips);
+      const currentUserRatedTrips = Object.keys(userNode.userRatedTrips);
+      const userActivityTrups = allTripsArray.filter((someTrip) => {
+        return currentUserCommentedTripsID.includes(someTrip.tripID) || currentUserRatedTrips.includes(someTrip.tripID);
+      })
+      setUserActivityTrips(userActivityTrups);
+    })
+  }
 
   const handleEditButton = () => {
     const usernameinput = document.getElementById('username');
@@ -47,37 +94,35 @@ function Profile({allTrips, currentUser, signOutHandler}) {
     homecountryinput.style.borderWidth = '0px'
   };
 
-  const [tripbuttoncolor, setTripButtonColor] = useState('#624b2d ');
-  const [activitybuttoncolor, setActivityButtonColor] = useState('white');
-  const [tripbuttonstate, setTripButtonState] = useState(true);
-  const [acitvitybuttonstate, setActivityButtonState] = useState(false);
-  const navigate = useNavigate();
+  
 
   const handleTripButton = () => {
-    if (tripbuttonstate) {}
-      else{
+        if (tripbuttonstate) { return }
+        setTripsToDisplay(userOwnTrips);
         setTripButtonState(true)
         setTripButtonColor('#624b2d')
         setActivityButtonState(false)
         setActivityButtonColor('white')
-        const my_div = document.getElementById('my_div');
-        const act_div = document.getElementById('act_div');
-        my_div.hidden = false;
-        act_div.hidden = true;
-      }
+        //const my_div = document.getElementById('my_div');
+        //const act_div = document.getElementById('act_div');
+        //my_div.hidden = false;
+        //act_div.hidden = true;
     };
 
   const handleActivityButton = () => {
     if (acitvitybuttonstate) {}
       else{
+        setTripsToDisplay(userActivityTrips);
         setActivityButtonState(true)
         setActivityButtonColor('#624b2d')
         setTripButtonState(false)
         setTripButtonColor('white')
+        /*
         const my_div = document.getElementById('my_div');
         const act_div = document.getElementById('act_div');
         act_div.hidden = false;
         my_div.hidden = true;
+        */
       }
     };
 
@@ -353,8 +398,8 @@ function Profile({allTrips, currentUser, signOutHandler}) {
     <option value="YE">Yemen</option>
     <option value="ZM">Zambia</option>
     <option value="ZW">Zimbabwe</option>
-</select>
-</p><br/>
+        </select>
+        </p><br/>
       <p>Email:  <input id='email' type='text' style={{borderWidth:'0px'}} disabled></input></p><br/>
     </div>
     </div>
@@ -364,11 +409,8 @@ function Profile({allTrips, currentUser, signOutHandler}) {
       <div id='h_line'></div>
     </div>
     <div id='feed'>
-      <div id='midlertidig'>
-      <div id='my_div' hidden>Users own trips here</div>
-      <div id='act_div' hidden>Users interacted trips here</div>
-      </div>
-    {allTripsArray.map((tripObject) => {
+    
+    {tripsToDisplay.map((tripObject) => {
             return <DisplayTrip tripsInfo={tripObject}/>
           })}
     </div>
