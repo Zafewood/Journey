@@ -37,9 +37,12 @@ function Favourites({allTrips, signedInUser, tripsChanged, handleUserEditTrip}) 
 return (
     <div id="favouritesDiv">
         <h1 id='headerFav'> MY FAVOURITE TRIPS </h1>
-        {allTripsArray.map((tripObject, index) => {
-            return <DisplayTrip key={index} tripsInfo={tripObject} signedInUser={signedInUser} tripsChanged={tripsChanged} handleUserEditTrip={handleUserEditTrip}/>
+        <div className='favouritesTrip'> 
+            {allTripsArray.map((tripObject, index) => {
+                return <DisplayTrip key={index} tripsInfo={tripObject} signedInUser={signedInUser} tripsChanged={tripsChanged} handleUserEditTrip={handleUserEditTrip}/>
           })}
+        </div>
+        
     </div>
 )}
 

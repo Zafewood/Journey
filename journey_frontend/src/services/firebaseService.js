@@ -140,13 +140,6 @@ const createTrip = ({ tripTitle, tripPrice, tripCountry, tripCity, tripKeywords,
       })
     })
   }
-
-  const getCurrentUserTrips = () => {
-    getCurrentUserNode().then((userNode) => {
-      const userTrips = Object.keys(userNode.userTrips);
-      
-    })
-  }
   
   const saveComment = ({ tripID, userID, comment }) => {
     return new Promise((resolve, reject) => {
