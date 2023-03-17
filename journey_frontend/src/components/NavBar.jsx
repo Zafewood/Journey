@@ -17,7 +17,7 @@ function NavBar({ currentUser, theme, toggleTheme }) {
 
     
   return (
-    <nav >
+    <nav data-testid="navbar">
         <div className="nav-left">
             
             {/* Link elements work kind of like html a tag, but they also set the route for react router. 
