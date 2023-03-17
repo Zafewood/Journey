@@ -54,8 +54,8 @@
 
 .trip-comments {
     background-color: #E9E2D0;
-    height: auto;
     width: 800px;
+    border-radius: 20px;
 }
 
 .test {
@@ -149,20 +149,6 @@
 
 }
 
-#likeButton { 
-    border-radius: 5px;
-    width: 105px;
-    height: 10%;
-    padding: 5px;
-    margin-left: 50%;
-    margin-bottom: 5%;
-    font-size: 15px;
-    /* border: 0; */
-    background-color: #624b2d;
-    color: #E9E2D0;
-    border-color: #624b2d;
-}
-
 #likeButton:hover { 
     background-color: #E9E2D0;
     color: #624b2d;
@@ -199,3 +185,6 @@
 
 
 
+#no-comment {
+    margin-left: 45%;
+    padding: 3%;}

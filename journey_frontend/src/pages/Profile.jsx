@@ -9,7 +9,7 @@ import firebaseService from '../services/firebaseService.js';
 function Profile({allTrips, currentUser, signOutHandler, theme}) {
 
   function loadValues() {
-    const userNode = firebaseService.getCurrentUserNode();
+    const userNode = firebaseService.getCurrentUserNode(currentUser.uid);
     userNode.then((data) => {
       document.getElementById('username').value = data.displayName;
       document.getElementById('home_country').value = data.homeCountry;
@@ -18,7 +18,6 @@ function Profile({allTrips, currentUser, signOutHandler, theme}) {
   }
 
   const allTripsArray = Object.values(allTrips);
-  console.log("alltirpos: ", allTripsArray);
 
   const handleEditButton = () => {
     const usernameinput = document.getElementById('username');
