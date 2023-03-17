@@ -3,18 +3,22 @@ import '../../styles/Trips/CreateTrip.css'
 import placeholderImg from '../../assets/example-beach.jpg'
 import { useState } from 'react'
 import UserComment from './UserComment';
+import { auth, db } from '../../firebase-config'
 
 import  firebaseService  from '../../services/firebaseService';
 
 
-function TripsCard({ tripAddedHandler }) {
+function TripsCard({ tripAddedHandler, theme }) {
     const [isShown, setIsShown] = useState(false);
     const [trip, setTrip] = useState({
         tripTitle: '',
         tripDuration: '',
+        tripPrice: '',     
         tripCountry: '',
         tripCity: '',
-        tripDescription: ''
+        tripKeywords: '',   
+        tripDescription: '',
+        tripAuthor: auth.currentUser ? auth.currentUser.email : "",
       });
 
       function changeButtonText () { 
@@ -57,6 +61,10 @@ function TripsCard({ tripAddedHandler }) {
     const updateDuration = (event) => {
         setTrip(prevTrip => ({ ...prevTrip, tripDuration: event.target.value }));
     };
+
+    const updatePrice = (e) => {
+        setTrip(prevTrip => ({ ...prevTrip, tripPrice: e.target.value }));
+    };
     
     const updateCountry = (e) => {
         setTrip(prevTrip => ({ ...prevTrip, tripCountry: e.target.value }));
@@ -64,6 +72,10 @@ function TripsCard({ tripAddedHandler }) {
     
     const updateCity = (e) => {
         setTrip(prevTrip => ({ ...prevTrip, tripCity: e.target.value }));
+    };
+
+    const updateKeywords = (e) => {
+        setTrip(prevTrip => ({ ...prevTrip, tripKeywords: e.target.value }));
     };
     
     const updateDescription = (e) => {
@@ -73,21 +85,25 @@ function TripsCard({ tripAddedHandler }) {
 
   return (
     <div className= "tripBox"> 
-        <button  id='addTravelButton' data-testid="addTravelBtn" onClick={changeButtonText}>Add travel</button>
+        <button  id='addTravelButton' data-testid="addTravelBtn" onClick={changeButtonText}>Add Your Own Travel</button>
         {isShown && (
-            <div>
+            <div className={`tripform${theme}`}>
             <form>
                 <h1> <b> Add Your Journey Here </b> </h1> 
                 <div className="trip-content">
                     <label htmlFor="titleInput">Title of your trip</label>
                     <input id="titleInput" type="text" onChange={updateTitle} />
-                    <label id='authorLabel'> Author </label> 
+                    <label id='authorLabel'> Author: {auth.currentUser ? auth.currentUser.email : ""} </label> 
                     <label htmlFor='duationInput'> Duration (days) </label> 
                     <input id='duationInput' type="integer" onChange = {updateDuration}></input> 
+                    <label htmlFor="priceInput">Estimated Price</label>
+                    <input id="priceInput" type="integer" onChange={updatePrice}></input>
                     <label htmlFor='countryInput'> Country/Countries </label> 
                     <input id='countryInput' type ="text" onChange={updateCountry}></input> 
                     <label htmlFor='citiesInput'> City/Cities </label> 
                     <input id='citiesInput' type ="text" onChange={updateCity}></input> 
+                    <label htmlFor='keywordsInput'> Keywords </label> 
+                    <input id='keywordsInput' type ="text" onChange={updateKeywords}></input>
                     <label htmlFor='descriptionInput' > Description </label> 
                     <textarea id='descriptionInput' type ="text" onChange={updateDescription} textarea rows={5} cols={40} ></textarea> 
                 </div>

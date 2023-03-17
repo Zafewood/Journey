@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-route
 import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
 import CreateUserPage from '../pages/CreateUserPage';
+import Favourites from '../pages/Favourites';
 import Profile from '../pages/Profile';
 import NavBar from './NavBar';
 import Footer from './Footer';
@@ -58,6 +59,7 @@ function App() {
   // Retrieve all trips from database
   const getAllTrips = () => {
     firebaseService.getAllTrips().then((retrievedTrips) => {
+      
       setTrips(retrievedTrips)
     })
   }
@@ -78,7 +80,8 @@ function App() {
         console.log('user signed in: ', user);
         setUser(user);
       } else {
-        console.log('User not signed in');
+        console.log('User not signed in', user);
+        // console.log('this is user id: ', auth.currentUser.uid, 'hva kommer ut');
       }
     })
   }
@@ -107,7 +110,7 @@ function App() {
     getAllTrips();
     newTripAdded();
   }, [])
-
+  
   return (
     // Whole app embedded inside router element to display different content based on current route
     // Main content of the app is rendered inside the main-content div, and the content depends on the current route
@@ -117,11 +120,11 @@ function App() {
       <Router >
         <NavBar currentUser={user} toggleTheme={toggleTheme} theme={theme}/>
         
-        <div className="main-content" data-testid="main-content">
+        <div className={`main-content ${theme}`} data-testid="main-content">
           <Routes>
             
-            <Route path='/' element={ <HomePage allTrips={trips} tripAddedHandler={newTripAdded} handleUserEditTrip={handleUserEditTrip} signedInUser={user} tripsChanged={tripsChanged} theme={theme}/> }/>
-            <Route path='/about' element={ <About /> }/>
+            <Route path='/' element={ <HomePage allTrips={trips} tripAddedHandler={newTripAdded} handleUserEditTrip={handleUserEditTrip} signedInUser={user} tripsChanged={tripsChanged}theme={theme}/> }/>
+            <Route path='/favourites' element={ <Favourites allTrips={trips} signedInUser={user} tripsChanged={tripsChanged} handleUserEditTrip={handleUserEditTrip} /> }/>
             <Route path='/loginpage' element={ <LoginPage authChanged={handleAuthStateChanged}/> }/>
             <Route path='/createuserpage' element={ <CreateUserPage /> }/>
             <Route path='/profile' element={ <Profile allTrips={trips} currentUser={user} signOutHandler={signOutUSers} /> }/>

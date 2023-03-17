@@ -4,6 +4,7 @@
     color: black;
 }
 
+
 .card-content {
     background-color: #E9E2D0;
     width: 800px;
@@ -12,6 +13,8 @@
     justify-content: space-evenly;
     align-items: stretch;
 }
+
+
 
 .trip-info {
     display: flex;
@@ -59,6 +62,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 2%;
 }
 
 .rating {
@@ -67,24 +71,36 @@
 }
 .app {
   float:left;
-  padding: 2%;
   width: 100%;
   margin-top: 2%;
 }
 .your-rating {
   float: left;
   font-style: italic;
-  margin-top: 3%;
+  margin-top: 4%;
   margin-left: 3%;
   font-size: smaller
   }
+
+.rating-btn {
+  float: left;
+  margin-right: 2%;
+  margin-top: 2%;
+  border-radius: 10px;
+  padding: 6px;
+  font-size: 15px;
+  background-color: #624b2d;
+  color:#E9E2D0;
+  border-color: #E9E2D0;
+}
 
 .comments-btn {
     border: none;
     background-color: transparent;
     cursor: pointer;
     float: left;
-    width: 30%;
+    margin-top: 4%;
+    width: 25%;
     color: gray;
 }
 
@@ -94,6 +110,7 @@
     margin: 0 auto;
     /* max-width: 500px; */
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.39);
+
 }
 
 #addTravelButton { 
@@ -110,10 +127,11 @@
     cursor: pointer;
 }
 
-#formButton { 
+#formButton, #editTrip, #deleteTrip { 
     border-radius: 5px;
     padding: 5px;
     font-size: 15px;
+    margin: 1%;
     /* border: 0; */
     background-color: #624b2d;
     color: #E9E2D0;
@@ -121,7 +139,7 @@
 
 }
 
-#formButton:hover { 
+#formButton:hover, #editTrip:hover, #deleteTrip:hover { 
     background-color: #E9E2D0;
     color: #624b2d;
     cursor: pointer;
@@ -131,11 +149,53 @@
 
 }
 
-#editTrip {
-    width: 3vh;
+#likeButton { 
+    border-radius: 5px;
+    width: 105px;
+    height: 10%;
+    padding: 5px;
+    margin-left: 50%;
+    margin-bottom: 5%;
+    font-size: 15px;
+    /* border: 0; */
+    background-color: #624b2d;
+    color: #E9E2D0;
+    border-color: #624b2d;
 }
 
-#deleteTrip {
-    width: 5vh;
+#likeButton:hover { 
+    background-color: #E9E2D0;
+    color: #624b2d;
+    cursor: pointer;
+    font-weight: bold;
+    border-color:#E9E2D0;
+    text-align: center;
+
 }
+
+#likeButton { 
+    border-radius: 5px;
+    width: 105px;
+    height: 10%;
+    padding: 5px;
+    margin-left: 50%;
+    margin-bottom: 5%;
+    font-size: 15px;
+    /* border: 0; */
+    background-color: #624b2d;
+    color: #E9E2D0;
+    border-color: #624b2d;
+}
+
+#likeButton:hover { 
+    background-color: #E9E2D0;
+    color: #624b2d;
+    cursor: pointer;
+    font-weight: bold;
+    border-color:#E9E2D0;
+    text-align: center;
+
+}
+
+
 

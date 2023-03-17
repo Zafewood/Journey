@@ -6,7 +6,7 @@ import DisplayTrip from '../components/Trips/DisplayTrip';
 import firebaseService from '../services/firebaseService.js';
 
 
-function Profile({allTrips, currentUser, signOutHandler}) {
+function Profile({allTrips, currentUser, signOutHandler, theme}) {
 
   function loadValues() {
     const userNode = firebaseService.getCurrentUserNode();
@@ -94,7 +94,7 @@ function Profile({allTrips, currentUser, signOutHandler}) {
     <div id='image'>
       <img src={User_picture} alt="User_picture" width='300' height='300'/>
     </div>
-    <div id='personal_info' >
+    <div className='personal_info' >
       <button id='button' onClick={handleEditButton}>Edit</button>
       <button id='button' onClick={handleSaveButton}>Save</button>
       <button id ='button' onClick={signOutTapped}>Log out</button>
@@ -368,10 +368,12 @@ function Profile({allTrips, currentUser, signOutHandler}) {
       <div id='midlertidig'>
       <div id='my_div' hidden>Users own trips here</div>
       <div id='act_div' hidden>Users interacted trips here</div>
-      </div>
-    {allTripsArray.map((tripObject) => {
+      </div>  
+      <div className='profileTrips' > 
+        {allTripsArray.map((tripObject) => {
             return <DisplayTrip tripsInfo={tripObject}/>
           })}
+      </div>
     </div>
     </>
     )
