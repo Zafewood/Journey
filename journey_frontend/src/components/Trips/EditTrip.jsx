@@ -3,7 +3,7 @@ import '../../styles/Trips/EditTrip.css'
 import { useState, useEffect } from 'react';
 import firebaseService from '../../services/firebaseService.js';
 
-function EditTrip( {userTripEdit, shouldShowPopup, handleUserSaveTrip, tripsChanged}) {
+function EditTrip( {userTripEdit, shouldShowPopup, handleUserEditTrip, handleUserSaveTrip, tripsChanged}) {
 
   const [trip, setTrip] = useState({
     tripTitle: '',
@@ -63,6 +63,11 @@ function EditTrip( {userTripEdit, shouldShowPopup, handleUserSaveTrip, tripsChan
     })
   }
 
+  const handleClose = () => {
+    handleUserEditTrip(userTripEdit);
+  }
+
+
   useEffect(() => {
     const newTrip = {
       tripTitle: userTripEdit.tripTitle,
@@ -103,10 +108,11 @@ function EditTrip( {userTripEdit, shouldShowPopup, handleUserSaveTrip, tripsChan
                         <label htmlFor='keywordsInput'> Keywords </label> 
                         <input id='keywordsInput' type ="text" onChange={updateKeywords}></input> 
                         <label htmlFor='descriptionInput' > Description </label> 
-                        <textarea id='descriptionInput' type ="text" onChange={updateDescription} textarea rows={5} cols={40} ></textarea><br/>
+                        <textarea id='descriptionInput' type ="text" onChange={updateDescription} textarea rows={5} cols={40} style={{resize: 'none'}}></textarea><br/>
                         
             </div>
-            <button onClick={saveTripInfo}>Save</button>
+            <button className='editBox' onClick={saveTripInfo}>Save</button>
+            <button className='editBox' onClick={handleClose}>Close</button>
         </div>
         
     </div>

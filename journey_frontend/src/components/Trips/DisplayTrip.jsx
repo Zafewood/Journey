@@ -1,7 +1,12 @@
 import React from 'react'
 import '../../styles/Trips/TripsCard.css'
-import placeholderImg from '../../assets/example-beach.jpg'
-import { useState, useEffect } from 'react'
+import placeholderImg from '../../assets/example-beach.jpg';
+import heartEmpty from '../../assets/heart-empty.svg';
+import heartFull from '../../assets/heart-fill.svg';
+import trashEmpty from '../../assets/trash-empty.svg';
+import trashFull from '../../assets/trash-fill.svg';
+import edit from '../../assets/edit.svg';
+import { useState, useEffect } from 'react';
 import UserComment from './UserComment';
 import CreateComment from './CreateComment';
 import firebaseService from '../../services/firebaseService';
@@ -18,6 +23,7 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
   const [ratingtype, setRatingType] = useState('Avg rating');
   const currentUserID = signedInUser ? signedInUser.uid : null;
   const [rateActive, setRateActive] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     if (tripsInfo.ratings === undefined) {
@@ -86,16 +92,13 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
             const tripLikedBy = Object.values(tripsInfo.tripLikedBy);
             for (let i = 0; i < tripLikedBy.length; i++) {
                 if (tripLikedBy[i].userID === currentUserID) {
-                    setBtnText('Unlike this trip')
                     setLikeTripButton(false)
                     break;
                 } else {
-                    setBtnText('Like this trip')
                     setLikeTripButton(true)
                 }
             } 
         } else {
-            setBtnText('Like this trip')
             setLikeTripButton(true)
         }
       }, [tripsInfo]);
@@ -109,12 +112,15 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
               tripID: tripsInfo.tripID,
           });
           tripsChanged();
+          console.log('liked')
       } else { 
           firebaseService.removeLike({ 
               userID: auth.currentUser.uid,
               tripID: tripsInfo.tripID,
           })
           tripsChanged();
+          console.log('unliked')
+
       }
     }
 
@@ -125,8 +131,11 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
             <img src={placeholderImg} alt="" className='trip-image' />
         </div>
         <div className='card-right'>
-        <button id='likeButton' onClick={likeTrip} style={{ display: currentUserID != null ? 'block' : 'none' }}> {btnText} </button>
-
+        <div className='buttonRow'>
+        <button onClick={likeTrip} id='likeButton' style={{ display: currentUserID != null ? 'block' : 'none' }}> <img width={'40px'} height={'40px'} src={likedTripButton ? heartEmpty : heartFull} alt='Like'></img>  </button>
+        <button onClick={editTrip} id='editTripButton' style={{ display: currentUserID === tripsInfo.userID ? 'block' : 'none' }}><img id='editTrip' width={'40px'} height={'40px'} src={edit} alt='Like'></img></button>
+        <button onClick={deleteTrip} id='deleteTripButton' style={{ display: currentUserID === tripsInfo.userID || currentUserID == "C9bhZbFCB8WkqyWf85EHWI3KymA3" ? 'block' : 'none' }}><img id='deleteTrip' src={trashEmpty}></img></button>
+        </div>
           <h1 className='trip-title'>{tripsInfo?.tripTitle}</h1>
           <div className='trip-info'>
           <p className='trip-author' data-testid="trip-author">Author: {tripsInfo?.tripAuthor}</p>
@@ -137,8 +146,6 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
               <p className='trip-keywords' data-testid="trip-keywords">Keywords: {tripsInfo?.tripKeywords} </p> 
               <p className='trip-description' data-testid="trip-description">Description: {tripsInfo?.tripDescription}</p> <br/>
           </div>
-          <button onClick={editTrip} style={{ display: currentUserID === tripsInfo.userID ? 'block' : 'none' }}>Edit</button>
-          <button onClick={deleteTrip} style={{ display: currentUserID === tripsInfo.userID || currentUserID == "C9bhZbFCB8WkqyWf85EHWI3KymA3" ? 'block' : 'none' }}>Delete</button>
           <div className='trip-rating-view'>
             <div className='app' >
               <div id='rating'>

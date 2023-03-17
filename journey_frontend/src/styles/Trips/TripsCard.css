@@ -140,7 +140,7 @@
     text-align: center;
 
 }
-
+/*
 #likeButton:hover { 
     background-color: #E9E2D0;
     color: #624b2d;
@@ -159,7 +159,6 @@
     margin-left: 50%;
     margin-bottom: 5%;
     font-size: 15px;
-    /* border: 0; */
     background-color: #624b2d;
     color: #E9E2D0;
     border-color: #624b2d;
@@ -174,13 +173,72 @@
     text-align: center;
 
 }
+*/
+
+.buttonRow {
+  float: right;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 120px;
+  width: 40px;
+}
+
+.buttonRow button {
+  height: 40px;
+  width: 40px;
+}
+
+#likeButton {
+  background-color: transparent;
+  border: none;
+  float: right;
+}
+
+#editTripButton {
+  float: right;
+  border: none;
+  background-color: transparent;
+
+}
 
 #editTrip {
     width: 3vh;
+    height: 30px;
+    width: 30px;
 }
+
+
+
+#deleteTripButton {
+  background-color: transparent;
+  border: none;
+  border-style: none;
+  float: right;
+  box-shadow: none;
+  outline: none;
+  height: 40px;
+  width: 40px;
+}
+
 
 #deleteTrip {
     width: 5vh;
+    background-image: url(../../assets/trash-empty.svg);
+    background-size: cover;
+    background-position: center;
+    border: none;
+    width: 40px;
+    height: 40px;
+}
+
+#deleteTrip:hover {
+  background-image: url(../../assets/trash-fill.svg);
+  background-size: cover;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+
 }
 
 #no-comment {
