@@ -35,7 +35,7 @@ function Profile({allTrips, currentUser, signOutHandler}) {
 
   
   function loadValues() {
-    const userNode = firebaseService.getCurrentUserNode();
+    const userNode = firebaseService.getCurrentUserNode(currentUser.uid);
     userNode.then((data) => {
       document.getElementById('username').value = data.displayName;
       document.getElementById('home_country').value = data.homeCountry;
