@@ -19,6 +19,8 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
   const [ratingtype, setRatingType] = useState('Avg rating')
   const currentUserID = signedInUser ? signedInUser.uid : null;
 
+  console.log("tripsinfo: ", tripsInfo);
+
   const loadAverageRating = () => {
     if (tripsInfo.ratings === undefined) {
       setRating(0);
@@ -91,6 +93,7 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
   }
 
     useEffect(() => {
+      loadAverageRating();
         if (typeof tripsInfo.tripLikedBy !== 'undefined') {
             const tripLikedBy = Object.values(tripsInfo.tripLikedBy);
             for (let i = 0; i < tripLikedBy.length; i++) {

@@ -21,14 +21,19 @@ function Profile({allTrips, currentUser, signOutHandler}) {
   const allTripsArray = Object.values(allTrips);
 
   const tripsToShow = tripbuttonstate ? userOwnTrips : userActivityTrips
-  
+
   useEffect(() => {
     getUserLikedTrips();
     getUserActivityTrips();
-  }, [allTrips])
+    setTripsToDisplay(userOwnTrips);
+  }, [allTrips]);
+
+  useEffect(() => {
+    setTripsToDisplay(userOwnTrips);
+    handleTripButton();
+  }, [userOwnTrips]);
 
   
-
   function loadValues() {
     const userNode = firebaseService.getCurrentUserNode();
     userNode.then((data) => {
@@ -52,14 +57,12 @@ function Profile({allTrips, currentUser, signOutHandler}) {
   const getUserActivityTrips = () => {
 
     firebaseService.getCurrentUserNode().then((userNode) => {
-      console.log("uerNdoe:", userNode);
       const currentUserCommentedTripsID = Object.keys(userNode.userCommentedTrips);
       const currentUserRatedTrips = Object.keys(userNode.userRatedTrips);
       const userActivityTrups = allTripsArray.filter((someTrip) => {
         return currentUserCommentedTripsID.includes(someTrip.tripID) || currentUserRatedTrips.includes(someTrip.tripID);
       })
       setUserActivityTrips(userActivityTrups);
-      console.log("user activity: ", userActivityTrups);
     })
   }
 
@@ -109,8 +112,6 @@ function Profile({allTrips, currentUser, signOutHandler}) {
   const handleActivityButton = () => {
     if (acitvitybuttonstate) {}
       else{
-        console.log("inside here");
-        console.log("Activity: ", userActivityTrips);
         setTripsToDisplay(userActivityTrips);
         setActivityButtonState(true)
         setActivityButtonColor('#624b2d')
@@ -397,8 +398,8 @@ function Profile({allTrips, currentUser, signOutHandler}) {
     <option value="YE">Yemen</option>
     <option value="ZM">Zambia</option>
     <option value="ZW">Zimbabwe</option>
-</select>
-</p><br/>
+        </select>
+        </p><br/>
       <p>Email:  <input id='email' type='text' style={{borderWidth:'0px'}} disabled></input></p><br/>
     </div>
     </div>
@@ -409,7 +410,7 @@ function Profile({allTrips, currentUser, signOutHandler}) {
     </div>
     <div id='feed'>
     
-    {tripsToShow.map((tripObject) => {
+    {tripsToDisplay.map((tripObject) => {
             return <DisplayTrip tripsInfo={tripObject}/>
           })}
     </div>
