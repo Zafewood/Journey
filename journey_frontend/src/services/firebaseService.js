@@ -2,11 +2,10 @@ import { db, auth } from '../firebase-config';
 import { set, ref, onValue, get, child, update } from 'firebase/database';
 import { uuidv4 } from '@firebase/util';
 
-const getCurrentUserNode = () => {
+const getCurrentUserNode = (userID) => {
   const dbRef = ref(db);
-  const currentUserID = auth.currentUser.uid;
   return new Promise((resolve, reject) => {
-    get(child(dbRef, `users/${currentUserID}`)).then((snapshot) => {
+    get(child(dbRef, `users/${userID}`)).then((snapshot) => {
       if (snapshot.exists()) {
         const userNode = snapshot.val();
         resolve(userNode);
@@ -36,26 +35,25 @@ const editUserNode = ({displayName, homeCountry, email}) => {
   });
 }
 
-const editTripNode = ({tripID, tripTitle, tripDuration, tripPrice, tripCountry, tripCity, tripKeywords, tripDescription, userID}) => {
+const editTripNode = ({tripID, tripTitle, tripDuration, tripPrice, tripCountry, tripCity, tripKeywords, tripDescription}) => {
   return new Promise((resolve, reject) => {
-    set(ref(db, 'trips/' + tripID), {
+    update(ref(db, 'trips/' + tripID), {
       tripTitle, 
-      tripID,
       tripPrice,
       tripCountry, 
       tripCity, 
       tripKeywords,
       tripDescription,
-      tripDuration,
-      userID,
+      tripDuration
     }).then(() => {
       resolve();
     }).catch((error) => {
-      console.log('error editing user node: ', error);
+      console.log('error editing trip node: ', error);
       reject(error);
     });
   });
 }
+
 
 const deleteTripNode = ({tripID, userID}) => {
   return new Promise((resolve, reject) => {
@@ -143,6 +141,48 @@ const createTrip = ({ tripTitle, tripPrice, tripCountry, tripCity, tripKeywords,
     })
   }
   
+  const saveComment = ({ tripID, userID, comment }) => {
+    return new Promise((resolve, reject) => {
+      set(ref(db, `trips/${tripID}/comments/${userID}/`), {
+        comment
+      }).then(() => {
+        set(ref(db, `users/${userID}/userCommentedTrips/${tripID}`), {
+          tripID
+        })
+        resolve()
+      }).catch((error) => {
+        console.log('error saving comment: ', error);
+        reject(error);
+      });
+    });
+  }
+
+  const editComment = ({ tripID, userID, comment }) => {
+    return new Promise((resolve, reject) => {
+      update(ref(db, `trips/${tripID}/comments/${userID}/`), {
+        comment
+      }).then(() => {
+        resolve()
+      }).catch((error) => {
+        console.log('error saving comment: ', error);
+        reject(error);
+      });
+    });
+  }
+
+  const deleteComment = ({ tripID, userID}) => {
+    return new Promise((resolve, reject) => {
+      set(ref(db, `trips/${tripID}/comments/${userID}/`), {
+      }).then(() => {
+        set(ref(db, `users/${userID}/userCommentedTrips/${tripID}`), {
+        })
+        resolve()
+      }).catch((error) => {
+        console.log('error saving comment: ', error);
+        reject(error);
+      });
+    });
+  }
 
 
-export default { getCurrentUserNode, editUserNode, getAllTrips, createTrip, addLike, removeLike, saveRating, editTripNode, deleteTripNode}
+export default { getCurrentUserNode, editUserNode, getAllTrips, createTrip, addLike, removeLike, saveRating, editTripNode, deleteTripNode, saveComment, editComment, deleteComment}
