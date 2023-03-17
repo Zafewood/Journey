@@ -74,13 +74,13 @@ function EditTrip( {userTripEdit, shouldShowPopup, handleUserSaveTrip, tripsChan
       tripDescription: userTripEdit.tripDescription,
     };
     setTrip(newTrip);
-    document.getElementById("tripTitle").value = newTrip.tripTitle;
-    document.getElementById("durationInput").value = newTrip.tripDuration;
-    document.getElementById("priceInput").value = newTrip.tripPrice;
-    document.getElementById("countryInput").value = newTrip.tripCountry;
-    document.getElementById("citiesInput").value = newTrip.tripCity;
-    document.getElementById("keywordsInput").value = newTrip.tripKeywords;
-    document.getElementById("descriptionInput").value = newTrip.tripDescription;
+    document.getElementById("tripTitle").value = newTrip.tripTitle ?? "";
+    document.getElementById("durationInput").value = newTrip.tripDuration ?? "";
+    document.getElementById("priceInput").value = newTrip.tripPrice ?? "";
+    document.getElementById("countryInput").value = newTrip.tripCountry ?? "";
+    document.getElementById("citiesInput").value = newTrip.tripCity ?? "";
+    document.getElementById("keywordsInput").value = newTrip.tripKeywords ?? "";
+    document.getElementById("descriptionInput").value = newTrip.tripDescription ?? "";
   }, [userTripEdit]);
 
   return (
