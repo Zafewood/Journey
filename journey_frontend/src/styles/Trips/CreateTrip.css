@@ -35,6 +35,11 @@
 .trip-content {
     display: flex;
     flex-direction: column;
+    color: black !important;
+}
+
+#createTripHeader{ 
+    color: black !important;
 }
 
 

@@ -89,7 +89,7 @@ function TripsCard({ tripAddedHandler, theme }) {
         {isShown && (
             <div className={`tripform${theme}`}>
             <form>
-                <h1> <b> Add Your Journey Here </b> </h1> 
+                <h1 id='createTripHeader'> <b> Add Your Journey Here </b> </h1> 
                 <div className="trip-content">
                     <label htmlFor="titleInput">Title of your trip</label>
                     <input id="titleInput" type="text" onChange={updateTitle} />
