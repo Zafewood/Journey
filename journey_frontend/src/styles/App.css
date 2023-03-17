@@ -3,6 +3,8 @@
     padding: 0;
 }
 
+
+
 body { 
     background-color: rgb(252, 245, 227)  ;
 }
@@ -10,3 +12,24 @@ body {
 .main-content {
     min-height: 80vh;
 }
+
+.switch {
+    display: flex;
+    width: 100vw;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+}
+
+.switch label{
+    margin: 10px;
+}
+
+/*}
+#light .switch {
+    color: black;
+}
+
+#dark .switch {
+    color: white;
+}*/

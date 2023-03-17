@@ -1,6 +1,9 @@
+
+
 .tripscard p {
     color: black;
 }
+
 
 .card-content {
     background-color: #E9E2D0;
@@ -10,6 +13,8 @@
     justify-content: space-evenly;
     align-items: stretch;
 }
+
+
 
 .trip-info {
     display: flex;
@@ -57,6 +62,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 2%;
 }
 
 .rating {
@@ -104,6 +110,7 @@
     margin: 0 auto;
     /* max-width: 500px; */
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.39);
+
 }
 
 #addTravelButton { 
@@ -120,10 +127,11 @@
     cursor: pointer;
 }
 
-#formButton { 
+#formButton, #editTrip, #deleteTrip { 
     border-radius: 5px;
     padding: 5px;
     font-size: 15px;
+    margin: 1%;
     /* border: 0; */
     background-color: #624b2d;
     color: #E9E2D0;
@@ -131,7 +139,7 @@
 
 }
 
-#formButton:hover { 
+#formButton:hover, #editTrip:hover, #deleteTrip:hover { 
     background-color: #E9E2D0;
     color: #624b2d;
     cursor: pointer;
@@ -175,13 +183,7 @@
 
 }
 
-#editTrip {
-    width: 3vh;
-}
 
-#deleteTrip {
-    width: 5vh;
-}
 
 #no-comment {
     margin-left: 45%;

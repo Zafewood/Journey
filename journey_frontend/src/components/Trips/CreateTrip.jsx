@@ -8,7 +8,7 @@ import { auth, db } from '../../firebase-config'
 import  firebaseService  from '../../services/firebaseService';
 
 
-function TripsCard({ tripAddedHandler }) {
+function TripsCard({ tripAddedHandler, theme }) {
     const [isShown, setIsShown] = useState(false);
     const [trip, setTrip] = useState({
         tripTitle: '',
@@ -85,11 +85,11 @@ function TripsCard({ tripAddedHandler }) {
 
   return (
     <div className= "tripBox"> 
-        <button  id='addTravelButton' data-testid="addTravelBtn" onClick={changeButtonText}>Add travel</button>
+        <button  id='addTravelButton' data-testid="addTravelBtn" onClick={changeButtonText}>Add Your Own Travel</button>
         {isShown && (
-            <div>
+            <div className={`tripform${theme}`}>
             <form>
-                <h1> <b> Add Your Journey Here </b> </h1> 
+                <h1 id='createTripHeader'> <b> Add Your Journey Here </b> </h1> 
                 <div className="trip-content">
                     <label htmlFor="titleInput">Title of your trip</label>
                     <input id="titleInput" type="text" onChange={updateTitle} />
