@@ -2,10 +2,11 @@ import { db, auth } from '../firebase-config';
 import { set, ref, onValue, get, child, update } from 'firebase/database';
 import { uuidv4 } from '@firebase/util';
 
-const getCurrentUserNode = (userID) => {
+const getCurrentUserNode = () => {
   const dbRef = ref(db);
+  const currentUserID = auth.currentUser.uid;
   return new Promise((resolve, reject) => {
-    get(child(dbRef, `users/${userID}`)).then((snapshot) => {
+    get(child(dbRef, `users/${currentUserID}`)).then((snapshot) => {
       if (snapshot.exists()) {
         const userNode = snapshot.val();
         resolve(userNode);
@@ -140,6 +141,13 @@ const createTrip = ({ tripTitle, tripPrice, tripCountry, tripCity, tripKeywords,
       })
     })
   }
+
+  const getCurrentUserTrips = () => {
+    getCurrentUserNode().then((userNode) => {
+      const userTrips = Object.keys(userNode.userTrips);
+      
+    })
+  }
   
   const saveComment = ({ tripID, userID, comment }) => {
     return new Promise((resolve, reject) => {
@@ -185,4 +193,4 @@ const createTrip = ({ tripTitle, tripPrice, tripCountry, tripCity, tripKeywords,
   }
 
 
-export default { getCurrentUserNode, editUserNode, getAllTrips, createTrip, addLike, removeLike, saveRating, editTripNode, deleteTripNode, saveComment, editComment, deleteComment}
+export default { getCurrentUserNode, editUserNode, getAllTrips, createTrip, addLike, removeLike, saveRating, editTripNode, deleteTripNode, saveComment, editComment, deleteComment, getCurrentUserTrips}

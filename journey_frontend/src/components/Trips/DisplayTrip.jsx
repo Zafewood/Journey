@@ -13,7 +13,7 @@ import firebaseService from '../../services/firebaseService';
 import { Rating } from 'react-simple-star-rating'
 import {db, auth} from '../../firebase-config';
 
-function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}) {
+function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged, theme}) {
   const [cardHeight, setCardHeight] = useState("0px");
   const [isExpanded, setIsExpanded] = useState(false);
   const [shouldDisplay, setShouldDisplay] = useState("none");
@@ -126,7 +126,7 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
 
   return (
     <div className='test'>
-      <div className='card-content'>
+      <div className={`card-content ${theme}`}>
         <div className='card-left'>
             <img src={placeholderImg} alt="" className='trip-image' />
         </div>
@@ -164,7 +164,7 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged}
         <button className='comments-btn' onClick={handleExpand}>{shouldDisplay == "block" ? "Hide comments" : "View comments"}</button>
         </div>   
       </div>
-      <div className='trip-comments' style={{ 
+      <div className={`trip-comments ${theme}`} style={{ 
         height: cardHeight,
         display: shouldDisplay
         }}>

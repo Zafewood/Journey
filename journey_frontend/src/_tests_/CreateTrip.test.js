@@ -3,9 +3,9 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import TripsCard from '../components/Trips/CreateTrip'
 
 describe('TripsCard tests', () => {
-  it('should render the "Add travel" button', () => {
+  it('should render the "Add Your Own Travel" button', () => {
     render(<TripsCard />);
-    const addButton = screen.getByRole('button', { name: 'Add travel' });
+    const addButton = screen.getByRole('button', { name: 'Add Your Own Travel' });
     expect(addButton).toBeInTheDocument();
     
   });
@@ -13,7 +13,7 @@ describe('TripsCard tests', () => {
   it('should display form on "Add travel" button click', () => {
     render(<TripsCard />);
 
-    const addButton = screen.getByRole('button', { name: 'Add travel' });
+    const addButton = screen.getByRole('button', { name: 'Add Your Own Travel' });
     expect(addButton).toBeInTheDocument();
     fireEvent.click(addButton);
 

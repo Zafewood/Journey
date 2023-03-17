@@ -3,7 +3,7 @@
   text-align: center;
   padding-top: 3%;
   padding-bottom: 5%;
-  font-family: Georgia, serif;
+  /*font-family: Georgia, serif;*/
 }
 
 #profile {
@@ -12,7 +12,7 @@ margin-right: 20%;
 background-color: #624b2d;
 }
 
-#personal_info {
+.personal_info {
   color: #624b2d;
   padding-left: 5%;
   padding-right: 15%;
@@ -132,4 +132,8 @@ box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.39);
 
 #midlertidig {
 margin-left: 47%;
+}
+
+.profileTrips { 
+    color: black !important;
 }
