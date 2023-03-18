@@ -14,3 +14,7 @@
 .favouritesTrip { 
     color: black !important;
 }
+
+.signin-placeholder {
+    text-align: center;
+}

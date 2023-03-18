@@ -9,12 +9,13 @@ function Favourites({allTrips, signedInUser, tripsChanged, handleUserEditTrip}) 
 
     const [allTripsArray, setAllTripsArray] = useState([])
     
+    const userid = auth.currentUser ? auth.currentUser.uid : null;
     useEffect(() => {
         const allTripsArray = Object.values(allTrips);
       
         const filteredTrips = allTripsArray.filter((trip) => {
           if (typeof trip.tripLikedBy !== 'undefined') {
-            const userid = auth.currentUser.uid;
+            
             const tripLikedBy = Object.values(trip.tripLikedBy);
             for (let i = 0; i < tripLikedBy.length; i++) {
                 if (tripLikedBy[i].userID === userid) {
@@ -36,7 +37,8 @@ function Favourites({allTrips, signedInUser, tripsChanged, handleUserEditTrip}) 
     
 return (
     <div id="favouritesDiv">
-        <h1 id='headerFav'> MY FAVOURITE TRIPS </h1>
+      {userid ? <h1 id='headerFav'> MY FAVOURITE TRIPS </h1> : <h1 className='signin-placeholder'>Sign in to view liked trips</h1>}
+        
         <div className='favouritesTrip'> 
             {allTripsArray.map((tripObject, index) => {
                 return <DisplayTrip key={index} tripsInfo={tripObject} signedInUser={signedInUser} tripsChanged={tripsChanged} handleUserEditTrip={handleUserEditTrip}/>

@@ -22,7 +22,7 @@ const getCurrentUserNode = (userId) => {
 const editUserNode = ({displayName, homeCountry, email}) => {
   const currentUserID = auth.currentUser.uid;
   return new Promise((resolve, reject) => {
-    set(ref(db, 'users/' + currentUserID), {
+    update(ref(db, 'users/' + currentUserID), {
       displayName: displayName,
       homeCountry: homeCountry,
       email: email,
