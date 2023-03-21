@@ -23,11 +23,12 @@ function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser
   const handleSearch = (searchText) => {
     console.log("searchtext: ", searchText);
     const matchingTrips = allTripsArray.filter((trip) => {
-      const { tripTitle, tripCountry, tripCity } = trip;
+      const { tripTitle, tripCountry, tripCity, tripKeywords } = trip;
       return (
         tripTitle?.toLowerCase().includes(searchText.toLowerCase()) ||
         tripCountry?.toLowerCase().includes(searchText.toLowerCase()) ||
-        tripCity?.toLowerCase().includes(searchText.toLowerCase())
+        tripCity?.toLowerCase().includes(searchText.toLowerCase()) ||
+        tripKeywords?.toLowerCase().includes(searchText.toLowerCase())
       );
     });
     const matchingTripsSorted = sortByOption(sortVal, matchingTrips);
@@ -102,7 +103,7 @@ function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser
         <h1 className='text-over-image'>NEWEST TRIPS</h1>
         <div><Searchbar handleSearch={handleSearch} handleSort={handleSort}></Searchbar></div>
         <div className='card-view'>
-          <CreateTrip tripAddedHandler={tripAddedHandler}/>
+          <CreateTrip tripAddedHandler={tripAddedHandler} signedInUser={signedInUser}/>
             {filteredTrips.map((tripObject, index) => {
             return <DisplayTrip tripsInfo={tripObject} key={index} handleUserEditTrip={handleUserEditTrip} signedInUser={signedInUser} tripsChanged={tripsChanged} theme={theme}/>
           })}

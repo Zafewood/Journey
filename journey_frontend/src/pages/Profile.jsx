@@ -23,12 +23,13 @@ function Profile({allTrips, currentUser, signOutHandler, theme}) {
   
 
   const tripsToShow = tripbuttonstate ? userOwnTrips : userActivityTrips
-  const userId = auth.currentUser ? auth.currentUser.uid : null
 
   useEffect(() => {
-    getUserLikedTrips();
-    getUserActivityTrips();
-    setTripsToDisplay(userOwnTrips);
+    if (userId != null) {
+      getUserLikedTrips();
+      getUserActivityTrips();
+      setTripsToDisplay(userOwnTrips);
+    }
   }, [allTrips]);
 
   useEffect(() => {
@@ -36,24 +37,20 @@ function Profile({allTrips, currentUser, signOutHandler, theme}) {
     handleTripButton();
   }, [userOwnTrips]);
 
-
-
-
   const getUserLikedTrips = () => {
-    
-    firebaseService.getCurrentUserNode(userId).then((userNode) => {
-      console.log("Usernode: ", userNode);
-      const currentUserTripsID = Object.keys(userNode.userTrips ?? {});
-      const userTrips = allTripsArray.filter((someTrip) => {
-        return currentUserTripsID.includes(someTrip.tripID)
+    if (userId != null) {
+      firebaseService.getCurrentUserNode(userId).then((userNode) => {
+        const currentUserTripsID = Object.keys(userNode.userTrips ?? {});
+        const userTrips = allTripsArray.filter((someTrip) => {
+          return currentUserTripsID.includes(someTrip.tripID)
+        })
+        setUserOwnTrips(userTrips);
       })
-      setUserOwnTrips(userTrips);
-    })
+    }
   }
 
   const getUserActivityTrips = () => {
     firebaseService.getCurrentUserNode(userId).then((userNode) => {
-      console.log("Activity node: ", userNode);
       const currentUserCommentedTripsID = Object.keys(userNode.userCommentedTrips ?? {});
       const currentUserRatedTrips = Object.keys(userNode.userRatedTrips ?? {});
       const userActivityTrups = allTripsArray.filter((someTrip) => {
@@ -64,18 +61,21 @@ function Profile({allTrips, currentUser, signOutHandler, theme}) {
   }
 
 
+  useEffect(() => {
+    if (userId != null) {
+      const userNode = firebaseService.getCurrentUserNode(userId);
+      userNode.then((data) => {
+        document.getElementById('username').value = data.displayName;
+        document.getElementById('home_country').value = data.homeCountry;
+        document.getElementById('email').value = data.email;
+      })
+    }
+    
 
-  function loadValues() {
-    const userNode = firebaseService.getCurrentUserNode(currentUser.uid);
-    userNode.then((data) => {
-      document.getElementById('username').value = data.displayName;
-      document.getElementById('home_country').value = data.homeCountry;
-      document.getElementById('email').value = data.email;
-    })
-  }
+  }, [allTrips]);
 
   const allTripsArray = Object.values(allTrips);
-
+  const userId = currentUser ? currentUser.uid : null
 
 
   const handleEditButton = () => {
@@ -150,7 +150,7 @@ function Profile({allTrips, currentUser, signOutHandler, theme}) {
   return(
     <>
     <h1 id='header'>Your Profile</h1>
-    <div id='profile' onLoad={loadValues}>
+    <div id='profile'>
     <div id='image'>
       <img src={User_picture} alt="User_picture" width='300' height='300'/>
     </div>
@@ -430,8 +430,8 @@ function Profile({allTrips, currentUser, signOutHandler, theme}) {
       <div id='act_div' hidden>Users interacted trips here</div>
       </div>  
       <div className='profileTrips' > 
-        {tripsToDisplay.map((tripObject) => {
-            return <DisplayTrip tripsInfo={tripObject}/>
+        {tripsToDisplay.map((tripObject, index) => {
+            return <DisplayTrip tripsInfo={tripObject} key={index}/>
           })}
       </div>
     </div>

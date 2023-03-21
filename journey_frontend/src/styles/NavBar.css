@@ -78,6 +78,11 @@ a {
     margin-right: 1%;
     display: flex;
 }
+
+#switchButton {
+  margin-top: 1%;
+  margin-left: 2%;
+}
 /*
 .nav-right {
     margin-right: 20px;

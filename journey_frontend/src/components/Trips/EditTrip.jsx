@@ -3,7 +3,7 @@ import '../../styles/Trips/EditTrip.css'
 import { useState, useEffect } from 'react';
 import firebaseService from '../../services/firebaseService.js';
 
-function EditTrip( {userTripEdit, shouldShowPopup, handleUserSaveTrip, tripsChanged}) {
+function EditTrip( {userTripEdit, shouldShowPopup, handleUserEditTrip, handleUserSaveTrip, tripsChanged}) {
 
   const [trip, setTrip] = useState({
     tripTitle: '',
@@ -63,6 +63,11 @@ function EditTrip( {userTripEdit, shouldShowPopup, handleUserSaveTrip, tripsChan
     })
   }
 
+  const handleClose = () => {
+    handleUserEditTrip(userTripEdit);
+  }
+
+
   useEffect(() => {
     const newTrip = {
       tripTitle: userTripEdit.tripTitle,
@@ -87,7 +92,7 @@ function EditTrip( {userTripEdit, shouldShowPopup, handleUserSaveTrip, tripsChan
     <div className="popup-container" 
         id='popup-container' 
         style={{ display: shouldShowPopup ? "block" : "none" }} >
-        <div className='inner-popup-container'>
+        <div id='inner-popup-container'>
             <h1>Edit your trip</h1>
             <div className="popup-content">
                         <label htmlFor="titleInput">Title of your trip</label>
@@ -103,10 +108,11 @@ function EditTrip( {userTripEdit, shouldShowPopup, handleUserSaveTrip, tripsChan
                         <label htmlFor='keywordsInput'> Keywords </label> 
                         <input id='keywordsInput' type ="text" onChange={updateKeywords}></input> 
                         <label htmlFor='descriptionInput' > Description </label> 
-                        <textarea id='descriptionInput' type ="text" onChange={updateDescription} rows={5} cols={40} ></textarea><br/>
+                        <textarea id='descriptionInput' type ="text" onChange={updateDescription} rows={5} cols={40}></textarea><br/>
                         
             </div>
-            <button onClick={saveTripInfo}>Save</button>
+            <button id='editSaveButton' onClick={saveTripInfo}>Save</button>
+            <button id='editCloseButton' onClick={handleClose}>Close</button>
         </div>
         
     </div>

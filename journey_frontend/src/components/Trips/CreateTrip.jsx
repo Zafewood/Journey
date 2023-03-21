@@ -1,14 +1,14 @@
 import React from 'react'
 import '../../styles/Trips/CreateTrip.css'
 import placeholderImg from '../../assets/example-beach.jpg'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import UserComment from './UserComment';
 import { auth, db } from '../../firebase-config'
 
 import  firebaseService  from '../../services/firebaseService';
 
 
-function TripsCard({ tripAddedHandler, theme }) {
+function TripsCard({ tripAddedHandler, theme, signedInUser }) {
     const [isShown, setIsShown] = useState(false);
     const [trip, setTrip] = useState({
         tripTitle: '',
@@ -18,8 +18,12 @@ function TripsCard({ tripAddedHandler, theme }) {
         tripCity: '',
         tripKeywords: '',   
         tripDescription: '',
-        tripAuthor: auth.currentUser ? auth.currentUser.email : "",
+        tripAuthor: signedInUser ? signedInUser.email : "",
       });
+
+    useEffect(() => {
+        setTrip(prevTrip => ({ ...prevTrip, tripAuthor: signedInUser ? signedInUser.email : ""}));
+    }, [signedInUser]);
 
       function changeButtonText () { 
         const button = document.getElementById("addTravelButton");
@@ -84,7 +88,7 @@ function TripsCard({ tripAddedHandler, theme }) {
 
 
   return (
-    <div className= "tripBox"> 
+    <div className= "tripBox" style={{display: signedInUser ? "block" : "none"}}> 
         <button  id='addTravelButton' data-testid="addTravelBtn" onClick={changeButtonText}>Add Your Own Travel</button>
         {isShown && (
             <div className={`tripform${theme}`}>

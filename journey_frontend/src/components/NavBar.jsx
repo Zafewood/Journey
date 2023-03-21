@@ -51,7 +51,7 @@ function NavBar({ currentUser, theme, toggleTheme }) {
         <div className={`switch ${theme}`}>
             {/*<button onClick={toggleTheme}>Toggle Theme</button>*/}
             {theme === "light" ? "Light Mode" : "Dark Mode"}
-            <ReactSwitch onChange={toggleTheme} checked={theme === "dark"}/>
+            <div id='switchButton'><ReactSwitch onChange={toggleTheme} checked={theme === "dark"}/></div>
     </div>
     </nav>
   )
