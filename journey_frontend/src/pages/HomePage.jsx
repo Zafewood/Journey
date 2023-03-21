@@ -59,7 +59,8 @@ function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser
         case "Price":
         console.log("sort by price");
         sortedTrips = [...inputArray].sort((a, b) =>
-          a.tripCountry.localeCompare(b.tripCountry)
+        parseInt(b.tripPrice) - parseInt(a.tripPrice)
+          //a.tripCountry.localeCompare(b.tripCountry)
         );
         break;
       default:
