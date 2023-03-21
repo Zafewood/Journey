@@ -89,7 +89,7 @@ function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser
         <h1 className='text-over-image'>NEWEST TRIPS</h1>
         <div><Searchbar handleSearch={handleSearch} handleSort={handleSort}></Searchbar></div>
         <div className='card-view'>
-          <CreateTrip tripAddedHandler={tripAddedHandler}/>
+          <CreateTrip tripAddedHandler={tripAddedHandler} signedInUser={signedInUser}/>
             {filteredTrips.map((tripObject, index) => {
             return <DisplayTrip tripsInfo={tripObject} key={index} handleUserEditTrip={handleUserEditTrip} signedInUser={signedInUser} tripsChanged={tripsChanged} theme={theme}/>
           })}

@@ -108,7 +108,7 @@ function EditTrip( {userTripEdit, shouldShowPopup, handleUserEditTrip, handleUse
                         <label htmlFor='keywordsInput'> Keywords </label> 
                         <input id='keywordsInput' type ="text" onChange={updateKeywords}></input> 
                         <label htmlFor='descriptionInput' > Description </label> 
-                        <textarea id='descriptionInput' type ="text" onChange={updateDescription} textarea rows={5} cols={40} style={{resize: 'none'}}></textarea><br/>
+                        <textarea id='descriptionInput' type ="text" onChange={updateDescription} rows={5} cols={40}></textarea><br/>
                         
             </div>
             <button id='editSaveButton' onClick={saveTripInfo}>Save</button>
