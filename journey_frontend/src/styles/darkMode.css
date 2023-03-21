@@ -5,4 +5,15 @@
 .light {
     background-color: rgb(252, 245, 227);
     color: #333;
+    
 }
+
+  .dark textarea {
+    background-color: #174257;
+    color: #d1d1d1;
+  }
+
+  .light textarea {
+    background-color: white;
+    color: black;
+  }
