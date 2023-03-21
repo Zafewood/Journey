@@ -79,13 +79,14 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged,
   }
 
   const deleteTrip = () => {
+    if(window.confirm("Are you sure you want to delete this trip?") == true) {
     firebaseService.deleteTripNode({
       tripID: tripsInfo.tripID,
       userID: tripsInfo.userID
     }).then(() => {
       tripsChanged();
     })
-  }
+  }}
 
     useEffect(() => {
         if (typeof tripsInfo.tripLikedBy !== 'undefined') {
