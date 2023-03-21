@@ -58,7 +58,7 @@ function UserComment({comment, signedInUser, userID, tripID, tripsChanged}) {
         </div>
         <div className='comment-right'>
             <p>{displayName}</p>
-            <textarea id='comment-edit' readOnly={makeTextEditable == true ? true : false} onChange={updateComment} value={newComment}></textarea>
+            <textarea id='comment-edit' rows={5} readOnly={makeTextEditable == true ? true : false} onChange={updateComment} value={newComment}></textarea>
             <button onClick={makeCommentEditable} style={{display: signedInUser?.uid == userID  ? 'inline' : 'none'}}>Edit</button>
             <button style={{display: shouldDisplaySave == true ? "inline" : "none"}} onClick={saveComment}>Save</button>
             <button onClick={deleteComment} style={{display: signedInUser?.uid == userID || signedInUser?.uid == "C9bhZbFCB8WkqyWf85EHWI3KymA3" ? 'inline' : 'none'}}>Delete</button>

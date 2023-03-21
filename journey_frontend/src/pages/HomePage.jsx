@@ -34,20 +34,27 @@ function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser
     setFilteredTrips(matchingTripsSorted);
   }
 
+  const findAverageRating = (ratings) => {
+    if (ratings === undefined) {
+      return 0;
+    }
+    var count = 0.0;
+    var sum = 0.0;
+      for (let j = 0; j < Object.values(ratings).length; j++) {
+          count += 1.0;
+          sum += parseInt(Object.values(ratings)[j].tripRating);
+      }
+    const average = (sum / count).toFixed(1);
+    return average;
+  }
   // Function for sorting trips by option from searchbar dropdown menu
   const sortByOption = (sortBy, inputArray) => {
     let sortedTrips;
     switch (sortBy) {
-      case "Title":
-        console.log("sort by title");
-        sortedTrips = [...inputArray].sort((a, b) =>
-          a.tripTitle.localeCompare(b.tripTitle)
-        );
-        break;
-      case "Duration":
+      case "Duration (low to high)":
         console.log("sort by duration");
         sortedTrips = [...inputArray].sort(
-          (a, b) => parseInt(b.tripDuration) - parseInt(a.tripDuration)
+          (a, b) => parseInt(a.tripDuration) - parseInt(b.tripDuration)
         );
         break;
       case "Country":
@@ -56,11 +63,17 @@ function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser
           a.tripCountry.localeCompare(b.tripCountry)
         );
         break;
-        case "Price":
+        case "Price (low to high)":
         console.log("sort by price");
         sortedTrips = [...inputArray].sort((a, b) =>
-        parseInt(b.tripPrice) - parseInt(a.tripPrice)
+        parseInt(a.tripPrice) - parseInt(b.tripPrice)
           //a.tripCountry.localeCompare(b.tripCountry)
+        );
+        break;
+        case "Rating":
+        console.log("sort by rating");
+        sortedTrips = [...inputArray].sort(
+          (a, b) => (findAverageRating(b.ratings)) - (findAverageRating(a.ratings))
         );
         break;
       default:
