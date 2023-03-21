@@ -82,18 +82,34 @@
   font-size: smaller
   }
 
-.rating-btn {
+#rating-btn {
   float: left;
   margin-right: 2%;
   margin-top: 2%;
   border-radius: 10px;
   padding: 6px;
   font-size: 15px;
-  background-color: #624b2d;
   color:#E9E2D0;
-  border-color: #E9E2D0;
+  border-color: #E9E2D0; 
 }
 
+#rating-btn:hover{
+  background-color: #E9E2D0 !important;
+  color: #624b2d;
+  cursor: pointer;
+}
+
+#rating-btn-locked {
+  float: left;
+  margin-right: 2%;
+  margin-top: 2%;
+  border-radius: 10px;
+  padding: 6px;
+  font-size: 15px;
+  color:#E9E2D0;
+  border-color: #E9E2D0; 
+  background-color: #E9E2D0;
+}
 .comments-btn {
     border: none;
     background-color: transparent;
@@ -123,11 +139,10 @@
 }
 
 #addTravelButton:hover { 
-    font-weight: bold;
     cursor: pointer;
 }
 
-#formButton, #editTrip, #deleteTrip { 
+#formButton{ 
     border-radius: 5px;
     padding: 5px;
     font-size: 15px;
@@ -139,49 +154,12 @@
 
 }
 
-#formButton:hover, #editTrip:hover, #deleteTrip:hover { 
+#formButton:hover{ 
     background-color: #E9E2D0;
     color: #624b2d;
     cursor: pointer;
-    font-weight: bold;
     border-color:#E9E2D0;
-    text-align: center;
-
 }
-/*
-#likeButton:hover { 
-    background-color: #E9E2D0;
-    color: #624b2d;
-    cursor: pointer;
-    font-weight: bold;
-    border-color:#E9E2D0;
-    text-align: center;
-
-}
-
-#likeButton { 
-    border-radius: 5px;
-    width: 105px;
-    height: 10%;
-    padding: 5px;
-    margin-left: 50%;
-    margin-bottom: 5%;
-    font-size: 15px;
-    background-color: #624b2d;
-    color: #E9E2D0;
-    border-color: #624b2d;
-}
-
-#likeButton:hover { 
-    background-color: #E9E2D0;
-    color: #624b2d;
-    cursor: pointer;
-    font-weight: bold;
-    border-color:#E9E2D0;
-    text-align: center;
-
-}
-*/
 
 .buttonRow {
   float: right;
@@ -203,11 +181,18 @@
   float: right;
 }
 
+#likeButton:hover {
+  cursor: pointer;
+}
+
 #editTripButton {
   float: right;
   border: none;
   background-color: transparent;
+}
 
+#editTripButton:hover {
+  cursor: pointer;
 }
 
 #editTrip {
@@ -219,7 +204,7 @@
 
 
 #deleteTripButton {
-  background-color: transparent;
+  background-color: transparent !important;
   border: none;
   border-style: none;
   float: right;

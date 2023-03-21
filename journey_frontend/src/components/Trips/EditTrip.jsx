@@ -92,7 +92,7 @@ function EditTrip( {userTripEdit, shouldShowPopup, handleUserEditTrip, handleUse
     <div className="popup-container" 
         id='popup-container' 
         style={{ display: shouldShowPopup ? "block" : "none" }} >
-        <div className='inner-popup-container'>
+        <div id='inner-popup-container'>
             <h1>Edit your trip</h1>
             <div className="popup-content">
                         <label htmlFor="titleInput">Title of your trip</label>
@@ -111,8 +111,8 @@ function EditTrip( {userTripEdit, shouldShowPopup, handleUserEditTrip, handleUse
                         <textarea id='descriptionInput' type ="text" onChange={updateDescription} textarea rows={5} cols={40} style={{resize: 'none'}}></textarea><br/>
                         
             </div>
-            <button className='editBox' onClick={saveTripInfo}>Save</button>
-            <button className='editBox' onClick={handleClose}>Close</button>
+            <button id='editSaveButton' onClick={saveTripInfo}>Save</button>
+            <button id='editCloseButton' onClick={handleClose}>Close</button>
         </div>
         
     </div>

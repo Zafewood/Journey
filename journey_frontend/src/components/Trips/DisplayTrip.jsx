@@ -157,7 +157,7 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged,
                 allowHover={rating === 0 ? true : false}
                 />
               </div>
-              <button className='rating-btn' onClick={saveRating} disabled={rateActive? true : false} style={{ display: currentUserID ? 'inline' : 'none', backgroundColor: rateActive ? 'gray' : '#624b2d'}}> Send rating</button>  
+              <button id={rateActive? 'rating-btn-locked' : 'rating-btn'} onClick={saveRating} disabled={rateActive? true : false} style={{ display: currentUserID ? 'inline' : 'none', backgroundColor: rateActive ? 'gray' :'#624b2d'}}> Send rating</button>  
             <div className='your-rating'>{ratingtype}: {rating}</div>   
             </div>  
           </div>
