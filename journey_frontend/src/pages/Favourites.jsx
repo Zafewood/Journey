@@ -10,6 +10,7 @@ function Favourites({allTrips, signedInUser, tripsChanged, handleUserEditTrip}) 
     const [allTripsArray, setAllTripsArray] = useState([])
     
     const userid = auth.currentUser ? auth.currentUser.uid : null;
+
     useEffect(() => {
         const allTripsArray = Object.values(allTrips);
       

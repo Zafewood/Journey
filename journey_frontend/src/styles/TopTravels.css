@@ -1,0 +1,19 @@
+#topTravelsHeader { 
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.TopTravelTrip{ 
+    color: black !important;
+}
+
+.tripsDropdown {
+    /* margin-left: 45%; */
+    /* margin-bottom: 2%; */
+    padding:0;
+    display: block;
+    margin: 0 auto 2%;
+    font-size: 40px;
+    width: 10%;
+}

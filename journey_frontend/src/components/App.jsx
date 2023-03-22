@@ -6,6 +6,7 @@ import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
 import CreateUserPage from '../pages/CreateUserPage';
 import Favourites from '../pages/Favourites';
+import TopTravels from '../pages/TopTravels';
 import Profile from '../pages/Profile';
 import NavBar from './NavBar';
 import Footer from './Footer';
@@ -124,7 +125,8 @@ function App() {
           <Routes>
             
             <Route path='/' element={ <HomePage allTrips={trips} tripAddedHandler={newTripAdded} handleUserEditTrip={handleUserEditTrip} signedInUser={user} tripsChanged={tripsChanged}theme={theme}/> }/>
-            <Route path='/favourites' element={ <Favourites allTrips={trips} signedInUser={user} tripsChanged={tripsChanged} handleUserEditTrip={handleUserEditTrip} /> }/>
+            <Route path='/toptravels' element={<TopTravels allTrips={trips} signedInUser={user} tripsChanged={tripsChanged} handleUserEditTrip={handleUserEditTrip}/> }/>
+             <Route path='/favourites' element={ <Favourites allTrips={trips} signedInUser={user} tripsChanged={tripsChanged} handleUserEditTrip={handleUserEditTrip} /> }/>
             <Route path='/loginpage' element={ <LoginPage authChanged={handleAuthStateChanged}/> }/>
             <Route path='/createuserpage' element={ <CreateUserPage /> }/>
             <Route path='/profile' element={ <Profile allTrips={trips} currentUser={user} signOutHandler={signOutUSers} handleUserEditTrip={handleUserEditTrip} tripsChanged={tripsChanged}/> }/>
