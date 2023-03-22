@@ -20,7 +20,7 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged,
   const [likedTripButton, setLikeTripButton] = useState(true);
   const [btnText, setBtnText] = useState("Like this trip");
   const [rating, setRating] = useState(0);
-  const [ratingtype, setRatingType] = useState('Avg rating');
+  const [ratingtype, setRatingType] = useState('Average rating');
   const currentUserID = signedInUser ? signedInUser.uid : null;
   const [rateActive, setRateActive] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -39,7 +39,7 @@ function DisplayTrip({tripsInfo, handleUserEditTrip, signedInUser, tripsChanged,
       }
     const average = (sum / count).toFixed(1);
     setRating(average);
-    setRatingType('Avg rating')
+    setRatingType('Average rating')
   }, [tripsInfo]);
 
   const saveRating = () => {

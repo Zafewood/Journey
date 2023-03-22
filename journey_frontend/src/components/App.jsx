@@ -129,7 +129,7 @@ function App() {
              <Route path='/favourites' element={ <Favourites allTrips={trips} signedInUser={user} tripsChanged={tripsChanged} handleUserEditTrip={handleUserEditTrip} /> }/>
             <Route path='/loginpage' element={ <LoginPage authChanged={handleAuthStateChanged}/> }/>
             <Route path='/createuserpage' element={ <CreateUserPage /> }/>
-            <Route path='/profile' element={ <Profile allTrips={trips} currentUser={user} signOutHandler={signOutUSers} /> }/>
+            <Route path='/profile' element={ <Profile allTrips={trips} currentUser={user} signOutHandler={signOutUSers} handleUserEditTrip={handleUserEditTrip} tripsChanged={tripsChanged}/> }/>
           </Routes>
         </div>
         <Footer />

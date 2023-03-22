@@ -2,12 +2,13 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import '../styles/Searchbar.css';
 
-export default function Searchbar ({ handleSearch, handleSort }) { 
+export default function Searchbar ({ updateSearchValue, handleSort }) { 
     const [searchValue, setSearchValue] = useState(""); 
     const [sortValue, setSortValue] = useState("");
     
     useEffect(() => {
         setSortValue("Newest");
+        updateSearchValue(searchValue);
       }, [])
 
     const searchbarHandler = (event) => {
@@ -24,7 +25,7 @@ export default function Searchbar ({ handleSearch, handleSort }) {
 
     const searchBtnHandler = () => {
         handleSort(sortValue);
-        handleSearch(searchValue);
+        updateSearchValue(searchValue);
     }
     
 

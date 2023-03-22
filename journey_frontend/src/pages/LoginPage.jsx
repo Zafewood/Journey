@@ -33,7 +33,7 @@ function LoginPage({ authChanged }) {
         <label>Password</label><br />
         <input type="password" value={password} onChange = {(e) => setPassword(e.target.value)}></input><br /><br />
         <button className='loginButtons'>LOG IN</button><br /><br /><br />
-        <h4>Don´t have an account??</h4> <br/>
+        <h4>Don´t have an account?</h4> <br/>
         <button className='loginButtons'><Link to='/createuserpage'>Create new account</Link></button>
     </form>
     </div>

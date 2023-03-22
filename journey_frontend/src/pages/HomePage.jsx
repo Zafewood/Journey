@@ -12,12 +12,21 @@ function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser
   const [initialTripsArray, setInitialTripsArray] = useState(allTripsArray);
   const [filteredTrips, setFilteredTrips] = useState([])
   const [sortVal, setSortVal] = useState("Newest");
+  const [searchText, setSearchText] = useState("")
 
   // Load initial trips
   useEffect(() => {
     setInitialTripsArray(allTripsArray);
     setFilteredTrips(allTripsArray)
   }, [allTrips]);
+
+  useEffect(() => {
+    handleSearch(searchText);
+  }, [allTrips, searchText]);
+
+  const updateSearchValue = (searchText) => {
+      setSearchText(searchText)
+  }
 
   // Search handler is ran when search button is pressed with searchfields test as input
   const handleSearch = (searchText) => {
@@ -91,7 +100,6 @@ function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser
     setFilteredTrips(sortedTrips);
   }
   
-
   return (
     <>
       <div className='hero-content'>
@@ -101,7 +109,7 @@ function HomePage({ allTrips, tripAddedHandler, handleUserEditTrip, signedInUser
       
       <div className='bottom-content'>
         <h1 className='text-over-image'>NEWEST TRIPS</h1>
-        <div><Searchbar handleSearch={handleSearch} handleSort={handleSort}></Searchbar></div>
+        <div><Searchbar updateSearchValue={updateSearchValue} handleSort={handleSort}></Searchbar></div>
         <div className='card-view'>
           <CreateTrip tripAddedHandler={tripAddedHandler} signedInUser={signedInUser}/>
             {filteredTrips.map((tripObject, index) => {

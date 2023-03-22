@@ -7,7 +7,7 @@ import firebaseService from '../services/firebaseService.js';
 import { auth } from '../firebase-config';
 
 
-function Profile({allTrips, currentUser, signOutHandler, theme}) {
+function Profile({allTrips, currentUser, signOutHandler, theme, handleUserEditTrip, tripsChanged}) {
 
 
   const [tripbuttoncolor, setTripButtonColor] = useState('#624b2d ');
@@ -431,7 +431,7 @@ function Profile({allTrips, currentUser, signOutHandler, theme}) {
       </div>  
       <div className='profileTrips' > 
         {tripsToDisplay.map((tripObject, index) => {
-            return <DisplayTrip tripsInfo={tripObject} key={index}/>
+            return <DisplayTrip tripsInfo={tripObject} key={index} handleUserEditTrip={handleUserEditTrip} signedInUser={currentUser} tripsChanged={tripsChanged} theme={theme}/>
           })}
       </div>
     </div>
