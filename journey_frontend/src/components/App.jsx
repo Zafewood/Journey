@@ -21,6 +21,8 @@ import UserComment from './Trips/UserComment';
 import TripsCard from './Trips/CreateTrip';
 import '../styles/darkMode.css';
 import '../styles/NavBar.css';
+import PersonalPage from '../pages/PersonalPage';
+import ForyouPage from '../pages/ForyouPage'
 
 export const ThemeContext = createContext(null);
 
@@ -56,6 +58,7 @@ function App() {
     setUser(newUser);
     console.log('new user signed in: ', user);
   }
+
 
   // Retrieve all trips from database
   const getAllTrips = () => {
@@ -126,9 +129,11 @@ function App() {
             
             <Route path='/' element={ <HomePage allTrips={trips} tripAddedHandler={newTripAdded} handleUserEditTrip={handleUserEditTrip} signedInUser={user} tripsChanged={tripsChanged}theme={theme}/> }/>
             <Route path='/toptravels' element={<TopTravels allTrips={trips} signedInUser={user} tripsChanged={tripsChanged} handleUserEditTrip={handleUserEditTrip}/> }/>
-             <Route path='/favourites' element={ <Favourites allTrips={trips} signedInUser={user} tripsChanged={tripsChanged} handleUserEditTrip={handleUserEditTrip} /> }/>
+            <Route path='/foryouPage' element={<ForyouPage allTrips={trips} currentUser={user} tripsChanged={tripsChanged} handleUserEditTrip={handleUserEditTrip} />} />
+            <Route path='/favourites' element={ <Favourites allTrips={trips} signedInUser={user} tripsChanged={tripsChanged} handleUserEditTrip={handleUserEditTrip} /> }/>
             <Route path='/loginpage' element={ <LoginPage authChanged={handleAuthStateChanged}/> }/>
             <Route path='/createuserpage' element={ <CreateUserPage /> }/>
+
             <Route path='/profile' element={ <Profile allTrips={trips} currentUser={user} signOutHandler={signOutUSers} handleUserEditTrip={handleUserEditTrip} tripsChanged={tripsChanged}/> }/>
           </Routes>
         </div>
