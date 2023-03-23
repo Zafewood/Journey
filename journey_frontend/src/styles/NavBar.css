@@ -34,9 +34,9 @@ a {
 
 
 .nav-left {
-    display: flex;
+    display: fixed;
     justify-content: center;
-    align-items: center;
+    align-items: left;
     font-size: 36px;
     margin-left: 3%;
     /* margin-right: 5%; */
@@ -44,6 +44,9 @@ a {
 }
 
 
+.nav-mid {
+  width: 160%;
+}
 
 .nav-mid ul {
     display: flex;
@@ -51,7 +54,6 @@ a {
     white-space: nowrap;
     /* transform: translate(10%, 10%); */
     font-size: 25px;
-    margin-left: 10%;
 }
 
 .my-journey-btn {
@@ -74,9 +76,8 @@ a {
 }
 
 .switch {
-  float: right;
-  margin-left: 5%;
   display: flex;
+  margin-right: 2%;
 }
 
 #switchButton {

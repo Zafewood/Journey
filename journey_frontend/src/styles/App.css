@@ -15,7 +15,7 @@ body {
 
 .switch {
     display: flex;
-    width: 100vw;
+    width: 40%;
     height: 100px;
     justify-content: center;
     align-items: center;
