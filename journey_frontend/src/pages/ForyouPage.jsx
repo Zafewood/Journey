@@ -73,8 +73,8 @@ function PersonalPage({ allTrips, currentUser, tripsChanged, handleUserEditTrip 
     <div className='personalpage-container'>
         {tripsToShow.length === 0 ? (
         <div className='kom-igang'>
-            <h1>Kom i gang!</h1>
-            <h2>Like en reise for å se din personlige feed!</h2>
+          {userID ? <h1> YOUR RECOMMENDED TRIPS </h1> : <h1>Sign in to view your recommended trips</h1>}
+
         </div>
         ) : (
         tripsToShow.map((tripObject, index) => {

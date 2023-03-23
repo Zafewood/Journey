@@ -21,7 +21,6 @@ import UserComment from './Trips/UserComment';
 import TripsCard from './Trips/CreateTrip';
 import '../styles/darkMode.css';
 import '../styles/NavBar.css';
-import PersonalPage from '../pages/PersonalPage';
 import ForyouPage from '../pages/ForyouPage'
 
 export const ThemeContext = createContext(null);
