@@ -21,6 +21,7 @@ import TripsCard from './Trips/CreateTrip';
 import '../styles/darkMode.css';
 import '../styles/NavBar.css';
 import PersonalPage from '../pages/PersonalPage';
+import ForyouPage from '../pages/ForyouPage'
 
 export const ThemeContext = createContext(null);
 
@@ -126,10 +127,11 @@ function App() {
           <Routes>
             
             <Route path='/' element={ <HomePage allTrips={trips} tripAddedHandler={newTripAdded} handleUserEditTrip={handleUserEditTrip} signedInUser={user} tripsChanged={tripsChanged}theme={theme}/> }/>
-            <Route path='/personalPage' element={<PersonalPage allTrips={trips} currentUser={user} tripsChanged={tripsChanged} handleUserEditTrip={handleUserEditTrip} />} />
+            <Route path='/foryouPage' element={<ForyouPage allTrips={trips} currentUser={user} tripsChanged={tripsChanged} handleUserEditTrip={handleUserEditTrip} />} />
             <Route path='/favourites' element={ <Favourites allTrips={trips} signedInUser={user} tripsChanged={tripsChanged} handleUserEditTrip={handleUserEditTrip} /> }/>
             <Route path='/loginpage' element={ <LoginPage authChanged={handleAuthStateChanged}/> }/>
             <Route path='/createuserpage' element={ <CreateUserPage /> }/>
+
             <Route path='/profile' element={ <Profile allTrips={trips} currentUser={user} signOutHandler={signOutUSers} handleUserEditTrip={handleUserEditTrip} tripsChanged={tripsChanged}/> }/>
           </Routes>
         </div>
