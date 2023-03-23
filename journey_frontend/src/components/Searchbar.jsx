@@ -37,8 +37,8 @@ export default function Searchbar ({ updateSearchValue, handleSort }) {
                 <option value="Newest">Newest first</option>
                 <option value="Rating">Rating</option>
                 <option value="Country">Country</option>
-                <option value="Duration">Duration</option>
-                <option value="Price">Price</option>
+                <option value="Duration (low to high)">Duration (low to high)</option>
+                <option value="Price (low to high)">Price (low to high)</option>
             </select>
         </div>
     )

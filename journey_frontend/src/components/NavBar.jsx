@@ -28,7 +28,7 @@ function NavBar({ currentUser, theme, toggleTheme }) {
         <div className="nav-mid">
             <ul >
                 <li>
-                    <Link to='personalPage' ><span className={`nav-mid ${theme} `}>TOP TRAVELS</span></Link>
+                    <Link to='/toptravels' ><span className={`nav-mid ${theme} `}>TOP TRAVELS</span></Link>
                 </li>
                 <li>
                     <Link to='/foryouPage' ><span className={`nav-mid ${theme} `}>FOR YOU</span></Link>
