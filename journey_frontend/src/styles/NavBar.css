@@ -9,7 +9,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 10vh;
+    height: 14vh;
 }
 
 ul {
@@ -40,7 +40,7 @@ a {
     font-size: 36px;
     margin-left: 3%;
     /* margin-right: 5%; */
-    margin-top: 2%;
+    margin-top: 1%;
 }
 
 
@@ -49,9 +49,9 @@ a {
     display: flex;
     align-items: center;
     white-space: nowrap;
-    /* padding-left: 50px; */
-    transform: translate(10%, 10%);
-    font-size: 30px;
+    /* transform: translate(10%, 10%); */
+    font-size: 25px;
+    margin-left: 10%;
 }
 
 .my-journey-btn {
@@ -69,14 +69,14 @@ a {
 }
 
 .logo {
-    width: 70%;
-    margin-left: 5%;
-    margin-top: 5%;
+    width: 80%;
+    margin-left: 5%;  
 }
 
 .switch {
-    margin-right: 1%;
-    display: flex;
+  float: right;
+  margin-left: 5%;
+  display: flex;
 }
 
 #switchButton {

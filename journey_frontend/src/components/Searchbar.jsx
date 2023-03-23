@@ -34,7 +34,7 @@ export default function Searchbar ({ updateSearchValue, handleSort }) {
             <input className="searchbar" type="text" placeholder="Search for your trips" value={searchValue} onChange={searchbarHandler}/>
             <button className="searchbutton" type="submit" onClick={searchBtnHandler}> Search </button>
             <select className="filterdropdown" name="filter" id="filter" value={sortValue} onChange={sortBtn}>
-                <option value="Newest">Newest first</option>
+                <option value="Newest">Sort by...</option>
                 <option value="Rating">Rating</option>
                 <option value="Country">Country</option>
                 <option value="Duration (low to high)">Duration (low to high)</option>
