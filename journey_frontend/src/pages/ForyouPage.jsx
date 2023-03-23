@@ -71,13 +71,12 @@ function PersonalPage({ allTrips, currentUser, tripsChanged, handleUserEditTrip 
 
   return (
     <div className='personalpage-container'>
-        {tripsToShow.length === 0 ? (
         <div className='kom-igang'>
-          {userID ? <h1> YOUR RECOMMENDED TRIPS </h1> : <h1>Sign in to view your recommended trips</h1>}
+          {userID ? <h1 classname='kom-igang'> YOUR RECOMMENDED TRIPS </h1> : <h1 classname='signin-placeholderForyou'>Sign in to view your recommended trips</h1>}
 
         </div>
-        ) : (
-        tripsToShow.map((tripObject, index) => {
+        <div className='foryouDiv'>
+        {tripsToShow.map((tripObject, index) => {
             return (
                 <DisplayTrip
                     key={index}
@@ -87,8 +86,8 @@ function PersonalPage({ allTrips, currentUser, tripsChanged, handleUserEditTrip 
                     handleUserEditTrip={handleUserEditTrip}
                 />
             );
-        })
-        )}
+        })}
+        </div>
     </div>
   )
 }

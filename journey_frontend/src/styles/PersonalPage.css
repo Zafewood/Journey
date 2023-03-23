@@ -1,17 +1,25 @@
 .kom-igang {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: black !important;
+  text-align: center;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 
 .personalpage-container {
     margin-top: 50px;
-    color: black !important;
+
 }
 
 .anbefalt {
     text-align: center;
     margin-bottom: 20px;
     color: black !important;
+}
+
+.signin-placeholderForyou {
+  text-align: center;
+
+}
+
+.foryouDiv {
+  color:black !important;
 }
